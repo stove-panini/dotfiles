@@ -1,2 +1,2 @@
 # don't share the vim undo folder!!!
-.vim/undo/
+.vim/undo/**
