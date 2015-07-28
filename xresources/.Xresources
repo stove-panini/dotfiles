@@ -51,7 +51,7 @@ URxvt*scrollTtyKeypress: true
 
 ! disable scrollback buffer in a pager
 URxvt.secondaryScreen: true
-!URxvt.secondaryScroll: false
+URxvt.secondaryScroll: false
 
 ! clickable urls
 URxvt.perl-ext-common: default,matcher
