@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =4
 let g:netrw_dirhist_1='/etc/udevil'
 let g:netrw_dirhist_2='/media/smb-rt-n66u-NetworkDrive/Downloads'
 let g:netrw_dirhist_3='/media/smb-rt-n66u-NetworkDrive/Downloads/Chastity Belt - Time to Go Home (2015) [V0]'
+let g:netrw_dirhist_4='/home/stove/.dotfiles/i3-desktop/.config/i3'
