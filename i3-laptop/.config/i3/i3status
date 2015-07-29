@@ -9,9 +9,9 @@
 general {
 	interval = 5
 	colors = true
-	color_good = "#fcaf3e"
-	color_degraded = "#f57900"
-	color_bad = "#cc0000"
+	color_good = "#b5bd68"
+	color_degraded = "#f0c674"
+	color_bad = "#cc6666"
 }
 
 order =+ "volume master"
