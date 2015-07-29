@@ -8,6 +8,10 @@ case $- in
       *) return;;
 esac
 
+# Base16 Shell colorscheme
+BASE16_SHELL="$HOME/.config/base16-shell/base16-tomorrow.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
 # Custom bash prompt via kirsle.net/wizards/ps1.html
 export PS1="\[$(tput bold)\]\[$(tput setaf 3)\]\u \[$(tput setaf 6)\][\w]\n\[$(tput sgr0)\]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
 
