@@ -69,9 +69,7 @@ filetype plugin on
 filetype indent on
 
 " colorscheme
-" uncomment next line if term colorscheme is different than vim colorscheme
-"let g:base16_shell_path="~/.vim/colors/base16-shell/"
-"let base16colorspace=256
+let base16colorspace=256
 colorscheme base16-tomorrow
 set background=dark
 
