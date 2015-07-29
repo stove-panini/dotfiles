@@ -32,6 +32,11 @@ autocmd BufReadPost *
 " remember info about open buffers on close
 set viminfo^=%
 
+" use the system clipboard if using gvim
+if has('unnamedplus')
+    set clipboard=unnamed,unnamedplus
+endif
+
 
 "===========.
 " Interface |
