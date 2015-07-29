@@ -63,4 +63,4 @@ URxvt.colorUL: #729fcf
 ! --- xautolock ---
 
 Xautolock.time: 10
-Xautolock.locker: i3lock --dpms --ignore-empty-password --image=/home/stove/.local/share/i3/lock.png --tiling
+Xautolock.locker: i3lock --dpms --ignore-empty-password --image=/home/stove/Pictures/wallpaper/lock.png --tiling
