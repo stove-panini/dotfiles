@@ -11,6 +11,9 @@
 # compositor
 exec --no-startup-id compton -b
 
+# daemonize urxvt
+exec --no-startup-id urxvtd -q -o -f
+
 # screensaver inhibitor
 exec --no-startup-id caffeine
 
@@ -145,8 +148,8 @@ set $alt Mod1
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
-bindsym $mod+Return exec x-terminal-emulator
+# start a terminal (urxvt client)
+bindsym $mod+Return exec urxvtc
 
 # kill focused window
 bindsym $mod+Shift+q kill
