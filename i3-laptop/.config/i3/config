@@ -1,0 +1,288 @@
+# i3 config file (v4)
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+# LAPTOP / DEBIAN VERSION
+
+#----------------------+
+# STARTUP APPLICATIONS |
+#----------------------+
+
+# compositor
+exec --no-startup-id compton -b
+
+# screensaver inhibitor
+exec --no-startup-id caffeine
+
+# screen lock
+exec --no-startup-id xautolock -detectsleep
+
+# background wallpaper
+exec --no-startup-id nitrogen --restore
+
+# disable touchpad immediately
+exec --no-startup-id  ~/.local/share/i3/touchpad_toggle.sh
+
+
+#-----------------+
+# CUSTOM KEYBINDS |
+#-----------------+
+
+# touchpad toggle
+bindsym XF86TouchpadToggle exec ~/.local/share/i3/touchpad_toggle.sh
+
+# brightness
+bindsym XF86MonBrightnessUp exec xbacklight -steps 5 -inc 10
+bindsym XF86MonBrightnessDown exec xbacklight -steps 5 -dec 10
+
+# volume
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo +10% && killall -USR1 i3status && avplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/click.wav
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -- -10% && killall -USR1 i3status && avplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/click.wav
+bindsym XF86AudioMute exec pactl set-sink-mute alsa_output.pci-0000_00_1b.0.analog-stereo toggle && killall -USR1 i3status
+
+# lock screen
+bindsym XF86ScreenSaver exec xautolock -locknow
+
+# screenshot (scrot)
+bindsym Print exec scrot -z ~/Pictures/'Screenshot_%F_%T.png' && avplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/scrot.wav
+bindsym --release Shift+Print exec scrot -s ~/Pictures/'Screenshot_%F_%T.png' && avplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/scrot.wav
+
+
+#------------+
+# APPEARANCE |
+#------------+
+
+# Theme: base16-tomorrow
+set $base00 #1d1f21
+set $base01 #282a2e
+set $base02 #373b41
+set $base03 #969896
+set $base04 #b4b7b4
+set $base05 #c5c8c6
+set $base06 #e0e0e0
+set $base07 #ffffff
+set $base08 #cc6666
+set $base09 #de935f
+set $base0A #f0c674
+set $base0B #b5bd68
+set $base0C #8abeb7
+set $base0D #81a2be
+set $base0E #b294bb
+set $base0F #a3685a
+
+font pango:Terminus 8
+
+# class                 border  backgr. text    indicator
+client.focused          $base02 $base02 $base07 $base05
+client.focused_inactive	$base01 $base01 $base03 $base05
+client.unfocused        $base01 $base01 $base03 $base05
+client.urgent           $base08 $base08 $base07 $base05
+
+
+#--------+
+# i3 BAR |
+#--------+
+
+bar {
+    status_command 	i3status -c ~/.config/i3/i3status
+    position        bottom
+
+colors	{
+    background $base00
+    statusline $base05
+    separator  $base03
+#                       border	backgr. text
+    focused_workspace   $base0A $base0A $base00
+    active_workspace    $base0D $base0D $base07
+    inactive_workspace  $base02 $base02 $base03
+    urgent_workspace    $base08 $base08 $base07
+    }
+}
+
+
+#---------------------+
+# CUSTOM WINDOW STUFF |
+#---------------------+
+
+# Workspace assignment
+assign [instance="Chromium"] $WS2
+assign [instance="crx_cnkjkdjlofllcpbemipjbcpfnglbgieh"] $WS3
+
+# Borderless
+for_window [class="Chromium"] border none
+for_window [class="mpv"] border none
+
+# Float
+for_window [class="XCalc"] floating enable
+for_window [class="Sxiv"] floating enable
+for_window [class="Nitrogen"] floating enable
+
+
+#-----------------+
+# WORKSPACE NAMES |
+#-----------------+
+
+set $WS1 1: term
+set $WS2 2: www
+set $WS3 3: music
+set $WS4 4: work
+set $WS5 5
+set $WS6 6
+set $WS7 7
+set $WS8 8
+set $WS9 9
+set $WS10 10: external
+
+
+#-------------+
+# WM KEYBINDS |
+#-------------+
+
+# Win key as modifier
+set $mod Mod4
+set $alt Mod1
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec x-terminal-emulator
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start dmenu (a program launcher)
+#bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn '-xos4-terminus-*-*-normal-12-*' -nb '$base00' -nf '$base03' -sb '$base00' -sf '$base0B'"
+
+# change focus (vi style)
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window (vi style)
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+b split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+t layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# cycle workspaces
+bindsym $mod+Tab workspace next
+
+# switch to workspace
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+bindsym $mod+7 workspace $WS7
+bindsym $mod+8 workspace $WS8
+bindsym $mod+9 workspace $WS9
+bindsym $mod+0 workspace $WS10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $WS1
+bindsym $mod+Shift+2 move container to workspace $WS2
+bindsym $mod+Shift+3 move container to workspace $WS3
+bindsym $mod+Shift+4 move container to workspace $WS4
+bindsym $mod+Shift+5 move container to workspace $WS5
+bindsym $mod+Shift+6 move container to workspace $WS6
+bindsym $mod+Shift+7 move container to workspace $WS7
+bindsym $mod+Shift+8 move container to workspace $WS8
+bindsym $mod+Shift+9 move container to workspace $WS9
+bindsym $mod+Shift+0 move container to workspace $WS10
+
+# move workspace to external monitor
+bindsym $mod+Shift+F7 move workspace to output HDMI1
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+#--------------+
+# POWER DIALOG |
+#--------------+
+
+set $Locker xautolock -locknow && sleep 1
+
+set $mode_system System (l) lock, (q) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+        bindsym l exec --no-startup-id $Locker, mode "default"
+        bindsym q exec --no-startup-id i3-msg exit, mode "default"
+        bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+        bindsym r exec --no-startup-id systemctl reboot, mode "default"
+        bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+
+        # back to normal: Escape
+        bindsym Escape mode "default"
+}
+
+        bindsym $mod+Pause mode "$mode_system"
