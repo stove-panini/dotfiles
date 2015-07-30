@@ -1,5 +1,0 @@
-# don't share the vim undo folder!!!
-vim/.vim/undo/**
-
-# or vim swapfiles
-*.swp
