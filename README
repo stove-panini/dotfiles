@@ -1,3 +1,7 @@
 hey, dotfiles
 
-I use this directory structure under ~/.dotfiles and manage my files via GNU Stow
+I place this directory structure under ~/.dotfiles and manage everything with GNU Stow.
+
+Colorsheme stuff is all base16 (http://github.com/chriskempson)
+In the case of my laptop, where I use URxvt as my terminal emulator, the colors are set in both .Xresources AND with a shell script that lives in .config/base16-shell which is referenced in .bashrc. Ugh, the things you do for 256 colors.
+On the desktop side, Termite handles 256 color themes just fine with no shell script hackery.
