@@ -26,3 +26,4 @@ select_file *
 mkdir .local/share
 
 delete
+openwith vim
