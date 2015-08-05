@@ -81,8 +81,8 @@ set background=dark
 set expandtab
 
 " 1 tab = 4 spaces
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 
 " don't auto-indent pasted text
 set paste
