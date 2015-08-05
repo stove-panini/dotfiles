@@ -110,6 +110,7 @@ for_window [class="Sxiv"] floating enable
 for_window [class="m64py"] floating enable
 for_window [class="Nitrogen"] floating enable
 for_window [class="Transmission-gtk"] floating enable
+for_window [class="Pavucontrol"] floating enable
 
 
 #-----------------+
