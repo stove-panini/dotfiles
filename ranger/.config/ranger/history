@@ -24,6 +24,7 @@ mkdir .Templates
 shell 
 select_file *
 mkdir .local/share
-
-delete
 openwith vim
+mkdir torrent_watchdir
+delete
+
