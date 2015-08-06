@@ -40,10 +40,19 @@ status.register("temp",
     format="CPU {temp:.0f}°C",
     alert_color="#cc6666",)
 
+# External drive disk usage
+status.register("shell",
+    command="/home/stove/.local/share/i3/df-net.sh",
+    color="#8abeb7",)
+
+status.register("shell",
+    command="/home/stove/.local/share/i3/df-ext.sh",
+    color="#8abeb7",)
+
 # Disk usage
 status.register("disk",
     path="/",
-    format="{free}G [{percentage_used}%]",
+    format="SSD {free}G [{percentage_used}%]",
     color="#8abeb7",
     round_size=1,)
 
