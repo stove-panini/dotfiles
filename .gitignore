@@ -3,3 +3,6 @@ vim/.vim/undo/**
 
 # or vim swapfiles
 *.swp
+
+# or ranger history
+ranger/.config/ranger/history
