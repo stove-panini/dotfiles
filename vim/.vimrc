@@ -121,3 +121,17 @@ nnoremap <A-F7> 7gt
 nnoremap <A-F8> 8gt
 nnoremap <A-F9> 9gt
 nnoremap <A-F0> 10gt
+
+"===========.
+" Lightline |
+"-----------'
+" show the dang bar
+set laststatus=2
+
+" hide the default mode list
+set noshowmode
+
+" set colorscheme
+let g:lightline = {
+    \ 'colorscheme':  'Tomorrow_Night',
+    \ }
