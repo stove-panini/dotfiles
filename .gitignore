@@ -1,8 +1,10 @@
-# don't share the vim undo folder!!!
+# don't share the vim undo folder or file history
 vim/.vim/undo/**
+vim/.vim/.netrwhist
 
 # or vim swapfiles
 *.swp
 
-# or ranger history
+# ranger history & bookmarks
 ranger/.config/ranger/history
+ranger/.config/ranger/bookmarks

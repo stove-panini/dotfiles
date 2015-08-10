@@ -43,11 +43,11 @@ status.register("temp",
 # External drive disk usage
 status.register("shell",
     command="/home/stove/.local/share/i3/df-net.sh",
-    color="#8abeb7",)
+    color="#b294bb",)
 
 status.register("shell",
     command="/home/stove/.local/share/i3/df-ext.sh",
-    color="#8abeb7",)
+    color="#81a2be",)
 
 # Disk usage
 status.register("disk",

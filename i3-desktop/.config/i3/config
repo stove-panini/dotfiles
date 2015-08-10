@@ -18,7 +18,7 @@ exec --no-startup-id dispwin ~/.color/dell_u2312hm_custom_color.icc
 exec --no-startup-id compton -b
 
 # screen lock
-exec --no-startup-id xautolock -detectsleep
+# exec --no-startup-id xautolock -detectsleep
 
 # background wallpaper
 exec --no-startup-id nitrogen --restore
@@ -267,7 +267,7 @@ bindsym $mod+r mode "resize"
 # POWER DIALOG |
 #--------------+
 
-set $Locker xautolock -locknow && sleep 1
+set $Locker i3lock --dpms --ignore-empty-password --image=/home/stove/Pictures/wallpaper/lock.png --tiling
 
 set $mode_system System (l) lock, (q) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
