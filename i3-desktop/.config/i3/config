@@ -105,7 +105,7 @@ for_window [class="Chromium"] border none
 for_window [class="mpv"] border none
 
 # Float
-for_window [class="XCalc"] floating enable
+for_window [class="Galculator"] floating enable
 for_window [class="Sxiv"] floating enable
 for_window [class="m64py"] floating enable
 for_window [class="Nitrogen"] floating enable
