@@ -2,9 +2,11 @@
 alias sudo='sudo '
 
 # ls shortcuts
-alias ls='ls -F --color=auto'
-alias ll='ls -l'
-alias la='ls -lA'
+export LS_OPTIONS='-F -h --color=auto'
+eval "`dircolors`"
+alias ls='ls $LS_OPTIONS'
+alias ll='ls $LS_OPTIONS -l'
+alias la='ls $LS_OPTIONS -lA'
 
 # color grep and make it case-insensitive
 alias grep='grep -i --color=auto'
