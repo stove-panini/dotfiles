@@ -14,9 +14,6 @@ exec --no-startup-id compton -b
 # daemonize urxvt
 exec --no-startup-id urxvtd -q -o -f
 
-# screensaver inhibitor
-exec --no-startup-id caffeine
-
 # screen lock
 exec --no-startup-id xautolock -detectsleep
 
