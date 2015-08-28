@@ -6,5 +6,3 @@
 
 # invoke global X session script
 . /etc/X11/Xsession
-
-exec /usr/bin/i3
