@@ -149,7 +149,7 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn '-xos4-terminus-*-*-normal-12-*' -nb '$base00' -nf '$base03' -sb '$base00' -sf '$base0B'" --term="termite"
+bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn '-xos4-terminus-*-*-*-12-*-*-*-*-*-*-*' -nb '$base00' -nf '$base03' -sb '$base00' -sf '$base0B'" --term="termite"
 
 # change focus (vi style)
 bindsym $mod+h focus left
