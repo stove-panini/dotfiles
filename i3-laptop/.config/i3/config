@@ -105,11 +105,11 @@ colors	{
 #---------------------+
 
 # Workspace assignment
-assign [instance="Chromium"] $WS2
+assign [instance="chromium"] $WS2
 assign [instance="crx_cnkjkdjlofllcpbemipjbcpfnglbgieh"] $WS3
 
 # Borderless
-for_window [class="Chromium"] border none
+for_window [class="chromium"] border none
 for_window [class="mpv"] border none
 
 # Float
