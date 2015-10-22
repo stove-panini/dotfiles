@@ -40,6 +40,10 @@ status.register("temp",
     format="CPU {temp:.0f}°C",
     alert_color="#cc6666",)
 
+# GPU temp
+status.register("shell",
+    command="echo GPU $(nvidia-settings -q gpucoretemp -t | tail -1)°C",)
+
 # External drive disk usage
 status.register("shell",
     command="/home/stove/.local/share/i3/df-net.sh",

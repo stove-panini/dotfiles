@@ -96,12 +96,12 @@ colors	{
 #---------------------+
 
 # Workspace assignment
-assign [instance="Chromium"] $WS2
+assign [instance="chromium"] $WS2
 assign [instance="crx_cnkjkdjlofllcpbemipjbcpfnglbgieh"] $WS3
 assign [class="Steam"] $WS4
 
 # Borderless
-for_window [class="Chromium"] border none
+for_window [class="chromium"] border none
 for_window [class="mpv"] border none
 
 # Float
@@ -149,7 +149,11 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+<<<<<<< HEAD
 bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn '-xos4-terminus-*-*-*-12-*-*-*-*-*-*-*' -nb '$base00' -nf '$base03' -sb '$base00' -sf '$base0B'" --term="termite"
+=======
+bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn '-xos4-terminus-medium-*-*-*-12-*' -nb '$base00' -nf '$base03' -sb '$base00' -sf '$base0B'" --term="termite"
+>>>>>>> 4c42606eba52eace9ad994d94db0388b94138b19
 
 # change focus (vi style)
 bindsym $mod+h focus left
