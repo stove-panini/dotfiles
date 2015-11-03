@@ -16,8 +16,8 @@ status.register("clock",
 # Network graph & traffic speed
 # Requires: colour, netifaces, psutil, basiciw
 status.register("network",
-    interface="enp3s0",
-    format_up="{network_graph} {kbs}KB/s {v4}",
+    interface="wlan0",
+    format_up="NET {network_graph} {kbs}KB/s",
     format_down="{interface}: DOWN",
     dynamic_color=True,
     start_color="#b5bd68",
