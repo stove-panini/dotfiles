@@ -93,11 +93,10 @@ URxvt.secondaryScroll:  False
 ! enable clickable urls and clipboard plugins
 URxvt.perl-ext-common: default,matcher,selection-to-clipboard
 
-! url plugin options
+! plugin options
 URxvt.url-launcher:     $BROWSER
 URxvt.matcher.button:   1
 URxvt.matcher.rend.0:   Uline Bold fg6
-
 
 ! --- xautolock ---
 
