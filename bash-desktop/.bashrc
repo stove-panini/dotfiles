@@ -1,16 +1,12 @@
+#
 # ~/.bashrc: executed by bash(1) for non-login shells.
+#
 
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
 esac
-
-# Environment variables
-export EDITOR=vim
-export VISUAL=vim
-export PAGER=less
-export BROWSER=chromium
 
 # Custom bash prompt via kirsle.net/wizards/ps1.html
 export PS1="\[$(tput bold)\]\[$(tput setaf 3)\]\u \[$(tput setaf 6)\][\w]\n\[$(tput sgr0)\]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"

@@ -20,6 +20,3 @@ alias u-netdrive='udevil umount //rt-n66u/NetworkDrive/'
 
 alias m-data='udevil mount /dev/sda1'
 alias u-data='udevil umount /dev/sda1'
-
-# upgrade packages
-alias upgrade='sudo apt-get update && sudo apt-get upgrade'

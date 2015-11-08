@@ -64,9 +64,10 @@ Xft.dpi:        96
 
 ! --- urxvt ---
 
-! fonts
-URxvt.font:     xft:terminus:pixelsize=11:antialias=false
-URxvt.boldFont: xft:terminus:bold:pixelsize=11:antialias=false
+! fonts, bright white bold
+URxvt.font:		-*-terminus-medium-*-*-*-12-*-*-*-*-*-*-* 
+URxvt.boldFont: -*-terminus-bold-*-*-*-12-*-*-*-*-*-*-* 
+URxvt.colorBD:	15
 
 ! fuck a scroll bar
 URxvt.scrollBar: False
@@ -93,7 +94,7 @@ URxvt.secondaryScroll:  False
 URxvt.perl-ext-common: default,matcher,selection-to-clipboard
 
 ! url plugin options
-URxvt.url-launcher:     /usr/bin/x-www-browser
+URxvt.url-launcher:     $BROWSER
 URxvt.matcher.button:   1
 URxvt.matcher.rend.0:   Uline Bold fg6
 
