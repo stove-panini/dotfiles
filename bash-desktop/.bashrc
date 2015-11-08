@@ -1,5 +1,5 @@
 #
-# ~/.bashrc: executed by bash(1) for non-login shells.
+# ~/.bashrc: executed by bash for interactive shells
 #
 
 # If not running interactively, don't do anything
