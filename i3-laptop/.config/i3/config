@@ -2,11 +2,14 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-# LAPTOP / DEBIAN VERSION
+# LAPTOP VERSION
 
 #----------------------+
 # STARTUP APPLICATIONS |
 #----------------------+
+
+# xdg autostart
+exec --no-startup-id dex -a
 
 # compositor
 exec --no-startup-id compton -b
@@ -15,7 +18,7 @@ exec --no-startup-id compton -b
 exec --no-startup-id urxvtd -q -o -f
 
 # screen lock
-exec --no-startup-id xautolock -detectsleep
+# exec --no-startup-id xautolock -detectsleep
 
 # background wallpaper
 exec --no-startup-id nitrogen --restore
@@ -36,16 +39,16 @@ bindsym XF86MonBrightnessUp exec xbacklight -steps 5 -inc 10
 bindsym XF86MonBrightnessDown exec xbacklight -steps 5 -dec 10
 
 # volume
-bindsym XF86AudioRaiseVolume exec avplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/click.wav & pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo +10% && pkill -SIGUSR1 -f "python3 /home/stove/.config/i3/i3pystatus-config.py" 
-bindsym XF86AudioLowerVolume exec avplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/click.wav & pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -- -10% && pkill -SIGUSR1 -f "python3 /home/stove/.config/i3/i3pystatus-config.py" 
+bindsym XF86AudioRaiseVolume exec ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/click.wav & pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo +10% && pkill -SIGUSR1 -f "python3 /home/stove/.config/i3/i3pystatus-config.py" 
+bindsym XF86AudioLowerVolume exec ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/click.wav & pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -10% && pkill -SIGUSR1 -f "python3 /home/stove/.config/i3/i3pystatus-config.py" 
 bindsym XF86AudioMute exec pactl set-sink-mute alsa_output.pci-0000_00_1b.0.analog-stereo toggle && pkill -SIGUSR1 -f "python3 /home/stove/.config/i3/i3pystatus-config.py"
 
 # lock screen
 bindsym XF86ScreenSaver exec xautolock -locknow
 
 # screenshot (scrot)
-bindsym Print exec scrot -z ~/Pictures/'Screenshot_%F_%T.png' && avplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/scrot.wav
-bindsym --release Shift+Print exec scrot -s ~/Pictures/'Screenshot_%F_%T.png' && avplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/scrot.wav
+bindsym Print exec scrot -z ~/Pictures/'Screenshot_%F_%T.png' && ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/scrot.wav
+bindsym --release Shift+Print exec scrot -s ~/Pictures/'Screenshot_%F_%T.png' && ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/scrot.wav
 
 
 #------------+
@@ -84,7 +87,8 @@ client.urgent           $base08 $base08 $base07 $base05
 #--------+
 
 bar {
-    status_command 	python3 ~/.config/i3/i3pystatus-config.py
+#   status_command 	python3 ~/.config/i3/i3pystatus-config.py
+	status_command	i3status -c ~/.config/i3/i3status
     position        bottom
 
 colors	{
