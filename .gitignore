@@ -8,3 +8,6 @@ vim/.vim/.netrwhist
 # ranger history & bookmarks
 ranger/.config/ranger/history
 ranger/.config/ranger/bookmarks
+
+# python cache (from ranger)
+*/__pycache__
