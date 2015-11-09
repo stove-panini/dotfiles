@@ -3,11 +3,11 @@ vim/.vim/undo/**
 vim/.vim/.netrwhist
 
 # or vim swapfiles
-*.swp
+**.swp
 
 # ranger history & bookmarks
 ranger/.config/ranger/history
 ranger/.config/ranger/bookmarks
 
 # python cache (from ranger)
-*/__pycache__
+**/__pycache__
