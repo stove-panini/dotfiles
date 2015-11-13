@@ -77,15 +77,15 @@ set background=dark
 "============.
 " Formatting |
 "------------'
+" don't auto-indent pasted text
+set paste
+
 " spaces, not tabs
 set expandtab
 
 " 1 tab = 4 spaces
 set tabstop=4
 set shiftwidth=4
-
-" don't auto-indent pasted text
-set paste
 
 
 "===========.

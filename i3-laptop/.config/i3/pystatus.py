@@ -13,20 +13,26 @@ status.register("dpms",
 status.register("clock",
     format=" %a %-d %b %l:%M:%S %p ",)
 
+# Battery
+status.register("battery",
+    format="BAT {remaining} {bar}",
+    color="#b4b7b4",
+    full_color="#b4b7b4",
+    charging_color="#b4b7b4",
+    critical_color="#cc6666",)
+    
 # Network graph & traffic speed
 # Requires: colour, netifaces, psutil, basiciw
 status.register("network",
-    interface="wlan0",
-    format_up="NET {network_graph} {kbs}KB/s",
+    interface="wlp3s0",
+    format_up="{interface} @ {essid} [{quality}%]",
     format_down="{interface}: DOWN",
-    dynamic_color=True,
-    start_color="#b5bd68",
-    end_color="#cc6666",
-    graph_style="blocks",
-    graph_width=10,
-    upper_limit="2500",
+    dynamic_color=False,
+    color_up="#b5bd68",
+    color_down="#cc6666",
+    interval=5,
     on_leftclick=None,
-    on_rightclick=None,
+    on_rightclick="cycle_interface",
     on_upscroll=None,
     on_downscroll=None,)
 
@@ -40,17 +46,15 @@ status.register("temp",
     format="CPU {temp:.0f}°C",
     alert_color="#cc6666",)
 
-# External drive disk usage
+# Network disk usage
 status.register("shell",
     command="/home/stove/.local/share/i3/df-net.sh",
-    color="#b294bb",)
-
-status.register("shell",
-    command="/home/stove/.local/share/i3/df-ext.sh",
+    interval=60,
     color="#81a2be",)
 
-# Disk usage
+# Internal disk usage
 status.register("disk",
+    interval=60,
     path="/",
     format="SSD {free}G [{percentage_used}%]",
     color="#8abeb7",

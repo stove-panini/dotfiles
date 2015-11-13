@@ -17,14 +17,11 @@ exec --no-startup-id compton -b
 # daemonize urxvt
 exec --no-startup-id urxvtd -q -o -f
 
-# screen lock
-# exec --no-startup-id xautolock -detectsleep
-
 # background wallpaper
 exec --no-startup-id nitrogen --restore
 
 # disable touchpad immediately
-exec --no-startup-id  ~/.local/share/i3/touchpad_toggle.sh
+exec --no-startup-id ~/.local/share/i3/touchpad_toggle.sh
 
 
 #-----------------+
@@ -35,20 +32,21 @@ exec --no-startup-id  ~/.local/share/i3/touchpad_toggle.sh
 bindsym XF86TouchpadToggle exec ~/.local/share/i3/touchpad_toggle.sh
 
 # brightness
-bindsym XF86MonBrightnessUp exec xbacklight -steps 5 -inc 10
-bindsym XF86MonBrightnessDown exec xbacklight -steps 5 -dec 10
+bindsym XF86MonBrightnessUp     exec xbacklight -steps 5 -inc 10
+bindsym XF86MonBrightnessDown   exec xbacklight -steps 5 -dec 10
 
 # volume
-bindsym XF86AudioRaiseVolume exec ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/click.wav & pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo +10% && pkill -SIGUSR1 -f "python3 /home/stove/.config/i3/i3pystatus-config.py" 
-bindsym XF86AudioLowerVolume exec ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/click.wav & pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -10% && pkill -SIGUSR1 -f "python3 /home/stove/.config/i3/i3pystatus-config.py" 
-bindsym XF86AudioMute exec pactl set-sink-mute alsa_output.pci-0000_00_1b.0.analog-stereo toggle && pkill -SIGUSR1 -f "python3 /home/stove/.config/i3/i3pystatus-config.py"
+bindsym XF86AudioRaiseVolume    exec pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo +10% && pkill -SIGUSR1 -f "python /home/stove/.config/i3/pystatus.py" & ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/click.wav
+bindsym XF86AudioLowerVolume    exec pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -10% && pkill -SIGUSR1 -f "python /home/stove/.config/i3/pystatus.py" & ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/click.wav
+bindsym XF86AudioMute           exec pactl set-sink-mute alsa_output.pci-0000_00_1b.0.analog-stereo toggle && pkill -SIGUSR1 -f "python /home/stove/.config/i3/pystatus.py"
 
 # lock screen
-bindsym XF86ScreenSaver exec xautolock -locknow
+bindsym XF86ScreenSaver exec sxlock -f -*-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
 
-# screenshot (scrot)
-bindsym Print exec scrot -z ~/Pictures/'Screenshot_%F_%T.png' && ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/scrot.wav
-bindsym --release Shift+Print exec scrot -s ~/Pictures/'Screenshot_%F_%T.png' && ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/scrot.wav
+# screenshot (fullscreen, active window, selection)
+bindsym Print       exec maim ~/Pictures/screenshot_$(date +%F_%T).png
+bindsym $mod+Print  exec maim -i $(xdotool getactivewindow) ~/Pictures/screenshot_$(date +%F_%T).png
+bindsym Shift+Print exec maim -s ~/Pictures/screenshot_$(date +%F_%T).png
 
 
 #------------+
@@ -73,7 +71,7 @@ set $base0D #81a2be
 set $base0E #b294bb
 set $base0F #a3685a
 
-font pango:Lime 8
+font pango:Terminus 8
 
 # class                 border  backgr. text    indicator
 client.focused          $base02 $base02 $base07 $base05
@@ -87,7 +85,7 @@ client.urgent           $base08 $base08 $base07 $base05
 #--------+
 
 bar {
-    status_command 	python3 ~/.config/i3/i3pystatus-config.py
+	status_command 	python ~/.config/i3/pystatus.py
 #	status_command	i3status -c ~/.config/i3/i3status
     position        bottom
 
@@ -156,8 +154,7 @@ bindsym $mod+Return exec urxvtc
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-#bindsym $mod+d exec dmenu_run
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn '-xos4-terminus-*-*-*-12-*-*-*-*-*-*-*' -nb '$base00' -nf '$base03' -sb '$base00' -sf '$base0B'"
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn 'Terminus-8' -nb '$base00' -nf '$base03' -sb '$base00' -sf '$base0B'"
 
 # change focus (vi style)
 bindsym $mod+h focus left
@@ -275,7 +272,7 @@ bindsym $mod+r mode "resize"
 # POWER DIALOG |
 #--------------+
 
-set $Locker xautolock -locknow && sleep 1
+set $Locker sxlock -f -*-terminus-medium-*-*-*-14-*-*-*-*-*-*-* && sleep 1
 
 set $mode_system System (l) lock, (q) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {

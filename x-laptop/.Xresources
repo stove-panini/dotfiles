@@ -1,13 +1,3 @@
-! --- fonts ---
-Xft.autohint:   0
-Xft.lcdfilter:  lcddefault
-Xft.hintstyle:  hintfull
-Xft.hinting:    1
-Xft.antialias:  1
-Xft.rgba:       rgb
-Xft.dpi:        96
-
-
 ! --- colors ---
 
 ! Base16 Tomorrow
@@ -72,7 +62,7 @@ URxvt.colorBD:	15
 ! fuck a scroll bar
 URxvt.scrollBar: False
 
-! no beeps, but lemme know if yer mad, okay?
+! no beeps, just flashes
 URxvt.visualBell:   True
 URxvt.urgentOnBell: True
 
@@ -84,21 +74,26 @@ URxvt.fading: 30
 
 ! no autoscroll on output but scroll-to-bottom on keypress
 URxvt.scrollTtyOutput:   False
+URxvt.scrollWithBuffer:  True
 URxvt.scrollTtyKeypress: True
 
 ! disable scrollback buffer in a pager
 URxvt.secondaryScreen:  True
 URxvt.secondaryScroll:  False
 
-! enable clickable urls and clipboard plugins
-URxvt.perl-ext-common: default,matcher,selection-to-clipboard
+! enable clickable urls, clipboard, and sane scrollwheel plugins
+! requires packages: urxvt-perls, urxvt-vtwheel
+URxvt.perl-ext-common: default,matcher,clipboard,vtwheel
 
-! plugin options
-URxvt.url-launcher:     $BROWSER
+! url plugin options
+URxvt.url-launcher:     /usr/bin/chromium
 URxvt.matcher.button:   1
 URxvt.matcher.rend.0:   Uline Bold fg6
 
-! --- xautolock ---
-
-Xautolock.time:     10
-Xautolock.locker:   i3lock --dpms --ignore-empty-password --image=/home/stove/Pictures/wallpaper/lock-mona_lisa.png
+! clipboard plugin options
+! first setting disables a useless feature that uses Shift+Ctrl
+URxvt.iso14755: False
+URxvt.keysym.Shift-Control-C:   perl:clipboard:copy
+URxvt.keysym.Shift-Control-V:   perl:clipboard:paste
+URxvt.clipboard.copycmd:        xsel -ib
+URxvt.clipboard.pastecmd:       xsel -ob

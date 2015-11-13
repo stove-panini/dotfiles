@@ -1,18 +1,22 @@
-# let sudo check for root's aliases
-alias sudo='sudo '
+# cd'n around
+alias ..='cd ..'            # go up one directory
+alias ...='cd ../..'        # go up two
+alias ....='cd ../../..'    # go up three
+alias cdd='cd -'            # go back to previous dir
 
-# ls shortcuts
-export LS_OPTIONS='-F -h --color=auto'
-eval "`dircolors`"
+# file mgmt
+LS_OPTIONS='-F -h --group-directories-first --color=auto'
 alias ls='ls $LS_OPTIONS'
 alias ll='ls $LS_OPTIONS -l'
 alias la='ls $LS_OPTIONS -lA'
-
-# color grep and make it case-insensitive
 alias grep='grep -i --color=auto'
+alias md='mkdir -p'         # create parent directories if needed
+alias rd='rmdir'
+alias cp='cp -ir'           # copy dir contents / warn if overwriting
+alias mv='mv -i'            # warn if overwriting
 
-# mkdir will create parent directories if necessary
-alias mkdir='mkdir -p'
+# make it easy
+alias q='exit'
 
 # udevil stuff
 alias m-netdrive='udevil mount //rt-n66u/NetworkDrive/'
@@ -20,3 +24,6 @@ alias u-netdrive='udevil umount //rt-n66u/NetworkDrive/'
 
 alias m-data='udevil mount /dev/sda1'
 alias u-data='udevil umount /dev/sda1'
+
+# ssh
+alias s-router='ssh root@rt-n66u'
