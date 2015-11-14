@@ -28,7 +28,7 @@ status.register("network",
     format_up="{interface} @ {essid} [{quality}%]",
     format_down="{interface}: DOWN",
     dynamic_color=False,
-    color_up="#b5bd68",
+    color_up="#c5c8c6",
     color_down="#cc6666",
     interval=5,
     on_leftclick=None,
@@ -50,14 +50,14 @@ status.register("temp",
 status.register("shell",
     command="/home/stove/.local/share/i3/df-net.sh",
     interval=60,
-    color="#81a2be",)
+    color="#8abeb7",)
 
 # Internal disk usage
 status.register("disk",
     interval=60,
     path="/",
     format="SSD {free}G [{percentage_used}%]",
-    color="#8abeb7",
+    color="#b5bd68",
     round_size=1,)
 
 # Shows pulseaudio default sink volume

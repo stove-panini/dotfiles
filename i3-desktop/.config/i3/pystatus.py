@@ -15,12 +15,13 @@ status.register("clock",
 
 # Network graph & traffic speed
 # Requires: colour, netifaces, psutil, basiciw
+# Wired connection colors only work with dynamic_color for some reason
 status.register("network",
     interface="enp3s0",
-    format_up="{network_graph} {kbs}KB/s {v4}",
+    format_up="{interface}:{network_graph} {kbs}KB/s",
     format_down="{interface}: DOWN",
     dynamic_color=True,
-    start_color="#b5bd68",
+    start_color="#c5c8c6",
     end_color="#cc6666",
     graph_style="blocks",
     graph_width=10,
@@ -42,22 +43,26 @@ status.register("temp",
 
 # GPU temp
 status.register("shell",
-    command="echo GPU $(nvidia-settings -q gpucoretemp -t | tail -1)°C",)
+    command="echo GPU $(nvidia-settings -q gpucoretemp -t | tail -1)°C",
+    interval=15,)
 
 # External drive disk usage
 status.register("shell",
     command="/home/stove/.local/share/i3/df-net.sh",
-    color="#b294bb",)
+    interval=30,
+    color="#8abeb7",)
 
 status.register("shell",
     command="/home/stove/.local/share/i3/df-ext.sh",
-    color="#81a2be",)
+    interval=30,
+    color="#b5bd68",)
 
 # Disk usage
 status.register("disk",
     path="/",
     format="SSD {free}G [{percentage_used}%]",
-    color="#8abeb7",
+    interval=30,
+    color="#b5bd68",
     round_size=1,)
 
 # Shows pulseaudio default sink volume
