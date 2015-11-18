@@ -118,6 +118,7 @@ for_window [class="mpv"] border none
 for_window [class="XCalc"] floating enable
 for_window [class="Sxiv"] floating enable
 for_window [class="Nitrogen"] floating enable
+for_window [class="Pavucontrol"] floating enable
 
 
 #-----------------+
@@ -154,7 +155,7 @@ bindsym $mod+Return exec urxvtc
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn 'Terminus-8' -nb '$base00' -nf '$base03' -sb '$base00' -sf '$base0B'"
+bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn 'Terminus-8' -nb '$base00' -nf '$base03' -sb '$base00' -sf '$base0B'" --term="urxvtc"
 
 # change focus (vi style)
 bindsym $mod+h focus left
