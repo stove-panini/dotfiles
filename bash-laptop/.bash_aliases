@@ -19,11 +19,12 @@ alias mv='mv -i'            # warn if overwriting
 alias q='exit'
 
 # udevil stuff
-alias m-netdrive='udevil mount //rt-n66u/NetworkDrive/'
-alias u-netdrive='udevil umount //rt-n66u/NetworkDrive/'
+alias m-netdrive='udevil mount //diskstation/share'
+alias u-netdrive='udevil umount //diskstation/share'
 
 alias m-data='udevil mount /dev/sda1'
 alias u-data='udevil umount /dev/sda1'
 
 # ssh
-alias s-router='ssh root@rt-n66u'
+alias s-router='ssh admin@er-x'
+alias s-nas='ssh root@diskstation'

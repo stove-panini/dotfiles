@@ -19,14 +19,15 @@ alias mv='mv -i'            # warn if overwriting
 alias q='exit'
 
 # udevil stuff
-alias m-netdrive='udevil mount //rt-n66u/NetworkDrive/'
-alias u-netdrive='udevil umount //rt-n66u/NetworkDrive/'
+alias m-netdrive='udevil mount //diskstation/share'
+alias u-netdrive='udevil umount //diskstation/share'
 
 alias m-external='udevil mount /dev/disk/by-label/External'
 alias u-external='udevil umount /dev/disk/by-label/External'
 
 # ssh
-alias s-router='ssh root@rt-n66u'
+alias s-router='ssh admin@er-x'
+alias s-nas='ssh root@diskstation'
 
 # disconnect PS3 Dualshock
 alias dualshock-off="echo -e 'disconnect 00:23:06:17:FF:26\nquit' | bluetoothctl"
