@@ -19,8 +19,8 @@ alias mv='mv -i'            # warn if overwriting
 alias q='exit'
 
 # udevil stuff
-alias m-netdrive='udevil mount //diskstation/share'
-alias u-netdrive='udevil umount //diskstation/share'
+alias m-nas='udevil mount //diskstation/share'
+alias u-nas='udevil umount //diskstation/share'
 
 alias m-external='udevil mount /dev/disk/by-label/External'
 alias u-external='udevil umount /dev/disk/by-label/External'
