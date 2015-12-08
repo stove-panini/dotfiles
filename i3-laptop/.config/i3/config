@@ -276,7 +276,7 @@ bindsym $mod+r mode "resize"
 # POWER DIALOG |
 #--------------+
 
-set $Locker sxlock -f -*-terminus-medium-*-*-*-14-*-*-*-*-*-*-* && sleep 1
+set $Locker xset s activate
 
 set $mode_system System (l) lock, (q) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
