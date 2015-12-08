@@ -48,7 +48,7 @@ status.register("shell",
 
 # External drive disk usage
 status.register("shell",
-    command="/home/stove/.local/share/i3/df-net.sh",
+    command="/home/stove/.local/share/i3/df-nas.sh",
     interval=30,
     color="#8abeb7",)
 

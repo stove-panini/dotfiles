@@ -48,7 +48,7 @@ status.register("temp",
 
 # Network disk usage
 status.register("shell",
-    command="/home/stove/.local/share/i3/df-net.sh",
+    command="/home/stove/.local/share/i3/df-nas.sh",
     interval=60,
     color="#8abeb7",)
 
