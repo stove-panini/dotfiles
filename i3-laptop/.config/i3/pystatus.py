@@ -15,11 +15,12 @@ status.register("clock",
 
 # Battery
 status.register("battery",
-    format="BAT {remaining} {bar}",
+    format="{status} {remaining} {bar}",
     color="#b4b7b4",
     full_color="#b4b7b4",
     charging_color="#b4b7b4",
-    critical_color="#cc6666",)
+    critical_color="#cc6666",
+    status={'CHR': 'CHR', 'DIS': 'DIS', 'FULL': 'BAT', 'DPL': 'DPL'},)
     
 # Network graph & traffic speed
 # Requires: colour, netifaces, psutil, basiciw
