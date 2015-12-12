@@ -123,6 +123,7 @@ for_window [class="Nitrogen"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Lxappearance"] floating enable
 for_window [class="Galculator"] floating enable
+for_window [class="Transmission"] floating enable
 
 #-----------------+
 # WORKSPACE NAMES |
