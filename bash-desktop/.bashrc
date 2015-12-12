@@ -30,8 +30,7 @@ set -o vi
 # THE LOOK |
 #----------'
 # Custom bash prompt via kirsle.net/wizards/ps1.html
-#export PS1="\[$(tput bold)\]\[$(tput setaf 3)\]\u \[$(tput setaf 6)\][\w]\n\[$(tput sgr0)\]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
-export PS1="\[$(tput setaf 3)\]\u\[$(tput setaf 16)\]@\h \[$(tput setaf 6)\][\w]\n\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
+export PS1="\[$(tput setaf 3)\]\u\[$(tput setaf 16)\]@\h \[$(tput setaf 7)\][\w]\n\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
 
 # enable color support of ls
 if [ -x /usr/bin/dircolors ]; then
