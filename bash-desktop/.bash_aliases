@@ -19,14 +19,15 @@ alias mv='mv -i'            # warn if overwriting
 alias q='exit'
 
 # udevil stuff
-alias m-nas='udevil mount //diskstation/share'
-alias u-nas='udevil umount //diskstation/share'
+alias m-diskstation='udevil mount //diskstation/share'
+alias u-diskstation='udevil umount //diskstation/share'
 
 alias m-external='udevil mount /dev/disk/by-label/External'
 alias u-external='udevil umount /dev/disk/by-label/External'
 
 # ssh
-alias s-router='ssh admin@er-x'
+alias s-router='ssh admin@edgerouter-x'
+alias s-diskstation='ssh root@diskstation'
 alias s-nas='ssh root@diskstation'
 
 # disconnect PS3 Dualshock

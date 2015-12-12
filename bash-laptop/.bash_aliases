@@ -19,12 +19,16 @@ alias mv='mv -i'            # warn if overwriting
 alias q='exit'
 
 # udevil stuff
-alias m-nas='udevil mount //diskstation/share'
-alias u-nas='udevil umount //diskstation/share'
+alias m-diskstation='udevil mount //diskstation/share'
+alias u-diskstation='udevil umount //diskstation/share'
 
 alias m-data='udevil mount /dev/sda1'
 alias u-data='udevil umount /dev/sda1'
 
 # ssh
-alias s-router='ssh admin@er-x'
-alias s-nas='ssh root@diskstation'
+alias s-router='ssh admin@edgerouter-x'
+alias s-diskstation='ssh root@diskstation'
+alias s-ossuary='ssh stove@ossuary'
+
+# wol desktop
+alias wol-ossuary='wol 44:8a:5b:9c:1d:fa'
