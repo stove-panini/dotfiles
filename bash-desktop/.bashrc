@@ -34,7 +34,7 @@ if [[ -n $SSH_CLIENT ]] || [[ -n $SSH_TTY ]]; then
     # SSH client prompt shows hostname
     export PS1="\[$(tput setaf 6)\]\u\[$(tput setaf 4)\]@\h \[$(tput setaf 15)\][\w]\n\$ \[$(tput sgr0)\]"; else
     # Local prompt does not
-    export PS1="\[$(tput setaf 3)\]\u \[$(tput setaf 7)\][\w]\n\[$(tput setaf 15)\]\$ \[$(tput sgr0)\]"
+    export PS1="\[$(tput setaf 3)\]\u \[$(tput setaf 15)\][\w]\n\$ \[$(tput sgr0)\]"
 fi
 
 # enable color support of ls
