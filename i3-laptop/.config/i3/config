@@ -51,6 +51,9 @@ bindsym Print       exec maim ~/Pictures/screenshot_$(date +%F_%T).png
 bindsym $mod+Print  exec maim -i $(xdotool getactivewindow) ~/Pictures/screenshot_$(date +%F_%T).png
 bindsym Shift+Print exec maim -s ~/Pictures/screenshot_$(date +%F_%T).png
 
+# external display config
+bindsym XF86Display exec arandr
+
 
 #------------+
 # APPEARANCE |
@@ -127,6 +130,7 @@ for_window [class="Pavucontrol"] floating enable
 for_window [class="Lxappearance"] floating enable
 for_window [class="Galculator"] floating enable
 for_window [class="Transmission"] floating enable
+for_window [class="Arandr"] floating enable resize set 640 480
 
 #-----------------+
 # WORKSPACE NAMES |
