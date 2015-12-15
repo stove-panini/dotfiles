@@ -100,8 +100,14 @@ nnoremap <A-0> 10gt
 "----------'
 call plug#begin()
 
-" use single quotes
+" use single quotes!
+
+" status line
 Plug 'itchyny/lightline.vim'
+
+" git integration
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
@@ -111,7 +117,43 @@ call plug#end()
 " hide the default mode list
 set noshowmode
 
-" set colorscheme
+" set colorscheme and git plugin
 let g:lightline = {
     \ 'colorscheme':  'Tomorrow_Night',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+    \   },
+    \ 'component_function': {
+    \   'fugitive': 'LightLineFugitive',
+    \   'readonly': 'LightLineReadonly',
+    \   'modified': 'LightLineModified'
+    \   },
     \ }
+
+" functions for lightline components
+function! LightLineModified()
+    if &filetype == "help"
+        return ""
+    elseif &modified
+        return "+"
+    elseif &modifiable
+        return ""
+    else
+        return ""
+    endif
+endfunction
+
+function! LightLineReadonly()
+    if &filetype == "help"
+        return ""
+    elseif &readonly
+        return "RO"
+    else
+        return ""
+    endif
+endfunction
+
+function! LightLineFugitive()
+    return exists('*fugitive#head') ? fugitive#head() : ''
+endfunction
