@@ -100,8 +100,8 @@ colors	{
     statusline $base05
     separator  $base03
 #                       border	backgr. text
-    focused_workspace   $base0A $base0A $base00
-    active_workspace    $base0D $base0D $base07
+    focused_workspace   $base0C $base0C $base00
+    active_workspace    $base0D $base0D $base00
     inactive_workspace  $base02 $base02 $base03
     urgent_workspace    $base08 $base08 $base07
     }
