@@ -32,7 +32,7 @@ status.register("network",
     color_up="#b5bd68",
     color_down="#cc6666",
     interval=5,
-    on_leftclick=None,
+    on_leftclick="/home/stove/.local/share/i3/scripts/window-wifimenu.sh",
     on_rightclick="cycle_interface",
     on_upscroll=None,
     on_downscroll=None,)
@@ -44,21 +44,24 @@ status.register("load",
 
 # Shows your CPU temperature, if you have a Intel CPU
 status.register("temp",
-    format="CPU {temp:.0f}°C",
-    alert_color="#cc6666",)
+    format="CPU {temp:.0f}°C / ",
+    alert_color="#cc6666",
+    hints={"separator": False, "separator_block_width": 0},)
 
 # Network disk usage
 status.register("shell",
-    command="/home/stove/.local/share/i3/df-nas.sh",
+    command="/home/stove/.local/share/i3/scripts/df-nas.sh",
     interval=60,
-    color="#8abeb7",)
+    color="#f0c674",
+    error_color="#de935f",)
 
 # Internal disk usage
 status.register("disk",
     interval=60,
     path="/",
     format="SSD {free}G [{percentage_used}%]",
-    color="#8abeb7",
+    color="#f0c674",
+    critical_color="#cc6666",
     round_size=1,)
 
 # Shows pulseaudio default sink volume

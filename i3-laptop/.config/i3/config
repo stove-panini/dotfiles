@@ -24,7 +24,7 @@ exec --no-startup-id urxvtd -q -o -f
 exec --no-startup-id nitrogen --restore
 
 # disable touchpad immediately
-exec --no-startup-id ~/.local/share/i3/touchpad_toggle.sh
+exec --no-startup-id ~/.local/share/i3/scripts/touchpad_toggle.sh
 
 
 #-----------------+
@@ -32,24 +32,36 @@ exec --no-startup-id ~/.local/share/i3/touchpad_toggle.sh
 #-----------------+
 
 # touchpad toggle
-bindsym XF86TouchpadToggle exec ~/.local/share/i3/touchpad_toggle.sh
+bindsym XF86TouchpadToggle exec --no-startup-id ~/.local/share/i3/scripts/touchpad_toggle.sh
 
 # brightness
 bindsym XF86MonBrightnessUp     exec xbacklight -steps 5 -inc 10
 bindsym XF86MonBrightnessDown   exec xbacklight -steps 5 -dec 10
 
 # volume
-bindsym XF86AudioRaiseVolume    exec pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo +10% && pkill -SIGUSR1 -f "python /home/stove/.config/i3/pystatus.py" & ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/click.wav
-bindsym XF86AudioLowerVolume    exec pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -10% && pkill -SIGUSR1 -f "python /home/stove/.config/i3/pystatus.py" & ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/click.wav
-bindsym XF86AudioMute           exec pactl set-sink-mute alsa_output.pci-0000_00_1b.0.analog-stereo toggle && pkill -SIGUSR1 -f "python /home/stove/.config/i3/pystatus.py"
+bindsym XF86AudioRaiseVolume    exec pactl set-sink-volume 0 +10% &&\
+                                pkill -SIGUSR1 -f "python /home/stove/.config/i3/pystatus.py" &\
+                                ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/sounds/vol.oga
+
+bindsym XF86AudioLowerVolume    exec pactl set-sink-volume 0 -10% &&\
+                                pkill -SIGUSR1 -f "python /home/stove/.config/i3/pystatus.py" &\
+                                ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/sounds/vol.oga
+
+bindsym XF86AudioMute           exec pactl set-sink-mute 0 &&\
+                                pkill -SIGUSR1 -f "python /home/stove/.config/i3/pystatus.py"
 
 # lock screen
 bindsym XF86ScreenSaver exec sxlock -f -*-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
 
 # screenshot (fullscreen, active window, selection)
-bindsym Print       exec maim ~/Pictures/screenshot_$(date +%F_%T).png
-bindsym $mod+Print  exec maim -i $(xdotool getactivewindow) ~/Pictures/screenshot_$(date +%F_%T).png
-bindsym Shift+Print exec maim -s ~/Pictures/screenshot_$(date +%F_%T).png
+bindsym Print       exec --no-startup-id maim ~/Pictures/screenshot_$(date +%F_%T).png &&\
+                    ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/sounds/screenshot.oga
+
+bindsym $mod+Print  exec --no-startup-id maim -i $(xdotool getactivewindow) ~/Pictures/screenshot_$(date +%F_%T).png &&\
+                    ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/sounds/screenshot.oga
+
+bindsym Shift+Print exec --no-startup-id maim -s ~/Pictures/screenshot_$(date +%F_%T).png &&\
+                    ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/sounds/screenshot.oga
 
 # external display config
 bindsym XF86Display exec arandr
@@ -100,7 +112,7 @@ colors	{
     statusline $base05
     separator  $base03
 #                       border	backgr. text
-    focused_workspace   $base0C $base0C $base00
+    focused_workspace   $base0A $base0A $base00
     active_workspace    $base0D $base0D $base00
     inactive_workspace  $base02 $base02 $base03
     urgent_workspace    $base08 $base08 $base07
@@ -130,7 +142,10 @@ for_window [class="Pavucontrol"] floating enable
 for_window [class="Lxappearance"] floating enable
 for_window [class="Galculator"] floating enable
 for_window [class="Transmission"] floating enable
-for_window [class="Arandr"] floating enable resize set 640 480
+for_window [class="Arandr"] floating enable, resize set 640 480
+
+# Special spawned windows (from i3pystatus, for example)
+for_window [instance="wifi-menu"] floating enable, border normal, title_format "Available Wireless Networks", resize set 344 346, move position 828 390
 
 #-----------------+
 # WORKSPACE NAMES |
