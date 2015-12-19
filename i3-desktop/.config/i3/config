@@ -100,6 +100,9 @@ assign [instance="chromium"] $WS2
 assign [instance="crx_cnkjkdjlofllcpbemipjbcpfnglbgieh"] $WS3
 assign [class="Steam"] $WS4
 
+# No titlebar for terminal windows
+for_window [class="Termite"] border pixel 2
+
 # Borderless
 for_window [class="chromium"] border none
 for_window [class="mpv"] border none
