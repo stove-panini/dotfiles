@@ -19,8 +19,8 @@ alias mv='mv -i'            # warn if overwriting
 alias q='exit'
 
 # udevil stuff
-alias m-diskstation='udevil mount //diskstation/share'
-alias u-diskstation='udevil umount //diskstation/share'
+alias m-diskstation='udevil mount diskstation:/volume1/share'
+alias u-diskstation='udevil umount diskstation:/volume1/share'
 
 alias m-data='udevil mount /dev/sda1'
 alias u-data='udevil umount /dev/sda1'

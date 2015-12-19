@@ -11,6 +11,9 @@
 # xdg autostart
 exec --no-startup-id dex -a
 
+# monitor color profile
+exec --no-startup-id dispwin ~/.color/x220_lg_ips.icm
+
 # compositor
 exec --no-startup-id compton -b
 
@@ -97,6 +100,8 @@ client.focused_inactive	$base01 $base01 $base03 $base05
 client.unfocused        $base01 $base01 $base03 $base05
 client.urgent           $base08 $base08 $base07 $base05
 
+client.background       $base00
+
 
 #--------+
 # i3 BAR |
@@ -113,7 +118,7 @@ colors	{
     separator  $base03
 #                       border	backgr. text
     focused_workspace   $base0A $base0A $base00
-    active_workspace    $base0D $base0D $base00
+    active_workspace    $base0D $base0D $base07
     inactive_workspace  $base02 $base02 $base03
     urgent_workspace    $base08 $base08 $base07
     }
@@ -141,7 +146,7 @@ for_window [class="Nitrogen"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Lxappearance"] floating enable
 for_window [class="Galculator"] floating enable
-for_window [class="Transmission"] floating enable
+for_window [class="Transmission-gtk"] floating enable
 for_window [class="Arandr"] floating enable, resize set 640 480
 
 # Special spawned windows (from i3pystatus, for example)
@@ -154,8 +159,8 @@ for_window [instance="wifi-menu"] floating enable, border normal, title_format "
 set $WS1 1: term
 set $WS2 2: www
 set $WS3 3: music
-set $WS4 4: work
-set $WS5 5
+set $WS4 4: whatEVER
+set $WS5 5: work
 set $WS6 6
 set $WS7 7
 set $WS8 8
@@ -304,7 +309,7 @@ set $Locker xset s activate
 set $mode_system System (l) lock, (q) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
         bindsym l exec --no-startup-id $Locker, mode "default"
-        bindsym q exec --no-startup-id i3-msg exit, mode "default"
+        bindsym q exec --no-startup-id pkill xss-lock && i3-msg exit, mode "default"
         bindsym s exec --no-startup-id systemctl suspend, mode "default"
         bindsym r exec --no-startup-id systemctl reboot, mode "default"
         bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  

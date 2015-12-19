@@ -23,6 +23,8 @@ status.register("network",
     dynamic_color=True,
     start_color="#c5c8c6",
     end_color="#cc6666",
+#   color_up="#b5bd68",
+#   color_down="#cc6666",
     graph_style="blocks",
     graph_width=10,
     upper_limit="2500",
@@ -38,8 +40,9 @@ status.register("load",
 
 # Shows your CPU temperature, if you have a Intel CPU
 status.register("temp",
-    format="CPU {temp:.0f}°C",
-    alert_color="#cc6666",)
+    format="CPU {temp:.0f}°C / ",
+    alert_color="#cc6666",
+    hints={"separator": False, "separator_block_width": 0},)
 
 # GPU temp
 status.register("shell",
@@ -48,21 +51,23 @@ status.register("shell",
 
 # External drive disk usage
 status.register("shell",
-    command="/home/stove/.local/share/i3/df-nas.sh",
+    command="/home/stove/.local/share/i3/scripts/df-nas.sh",
     interval=30,
-    color="#8abeb7",)
+    color="#f0c674",
+    error_color="#de935f",)
 
 status.register("shell",
-    command="/home/stove/.local/share/i3/df-ext.sh",
+    command="/home/stove/.local/share/i3/scripts/df-ext.sh",
     interval=30,
-    color="#b5bd68",)
+    color="#f0c674",
+    error_color="#de935f",)
 
-# Disk usage
+# Internal disk usage
 status.register("disk",
     path="/",
     format="SSD {free}G [{percentage_used}%]",
     interval=30,
-    color="#b5bd68",
+    color="#f0c674",
     round_size=1,)
 
 # Shows pulseaudio default sink volume
