@@ -19,11 +19,14 @@ alias mv='mv -i'            # warn if overwriting
 alias q='exit'
 
 # udevil stuff
-alias m-diskstation='udevil mount //diskstation/share'
-alias u-diskstation='udevil umount //diskstation/share'
+alias m-diskstation='udevil mount diskstation:/volume1/share'
+alias u-diskstation='udevil umount diskstation:/volume1/share'
 
 alias m-external='udevil mount /dev/disk/by-label/External'
 alias u-external='udevil umount /dev/disk/by-label/External'
+
+alias m-private='sudo cryptsetup luksOpen /dev/disk/by-partuuid/0ccc195d-be88-4c40-aa78-358b1af8ecbe c1 && udevil mount /dev/mapper/c1'
+alias u-private='udevil umount /dev/mapper/c1 && sudo cryptsetup luksClose c1'
 
 # ssh
 alias s-router='ssh admin@edgerouter-x'
