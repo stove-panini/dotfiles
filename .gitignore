@@ -9,3 +9,6 @@ ranger/.config/ranger/bookmarks
 neovim/.config/nvim/autoload/
 neovim/.config/nvim/colors/
 neovim/.config/nvim/plugged/
+
+# weechat logs
+weechat/.weechat/logs/
