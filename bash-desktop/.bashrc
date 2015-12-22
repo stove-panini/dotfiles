@@ -51,7 +51,7 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-tomorrow.dark.sh"
 # FUCK |
 #------'
 # Gotta set this environment variable here bc .bash_profile only sources it once, BEFORE X starts
-export BROWSER="$(if [[ -n $DISPLAY ]]; then echo 'chromium'; else echo 'w3m'; fi)"
+#export BROWSER="$(if [[ -n $DISPLAY ]]; then echo 'chromium'; else echo 'w3m'; fi)"
 
 
 #-------------.

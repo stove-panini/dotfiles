@@ -10,5 +10,7 @@ neovim/.config/nvim/autoload/
 neovim/.config/nvim/colors/
 neovim/.config/nvim/plugged/
 
-# weechat logs
+# weechat logs & crypt
+weechat/.weechat/sec.conf
+weechat/.weechat/weechat.log
 weechat/.weechat/logs/

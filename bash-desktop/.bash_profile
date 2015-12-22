@@ -3,11 +3,14 @@
 # 
 
 # Environment variables for my session
-# See .bashrc for BROWSER variable
+# Skip BROWSER since it interferes with xdg-open
 export PATH=$PATH:~/.bin
 export EDITOR=vim
 export VISUAL=vim
 export PAGER=less
+export TERMINAL="termite -e"
+# multithreaded xz
+export XZ_OPT="--threads=0"
 
 # Initial read of my bashrc goodies
 [[ -f ~/.bashrc ]] && . ~/.bashrc
