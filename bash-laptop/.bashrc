@@ -22,8 +22,8 @@ shopt -s histappend
 # bash completion w/ sudo
 complete -cf sudo
 
-# vi mode at the prompt
-set -o vi
+# vi mode at the prompt (nah)
+#set -o vi
 
 
 #----------.
