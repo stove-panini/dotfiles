@@ -1,2 +1,2 @@
 #!/bin/bash
-i3-msg exec "urxvt -name wifi-menu -e sudo wifi-menu -o"
+i3-msg exec "termite --name=wifi-menu --exec='sudo wifi-menu -o'"
