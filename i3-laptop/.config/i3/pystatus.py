@@ -51,6 +51,8 @@ status.register("temp",
 # Network disk usage
 status.register("shell",
     command="/home/stove/.local/share/i3/scripts/df-nas.sh",
+    # only log CRITICAL errors (default is 30 WARNING)
+    log_level=50,
     interval=60,
     color="#f0c674",
     error_color="#de935f",)
