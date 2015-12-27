@@ -150,7 +150,12 @@ for_window [class="Transmission-gtk"] floating enable
 for_window [class="Arandr"] floating enable, resize set 640 480
 
 # Special spawned windows (from i3pystatus, for example)
-for_window [instance="wifi-menu"] floating enable, border normal, title_format "Available Wireless Networks", resize set 344 346, move position 828 390
+for_window [instance="wifi-menu"] \
+        floating enable, \
+        border normal, \
+        title_format "Available Wireless Networks", \
+        resize set 344 346, \
+        move position 828 390
 
 #-----------------+
 # WORKSPACE NAMES |
