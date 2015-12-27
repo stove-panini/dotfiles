@@ -42,17 +42,6 @@ if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-# Base16 Shell colorscheme
-BASE16_SHELL="$HOME/.config/base16-shell/base16-tomorrow.dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-
-
-#------.
-# FUCK |
-#------'
-# Gotta set this environment variable here bc .bash_profile only sources it once, BEFORE X starts
-#export BROWSER="$(if [[ -n $DISPLAY ]]; then echo 'chromium'; else echo 'w3m'; fi)"
-
 
 #-------------.
 # THE ALIASES |
