@@ -53,12 +53,16 @@ status.register("shell",
 status.register("shell",
     command="/home/stove/.local/share/i3/scripts/df-nas.sh",
     interval=30,
+    # only log CRITICAL errors (default is 30 WARNING)
+    log_level=50,
     color="#f0c674",
     error_color="#de935f",)
 
 status.register("shell",
     command="/home/stove/.local/share/i3/scripts/df-ext.sh",
     interval=30,
+    # only log CRITICAL errors (default is 30 WARNING)
+    log_level=50,
     color="#f0c674",
     error_color="#de935f",)
 
