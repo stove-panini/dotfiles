@@ -8,9 +8,8 @@ export PATH=$PATH:~/.bin
 export EDITOR=vim
 export VISUAL=vim
 export PAGER=less
-export TERMINAL="urxvtc -e"
-# multithreaded xz
-export XZ_OPT="--threads=0"
+export TERMINAL="urxvtc -e"     # how xdg-open determines your terminal emulator
+export XZ_OPT="--threads=0"     # multithreaded xz
 
 # Initial read of my bashrc goodies
 [[ -f ~/.bashrc ]] && . ~/.bashrc
