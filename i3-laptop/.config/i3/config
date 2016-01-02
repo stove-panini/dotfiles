@@ -53,6 +53,14 @@ bindsym XF86AudioLowerVolume    exec pactl set-sink-volume 0 -10% &&\
 bindsym XF86AudioMute           exec pactl set-sink-mute 0 &&\
                                 pkill -SIGUSR1 -f "python /home/stove/.config/i3/pystatus.py"
 
+# cmus
+bindsym XF86AudioPlay               exec cmus-remote --pause
+bindsym XF86AudioStop               exec cmus-remote --stop
+bindsym XF86AudioNext               exec cmus-remote --next
+bindsym XF86AudioPrev               exec cmus-remote --prev
+bindsym Shift+XF86AudioRaiseVolume  exec cmus-remote --volume +10%
+bindsym Shift+XF86AudioLowerVolume  exec cmus-remote --volume -10%
+
 # lock screen
 bindsym XF86ScreenSaver exec sxlock -f -*-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
 
@@ -187,6 +195,7 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec termite
+#bindsym $mod+Return exec urxvtc
 
 # kill focused window
 bindsym $mod+Shift+q kill
