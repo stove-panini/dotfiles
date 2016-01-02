@@ -44,11 +44,11 @@ bindsym XF86MonBrightnessDown   exec xbacklight -steps 5 -dec 10
 # volume
 bindsym XF86AudioRaiseVolume    exec pactl set-sink-volume 0 +10% &&\
                                 pkill -SIGUSR1 -f "python /home/stove/.config/i3/pystatus.py" &\
-                                ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/sounds/vol.oga
+                                canberra-gtk-play --id="audio-volume-change"
 
 bindsym XF86AudioLowerVolume    exec pactl set-sink-volume 0 -10% &&\
                                 pkill -SIGUSR1 -f "python /home/stove/.config/i3/pystatus.py" &\
-                                ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/sounds/vol.oga
+                                canberra-gtk-play --id="audio-volume-change"
 
 bindsym XF86AudioMute           exec pactl set-sink-mute 0 &&\
                                 pkill -SIGUSR1 -f "python /home/stove/.config/i3/pystatus.py"
@@ -66,13 +66,13 @@ bindsym XF86ScreenSaver exec sxlock -f -*-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
 
 # screenshot (fullscreen, active window, selection)
 bindsym Print       exec --no-startup-id maim ~/Pictures/screenshot_$(date +%F_%T).png &&\
-                    ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/sounds/screenshot.oga
+                    canberra-gtk-play --id="camera-shutter"
 
 bindsym $mod+Print  exec --no-startup-id maim -i $(xdotool getactivewindow) ~/Pictures/screenshot_$(date +%F_%T).png &&\
-                    ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/sounds/screenshot.oga
+                    canberra-gtk-play --id="camera-shutter"
 
 bindsym Shift+Print exec --no-startup-id maim -s ~/Pictures/screenshot_$(date +%F_%T).png &&\
-                    ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/sounds/screenshot.oga
+                    canberra-gtk-play --id="camera-shutter"
 
 # external display config
 bindsym XF86Display exec arandr
