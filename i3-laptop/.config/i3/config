@@ -58,8 +58,8 @@ bindsym XF86AudioPlay               exec cmus-remote --pause
 bindsym XF86AudioStop               exec cmus-remote --stop
 bindsym XF86AudioNext               exec cmus-remote --next
 bindsym XF86AudioPrev               exec cmus-remote --prev
-bindsym Shift+XF86AudioRaiseVolume  exec cmus-remote --volume +10%
-bindsym Shift+XF86AudioLowerVolume  exec cmus-remote --volume -10%
+bindsym Shift+XF86AudioRaiseVolume  exec cmus-remote --volume +5%
+bindsym Shift+XF86AudioLowerVolume  exec cmus-remote --volume -5%
 
 # lock screen
 bindsym XF86ScreenSaver exec sxlock -f -*-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
