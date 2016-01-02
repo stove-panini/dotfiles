@@ -27,13 +27,13 @@ exec --no-startup-id nitrogen --restore
 
 # screenshot (fullscreen, active window, selection)
 bindsym Print       exec --no-startup-id maim ~/Pictures/screenshot_$(date +%F_%T).png &&\
-                    ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/sounds/screenshot.oga
+                    canberra-gtk-play --id="camera-shutter"
 
 bindsym $mod+Print  exec --no-startup-id maim -i $(xdotool getactivewindow) ~/Pictures/screenshot_$(date +%F_%T).png &&\
-                    ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/sounds/screenshot.oga
+                    canberra-gtk-play --id="camera-shutter"
 
 bindsym Shift+Print exec --no-startup-id maim -s ~/Pictures/screenshot_$(date +%F_%T).png &&\
-                    ffplay -loglevel quiet -nodisp -autoexit ~/.local/share/i3/sounds/screenshot.oga
+                    canberra-gtk-play --id="camera-shutter"
 
 
 #------------+
