@@ -35,6 +35,26 @@ bindsym $mod+Print  exec --no-startup-id maim -i $(xdotool getactivewindow) ~/Pi
 bindsym Shift+Print exec --no-startup-id maim -s ~/Pictures/screenshot_$(date +%F_%T).png &&\
                     canberra-gtk-play --id="camera-shutter"
 
+# volume
+bindsym XF86AudioRaiseVolume    exec pactl set-sink-volume 0 +10% &&\
+                                pkill -SIGUSR1 -f "python /home/stove/.config/i3/pystatus.py" &\
+                                canberra-gtk-play --id="audio-volume-change"
+
+bindsym XF86AudioLowerVolume    exec pactl set-sink-volume 0 -10% &&\
+                                pkill -SIGUSR1 -f "python /home/stove/.config/i3/pystatus.py" &\
+                                canberra-gtk-play --id="audio-volume-change"
+
+bindsym XF86AudioMute           exec pactl set-sink-mute 0 &&\
+                                pkill -SIGUSR1 -f "python /home/stove/.config/i3/pystatus.py"
+
+# cmus
+bindsym XF86AudioPlay               exec cmus-remote --pause
+bindsym XF86AudioStop               exec cmus-remote --stop
+bindsym XF86AudioNext               exec cmus-remote --next
+bindsym XF86AudioPrev               exec cmus-remote --prev
+bindsym Shift+XF86AudioRaiseVolume  exec cmus-remote --volume +5%
+bindsym Shift+XF86AudioLowerVolume  exec cmus-remote --volume -5%
+
 
 #------------+
 # APPEARANCE |
