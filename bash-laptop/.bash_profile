@@ -11,6 +11,9 @@ export PAGER=less
 export TERMINAL="termite -e"     # how xdg-open determines your terminal emulator
 export XZ_OPT="--threads=0"     # multithreaded xz
 
+# Beets bash completion
+eval "$(beet completion)"
+
 # Initial read of my bashrc goodies
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
