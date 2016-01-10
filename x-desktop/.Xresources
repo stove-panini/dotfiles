@@ -42,8 +42,7 @@
 *.color14:      base0C
 *.color15:      base07
 
-! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
-! use 'shell' template to set these if necessary
+! Colors past 15 require the patched rxvt-unicode-256xresources from AUR
 *.color16:      base09
 *.color17:      base0F
 *.color18:      base01
@@ -70,7 +69,8 @@ URxvt.urgentOnBell: True
 URxvt.cursorBlink: True
 
 ! fade text when window is unfocused
-URxvt.fading: 30
+! NOW HANDLED BY COMPTOSITOR
+!URxvt.fading: 30
 
 ! no autoscroll on output but scroll-to-bottom on keypress
 URxvt.scrollTtyOutput:   False

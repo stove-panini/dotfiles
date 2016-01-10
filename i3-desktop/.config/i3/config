@@ -17,6 +17,9 @@ exec --no-startup-id dispwin ~/.color/dell_u2312hm_custom_color.icc
 # compositor
 exec --no-startup-id compton -b
 
+# daemonize urxvt
+exec --no-startup-id urxvtd -q -o -f
+
 # background wallpaper
 exec --no-startup-id nitrogen --restore
 
@@ -121,7 +124,7 @@ assign [instance="crx_cnkjkdjlofllcpbemipjbcpfnglbgieh"] $WS3
 assign [class="Steam"] $WS4
 
 # No titlebar for terminal windows
-for_window [class="Termite"] border pixel 2
+for_window [class="URxvt"] border pixel 2
 
 # Borderless
 for_window [class="chromium"] border none
@@ -165,7 +168,7 @@ set $alt Mod1
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec urxvtc
 
 # kill focused window
 bindsym $mod+Shift+q kill
