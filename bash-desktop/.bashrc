@@ -30,11 +30,14 @@ complete -cf sudo
 # THE LOOK |
 #----------'
 # Custom bash prompt via kirsle.net/wizards/ps1.html
-if [[ -n $SSH_CLIENT ]] || [[ -n $SSH_TTY ]]; then
-    # SSH client prompt shows hostname
-    export PS1="\[$(tput setaf 6)\]\u\[$(tput setaf 4)\]@\h \[$(tput setaf 15)\][\w]\n\$ \[$(tput sgr0)\]"; else
-    # Local prompt does not
-    export PS1="\[$(tput setaf 3)\]\u \[$(tput setaf 15)\][\w]\n\$ \[$(tput sgr0)\]"
+# Low-color TTY
+if [[ $(tput colors) = 8 ]]; then
+        export PS1="\[$(tput bold)\]\[$(tput setaf 3)\]\u \[$(tput setaf 7)\][\w]\n\$ \[$(tput sgr0)\]";
+# SSH client prompt shows hostname
+elif [[ -n $SSH_CLIENT ]] || [[ -n $SSH_TTY ]]; then
+        export PS1="\[$(tput setaf 6)\]\u\[$(tput setaf 4)\]@\h \[$(tput setaf 15)\][\w]\n\\$ \[$(tput sgr0)\]";
+# 256-color terminal emulator
+else    export PS1="\[$(tput setaf 3)\]\u \[$(tput setaf 15)\][\w]\n\[$(tput setaf 15)\]\$ \[$(tput sgr0)\]";
 fi
 
 # enable color support of ls
