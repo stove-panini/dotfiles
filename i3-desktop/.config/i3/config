@@ -2,26 +2,12 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-# DESKTOP / ARCH LINUX VERSION
+# DESKTOP VERSION
 
-#----------------------+
-# STARTUP APPLICATIONS |
-#----------------------+
-
-# xdg autostart
-exec --no-startup-id dex -a
-
-# monitor color profile
-exec --no-startup-id dispwin ~/.color/dell_u2312hm_custom_color.icc
-
-# compositor
-exec --no-startup-id compton -b
-
-# daemonize urxvt
-exec --no-startup-id urxvtd -q -o -f
-
-# background wallpaper
-exec --no-startup-id nitrogen --restore
+#---------------+
+# STARTUP TASKS |
+#---------------+
+# Daemons and the like go in ~/.xprofile
 
 
 #-----------------+
