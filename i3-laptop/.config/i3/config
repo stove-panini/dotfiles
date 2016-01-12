@@ -4,27 +4,10 @@
 
 # LAPTOP VERSION
 
-#----------------------+
-# STARTUP APPLICATIONS |
-#----------------------+
-
-# xdg autostart
-exec --no-startup-id dex -a
-
-# monitor color profile
-exec --no-startup-id dispwin ~/.color/x220_lg_ips.icm
-
-# compositor
-exec --no-startup-id compton -b
-
-# screensaver
-exec --no-startup-id xss-lock -n dim-screen.sh -- sxlock -f -*-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
-
-# daemonize urxvt
-exec --no-startup-id urxvtd -q -o -f
-
-# background wallpaper
-exec --no-startup-id nitrogen --restore
+#---------------+
+# STARTUP TASKS |
+#---------------+
+# Daemons and the like go in ~/.xprofile
 
 # disable touchpad immediately
 exec --no-startup-id ~/.local/share/i3/scripts/touchpad_toggle.sh
@@ -62,7 +45,7 @@ bindsym Shift+XF86AudioRaiseVolume  exec cmus-remote --volume +5%
 bindsym Shift+XF86AudioLowerVolume  exec cmus-remote --volume -5%
 
 # lock screen
-bindsym XF86ScreenSaver exec sxlock -f -*-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
+bindsym XF86ScreenSaver exec xset s activate
 
 # screenshot (fullscreen, active window, selection)
 bindsym Print       exec --no-startup-id maim ~/Pictures/screenshot_$(date +%F_%T).png &&\
