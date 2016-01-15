@@ -1,0 +1,21 @@
+#
+# ~/.xprofile: autostart with X before the window manager
+#
+
+# autostart xdg .desktop files
+dex -a &
+
+# monitor color profile
+dispwin ~/.color/dell_u2312hm_custom_color.icc &
+
+# compositor
+compton -b &
+
+# screensaver
+xss-lock -n dim-screen.sh -- sxlock -f -*-terminus-medium-*-*-*-14-*-*-*-*-*-*-* &
+
+# daemonize urxvt
+urxvtd -q -o -f &
+
+# background wallpaper
+nitrogen --restore &
