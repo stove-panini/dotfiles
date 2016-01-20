@@ -8,7 +8,7 @@ export PATH=$PATH:~/.bin
 export EDITOR=vim
 export VISUAL=vim
 export PAGER=less
-export TERMINAL="urxvt -e"    # how xdg-open determines your terminal emulator
+export TERMINAL="urxvt -e"      # how xdg-open determines your terminal emulator
 export XZ_OPT="--threads=0"     # multithreaded xz
 
 # Beets bash completion
