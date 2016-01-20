@@ -8,7 +8,7 @@ export PATH=$PATH:~/.bin
 export EDITOR=vim
 export VISUAL=vim
 export PAGER=less
-export TERMINAL="urxvt -e"     # how xdg-open determines your terminal emulator
+export TERMINAL="urxvt -e"      # how xdg-open determines your terminal emulator
 export XZ_OPT="--threads=0"     # multithreaded xz
 
 # Beets bash completion
@@ -19,4 +19,4 @@ eval "$(beet completion)"
 
 # Start X if logging in on TTY1
 # For startx config, please move on to .xinitrc...
-[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
+#[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx    # USING XDM FOR NOW...
