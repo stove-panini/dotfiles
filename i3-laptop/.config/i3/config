@@ -25,15 +25,15 @@ bindsym XF86MonBrightnessUp     exec xbacklight -steps 5 -inc 10
 bindsym XF86MonBrightnessDown   exec xbacklight -steps 5 -dec 10
 
 # volume
-bindsym XF86AudioRaiseVolume    exec pactl set-sink-volume 0 +10% &&\
+bindsym XF86AudioRaiseVolume    exec pactl set-sink-volume @DEFAULT_SINK@ +10% &&\
                                 pkill -SIGUSR1 -f "python /home/stove/.config/i3/pystatus.py" &\
                                 canberra-gtk-play --id="audio-volume-change"
 
-bindsym XF86AudioLowerVolume    exec pactl set-sink-volume 0 -10% &&\
+bindsym XF86AudioLowerVolume    exec pactl set-sink-volume @DEFAULT_SINK@ -10% &&\
                                 pkill -SIGUSR1 -f "python /home/stove/.config/i3/pystatus.py" &\
                                 canberra-gtk-play --id="audio-volume-change"
 
-bindsym XF86AudioMute           exec pactl set-sink-mute 0 &&\
+bindsym XF86AudioMute           exec pactl set-sink-mute @DEFAULT_SINK@ &&\
                                 pkill -SIGUSR1 -f "python /home/stove/.config/i3/pystatus.py"
 
 # cmus
