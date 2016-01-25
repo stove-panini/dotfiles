@@ -19,8 +19,8 @@ alias mv='mv -i'            # warn if overwriting
 alias q='exit'
 
 # udevil stuff
-alias m-diskstation="udevil mount diskstation:/volume1/share && [[ -n $(pgrep -f pystatus.py) ]] && pkill -SIGUSR1 -f 'python /home/stove/.config/i3/pystatus.py'"
-alias u-diskstation="udevil umount diskstation:/volume1/share && [[ -n $(pgrep -f pystatus.py) ]] && pkill -SIGUSR1 -f 'python /home/stove/.config/i3/pystatus.py'"
+alias m-diskstation="udevil mount diskstation:/volume1/share && [ -n $(pgrep -f pystatus.py) ] && pkill -SIGUSR1 -f 'python /home/stove/.config/i3/pystatus.py'"
+alias u-diskstation="udevil umount diskstation:/volume1/share && [ -n $(pgrep -f pystatus.py) ] && pkill -SIGUSR1 -f 'python /home/stove/.config/i3/pystatus.py'"
 
 alias m-data='udevil mount /dev/sda1'
 alias u-data='udevil umount /dev/sda1'

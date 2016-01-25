@@ -19,11 +19,11 @@ alias mv='mv -i'            # warn if overwriting
 alias q='exit'
 
 # udevil stuff
-alias m-diskstation="udevil mount diskstation:/volume1/share && [[ -n $(pgrep -f pystatus.py) ]] && pkill -SIGUSR1 -f 'python /home/stove/.config/i3/pystatus.py'"
-alias u-diskstation="udevil umount diskstation:/volume1/share && [[ -n $(pgrep -f pystatus.py) ]] && pkill -SIGUSR1 -f 'python /home/stove/.config/i3/pystatus.py'"
+alias m-diskstation="udevil mount diskstation:/volume1/share && [ -n $(pgrep -f pystatus.py) ] && pkill -SIGUSR1 -f 'python /home/stove/.config/i3/pystatus.py'"
+alias u-diskstation="udevil umount diskstation:/volume1/share && [ -n $(pgrep -f pystatus.py) ] && pkill -SIGUSR1 -f 'python /home/stove/.config/i3/pystatus.py'"
 
-alias m-external="udevil mount /dev/disk/by-label/External && [[ -n $(pgrep -f pystatus.py) ]] && pkill -SIGUSR1 -f 'python /home/stove/.config/i3/pystatus.py'"
-alias u-external="udevil umount /dev/disk/by-label/External && [[ -n $(pgrep -f pystatus.py) ]] && pkill -SIGUSR1 -f 'python /home/stove/.config/i3/pystatus.py'"
+alias m-external="udevil mount /dev/disk/by-label/External && [ -n $(pgrep -f pystatus.py) ] && pkill -SIGUSR1 -f 'python /home/stove/.config/i3/pystatus.py'"
+alias u-external="udevil umount /dev/disk/by-label/External && [ -n $(pgrep -f pystatus.py) ] && pkill -SIGUSR1 -f 'python /home/stove/.config/i3/pystatus.py'"
 
 alias m-private='sudo cryptsetup luksOpen /dev/disk/by-partuuid/0ccc195d-be88-4c40-aa78-358b1af8ecbe c1 && udevil mount /dev/mapper/c1'
 alias u-private='udevil umount /dev/mapper/c1 && sudo cryptsetup luksClose c1'
