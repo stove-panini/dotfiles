@@ -123,6 +123,7 @@ colors	{
 # Workspace assignment
 assign [instance="chromium"] $WS2
 assign [instance="crx_cnkjkdjlofllcpbemipjbcpfnglbgieh"] $WS3
+assign [class="Remmina"] $WS6
 
 # No titlebar for terminal windows
 for_window [class="URxvt"] border pixel 2
@@ -160,7 +161,7 @@ set $WS2 2: www
 set $WS3 3: music
 set $WS4 4: whatEVER
 set $WS5 5: work
-set $WS6 6
+set $WS6 6: vnc
 set $WS7 7
 set $WS8 8
 set $WS9 9
