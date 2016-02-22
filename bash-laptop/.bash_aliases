@@ -28,7 +28,7 @@ alias u-data='udevil umount /dev/sda1'
 # ssh
 alias s-router='ssh admin@edgerouter-x'
 alias s-diskstation='ssh root@diskstation'
-alias s-ossuary='ssh -Y stove@ossuary'
+alias s-ossuary='ssh -X stove@ossuary'
 
 # wol desktop
 alias wol-ossuary='wol 44:8a:5b:9c:1d:fa'
