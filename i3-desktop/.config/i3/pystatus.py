@@ -41,6 +41,7 @@ status.register("load",
 # Shows your CPU temperature, if you have a Intel CPU
 status.register("temp",
     format="CPU {temp:.0f}°C / ",
+    file="/sys/class/thermal/thermal_zone2/temp",
     alert_color="#cc6666",
     hints={"separator": False, "separator_block_width": 0},)
 
