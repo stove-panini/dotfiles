@@ -124,6 +124,7 @@ for_window [class="Lxappearance"] floating enable
 for_window [class="Galculator"] floating enable
 for_window [class="Transmission-gtk"] floating enable
 for_window [class="m64py"] floating enable
+for_window [class="Virt-manager"] floating enable
 
 
 #-----------------+
