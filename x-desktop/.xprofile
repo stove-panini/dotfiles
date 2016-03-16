@@ -6,7 +6,7 @@
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # autostart xdg .desktop files
-dex -a &
+#dex -a &
 
 # monitor color profile
 dispwin ~/.color/dell_u2312hm_custom_color.icc &
