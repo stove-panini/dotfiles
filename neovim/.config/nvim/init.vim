@@ -4,6 +4,26 @@
 " ~/.config/nvim/init.vim |
 "-------------------------'
 
+"==========.
+" Vim-Plug |
+"----------'
+call plug#begin()
+
+" use single quotes!
+
+" status line
+Plug 'itchyny/lightline.vim'
+
+" git integration
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" solarized color scheme
+Plug 'altercation/vim-colors-solarized'
+
+call plug#end()
+
+
 "=========.
 " General |
 "---------'
@@ -44,9 +64,8 @@ filetype plugin on
 filetype indent on
 
 " colorscheme
-let base16colorspace=256
-colorscheme base16-tomorrow
 set background=dark
+colorscheme solarized
 
 
 "============.
@@ -95,22 +114,9 @@ nnoremap <A-9> 9gt
 nnoremap <A-0> 10gt
 
 
-"==========.
-" Vim-Plug |
-"----------'
-call plug#begin()
-
-" use single quotes!
-
-" status line
-Plug 'itchyny/lightline.vim'
-
-" git integration
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-
-call plug#end()
-
+"================.
+" Plugin Options |
+"----------------'
 
 " Lightline
 "-----------
@@ -119,7 +125,7 @@ set noshowmode
 
 " set colorscheme and git plugin
 let g:lightline = {
-    \ 'colorscheme':  'Tomorrow_Night',
+    \ 'colorscheme':  'solarized',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
