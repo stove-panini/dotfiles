@@ -14,4 +14,7 @@ export XZ_OPT="--threads=0"     # multithreaded xz
 #eval "$(beet completion)"
 
 # Initial read of my bashrc goodies
-[[ -f ~/.bashrc ]] && . ~/.bashrc
+# GNOME ignores this to prevent an infinite loop (see .bashrc)
+if [[ $DESKTOP_SESSION != gnome ]]; then
+    [[ -f ~/.bashrc ]] && . ~/.bashrc
+fi

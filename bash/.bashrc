@@ -52,3 +52,12 @@ fi
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
+#-----------.
+# UGH GNOME |
+#-----------'
+# it refuses to source .bash_profile
+if [[ $DESKTOP_SESSION = gnome ]]; then
+    . ~/.bash_profile
+fi
+
