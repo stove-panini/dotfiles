@@ -21,6 +21,9 @@ Plug 'airblade/vim-gitgutter'
 " solarized color scheme
 Plug 'altercation/vim-colors-solarized'
 
+" tmux.conf syntax highlight
+Plug 'tmux-plugins/vim-tmux'
+
 call plug#end()
 
 
