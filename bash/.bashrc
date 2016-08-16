@@ -2,9 +2,9 @@
 # ~/.bashrc: executed by interactive shells
 #
 
-#-------------.
-# THE OPTIONS |
-#-------------'
+#---------.
+# OPTIONS |
+#---------'
 # see bash manpage under SHELL BUILTIN COMMANDS
 shopt -s autocd
 shopt -s checkwinsize
@@ -22,8 +22,16 @@ shopt -s histappend
 # bash completion w/ sudo
 complete -cf sudo
 
-# vi mode at the prompt (nah)
-#set -o vi
+
+#-----------------------.
+# ENVIRONMENT VARIABLES |
+#-----------------------'
+# Skip BROWSER since it interferes with xdg-open
+export PATH=$PATH:~/.bin
+export EDITOR=vim
+export VISUAL=vim
+export PAGER=less
+export XZ_OPT="--threads=0"     # multithreaded xz
 
 
 #----------.
@@ -31,13 +39,11 @@ complete -cf sudo
 #----------'
 # Custom bash prompt via kirsle.net/wizards/ps1.html
 # Low-color TTY
-if [[ $(tput colors) = 8 ]]; then
+if [[ $(tput colors) <= 8 ]]; then
         export PS1="\[$(tput bold)\]\[$(tput setaf 3)\]\u \[$(tput setaf 7)\][\w]\n\$ \[$(tput sgr0)\]";
-# SSH client prompt shows hostname
-elif [[ -n $SSH_CLIENT ]] || [[ -n $SSH_TTY ]]; then
-        export PS1="\[$(tput setaf 6)\]\u\[$(tput setaf 4)\]@\h \[$(tput setaf 15)\][\w]\n\\$ \[$(tput sgr0)\]";
-# 256-color terminal emulator
-else    export PS1="\[$(tput setaf 3)\]\u \[$(tput setaf 15)\][\w]\n\[$(tput setaf 15)\]\$ \[$(tput sgr0)\]";
+# High-color TTY
+elif [[ $(tput colors) > 8 ]]; then
+        export PS1="\[$(tput setaf 3)\]\u \[$(tput setaf 15)\][\w]\n\[$(tput setaf 15)\]\$ \[$(tput sgr0)\]";
 fi
 
 # enable color support of ls
@@ -46,18 +52,10 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 
-#-------------.
-# THE ALIASES |
-#-------------'
+#---------.
+# ALIASES |
+#---------'
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
-fi
-
-#-----------.
-# UGH GNOME |
-#-----------'
-# it refuses to source .bash_profile
-if [[ $DESKTOP_SESSION = gnome ]]; then
-    . ~/.bash_profile
 fi
 
