@@ -39,10 +39,10 @@ export XZ_OPT="--threads=0"     # multithreaded xz
 #----------'
 # Custom bash prompt via kirsle.net/wizards/ps1.html
 # Low-color TTY
-if [[ $(tput colors) <= 8 ]]; then
+if [[ $(tput colors) -le 8 ]]; then
         export PS1="\[$(tput bold)\]\[$(tput setaf 3)\]\u \[$(tput setaf 7)\][\w]\n\$ \[$(tput sgr0)\]";
 # High-color TTY
-elif [[ $(tput colors) > 8 ]]; then
+elif [[ $(tput colors) -gt 8 ]]; then
         export PS1="\[$(tput setaf 3)\]\u \[$(tput setaf 15)\][\w]\n\[$(tput setaf 15)\]\$ \[$(tput sgr0)\]";
 fi
 
@@ -58,4 +58,3 @@ fi
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
-
