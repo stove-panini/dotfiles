@@ -38,12 +38,13 @@ export XZ_OPT="--threads=0"     # multithreaded xz
 # THE LOOK |
 #----------'
 # Custom bash prompt via kirsle.net/wizards/ps1.html
+# High-color prompt tuned for Solarized dark
 # Low-color TTY
-if [[ $(tput colors) -le 8 ]]; then
+if [[ $(tput colors) -eq 8 ]]; then
         export PS1="\[$(tput bold)\]\[$(tput setaf 3)\]\u \[$(tput setaf 7)\][\w]\n\$ \[$(tput sgr0)\]";
 # High-color TTY
 elif [[ $(tput colors) -gt 8 ]]; then
-        export PS1="\[$(tput setaf 3)\]\u \[$(tput setaf 15)\][\w]\n\[$(tput setaf 15)\]\$ \[$(tput sgr0)\]";
+        export PS1="\[$(tput setaf 4)\]\u \[$(tput setaf 15)\][\w]\n\[$(tput setaf 15)\]\$ \[$(tput sgr0)\]";
 fi
 
 # enable color support of ls
