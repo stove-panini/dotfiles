@@ -15,3 +15,6 @@ neovim/.config/nvim/.netrwhist
 weechat/.weechat/sec.conf
 weechat/.weechat/weechat.log
 weechat/.weechat/logs/
+
+# tmux plugins
+tmux/.tmux/plugins/
