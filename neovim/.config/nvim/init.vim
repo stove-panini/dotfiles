@@ -24,6 +24,9 @@ Plug 'altercation/vim-colors-solarized'
 " tmux.conf syntax highlight
 Plug 'tmux-plugins/vim-tmux'
 
+" easily generate a tmux statusline
+Plug 'edkolev/tmuxline.vim'
+
 call plug#end()
 
 
@@ -121,8 +124,14 @@ nnoremap <A-0> 10gt
 " Plugin Options |
 "----------------'
 
+" Tmuxline
+" --------
+" comment out when disabling plugin
+source ~/.config/nvim/tmuxline-custom.vim
+
+
 " Lightline
-"-----------
+" ---------
 " hide the default mode list
 set noshowmode
 
