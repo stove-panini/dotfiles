@@ -27,7 +27,7 @@ complete -cf sudo
 # ENVIRONMENT VARIABLES |
 #-----------------------'
 # Skip BROWSER since it interferes with xdg-open
-export PATH=$PATH:~/.bin
+export PATH=$PATH:~/.local/bin
 export EDITOR=vim
 export VISUAL=vim
 export PAGER=less
