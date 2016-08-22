@@ -16,8 +16,8 @@ if [[ $TYPE = ethernet ]]; then
     # Ethernet output: ENO1 192.168.1.123
     echo "${DEVICE^^} $IP4"
 elif [[ $TYPE = wifi ]]; then
-    # Wifi output: WLP3S0 HOME_NETWORK (84%)
-    echo "${DEVICE^^} $W_SSID $W_BARS"
+    # Wifi output: HOME_NETWORK ▂▄▆_
+    echo "$W_SSID $W_BARS"
 else
     echo "NET DOWN"
 fi
