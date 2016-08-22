@@ -1,18 +1,17 @@
 #!/bin/bash
 #
-# ~/.tmux/scripts/tmuxline-cpu.sh: Reports CPU usage as a percentage
+# ~/.tmux/scripts/tmuxline-cpu.sh: Reports CPU usage and temperature
 #
 
-# TODO: pray to god that the highest thermal_zoneN dir is reserved for cpu avg
-#       temp across all machines everywhere ever (ha ha ha)
-
-zone=$(ls -1 /sys/class/thermal/ | grep "thermal_zone" | tail -1)
-idle=$(mpstat | tail -n1 | awk '{printf "%0.f", $13}')
-temp=$(cat /sys/class/thermal/$zone/temp | cut -c 1-2)
+temp=$(sensors | grep "Physical id 0" | awk '{ sub(/\+/, ""); print $4}' | cut -c -2)
+idle=$(mpstat | tail -1 | awk '{printf "%0.f", $13}')
 
 if
     ! command -v mpstat >/dev/null; then
-        echo "Install sysstat package!"
+        echo "Install sysstat"
+elif
+    ! command -v sensors >/dev/null; then
+        echo "Install lm_sensors"
 else
     echo -n "CPU "
     printf "%2s" "$(( 100 - $idle ))"
