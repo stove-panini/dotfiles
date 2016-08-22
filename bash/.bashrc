@@ -42,11 +42,12 @@ export XZ_OPT="--threads=0"     # multithreaded xz
 
 # root user
 if [[ $USER = root ]]; then
-export PS1="\[$(tput bold)\]\[$(tput setaf 1)\]\u \[$(tput sgr0)\]\[$(tput setaf 1)\][\w]\n# \[$(tput sgr0)\]";
+export PS1="\[$(tput bold)\]\[$(tput setaf 1)\]\u@\h \[$(tput sgr0)\]\[$(tput setaf 1)\][\w]\n# \[$(tput sgr0)\]";
 
 # ssh session
 elif [[ $SSH_TTY ]]; then
-    export PS1="\u@\H\ [\w]\n\$ "
+#   export PS1="\u@\H [\w]\n\$ "
+    export PS1="\[$(tput setaf 2)\]\u \[$(tput setaf 15)\][\w]\n\$ \[$(tput sgr0)\]";
 
 # local session, low-color
 elif [[ $(tput colors) -eq 8 ]]; then
@@ -54,7 +55,7 @@ elif [[ $(tput colors) -eq 8 ]]; then
 
 # local session, high-color
 elif [[ $(tput colors) -gt 8 ]]; then
-    export PS1="\[$(tput setaf 6)\]\u \[$(tput setaf 15)\][\w]\n\[$(tput setaf 15)\]\$ \[$(tput sgr0)\]";
+    export PS1="\[$(tput setaf 6)\]\u \[$(tput setaf 15)\][\w]\n\$ \[$(tput sgr0)\]";
 fi
 
 # enable color in ls
