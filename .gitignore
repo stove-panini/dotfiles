@@ -18,3 +18,4 @@ weechat/.weechat/logs/
 
 # tmux plugins
 tmux/.tmux/plugins/
+tmux/.tmux/resurrect/
