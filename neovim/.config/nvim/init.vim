@@ -27,6 +27,9 @@ Plug 'tmux-plugins/vim-tmux'
 " easily generate a tmux statusline
 Plug 'edkolev/tmuxline.vim'
 
+" automatic session saver, used with tmux-continuum plugin
+Plug 'tpope/vim-obsession'
+
 call plug#end()
 
 
@@ -126,7 +129,7 @@ nnoremap <A-0> 10gt
 
 " Tmuxline
 " --------
-" comment out when disabling plugin
+" My tmuxline layout
 source ~/.config/nvim/tmuxline-custom.vim
 
 
