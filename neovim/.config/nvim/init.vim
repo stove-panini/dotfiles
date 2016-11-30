@@ -20,7 +20,7 @@ Plug 'airblade/vim-gitgutter'
 
 " color schemes
 Plug 'chriskempson/base16-vim'
-Plug 'felixjung/vim-base16-lightline'
+Plug 'stove-panini/vim-base16-lightline'
 
 " tmux.conf syntax highlight
 Plug 'tmux-plugins/vim-tmux'
@@ -73,7 +73,7 @@ filetype indent on
 
 " colorscheme
 let base16colorspace=256
-colorscheme base16-google-dark
+colorscheme base16-solar-flare
 
 
 "============.
@@ -139,7 +139,7 @@ set noshowmode
 
 " set colorscheme and git plugin
 let g:lightline = {
-    \ 'colorscheme':  'base16_google',
+    \ 'colorscheme':  'base16_high',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
