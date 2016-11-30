@@ -18,8 +18,9 @@ Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
-" solarized color scheme
-Plug 'altercation/vim-colors-solarized'
+" color schemes
+Plug 'chriskempson/base16-vim'
+Plug 'felixjung/vim-base16-lightline'
 
 " tmux.conf syntax highlight
 Plug 'tmux-plugins/vim-tmux'
@@ -27,8 +28,6 @@ Plug 'tmux-plugins/vim-tmux'
 " easily generate a tmux statusline
 Plug 'edkolev/tmuxline.vim'
 
-" automatic session saver, used with tmux-continuum plugin
-Plug 'tpope/vim-obsession'
 
 call plug#end()
 
@@ -73,8 +72,8 @@ filetype plugin on
 filetype indent on
 
 " colorscheme
-set background=dark
-colorscheme solarized
+let base16colorspace=256
+colorscheme base16-google-dark
 
 
 "============.
@@ -140,7 +139,7 @@ set noshowmode
 
 " set colorscheme and git plugin
 let g:lightline = {
-    \ 'colorscheme':  'solarized',
+    \ 'colorscheme':  'base16_google',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]

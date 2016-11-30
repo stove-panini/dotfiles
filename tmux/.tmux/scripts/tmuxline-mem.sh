@@ -8,4 +8,4 @@
 free=$(free -h | grep "Mem" | awk '{print $4}')
 percent=$(free | grep "Mem" | awk '{printf "%.0f", $3 / $2 * 100}')
 
-echo "MEM $free | $percent%"
+echo "MEM $free / $percent%"

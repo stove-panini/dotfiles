@@ -18,5 +18,5 @@ else
     echo -n "CPU "
     # pad output to 2 spaces to prevent statusbar wiggle
     printf "%2s" "$idle"
-    echo "% | $temp°C"
+    echo "% / $temp°C"
 fi

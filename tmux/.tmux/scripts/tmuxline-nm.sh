@@ -15,7 +15,7 @@ W_BARS=$(nmcli -t --fields IN-USE,BARS dev wifi | grep "\*" | cut -d ":" -f 2)
 
 if [[ $TYPE = ethernet ]]; then
     # Ethernet output: ENO1 192.168.1.123
-    echo "${DEVICE^^} $EXT_IP"
+    echo "${DEVICE^^} $IP4"
 elif [[ $TYPE = wifi ]]; then
     # Wifi output: HOME_NETWORK ▂▄▆_
     echo "$W_SSID $W_BARS"
