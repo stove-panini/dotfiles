@@ -31,7 +31,8 @@ export PATH=$PATH:~/.local/bin
 export EDITOR=vim
 export VISUAL=vim
 export PAGER=less
-export XZ_OPT="--threads=0"     # multithreaded xz
+export XZ_OPT="--threads=0" # multithreaded xz
+export WINEDLLOVERRIDES="winemenubuilder.exe=d" # no wine file assoc.
 
 
 #----------.
