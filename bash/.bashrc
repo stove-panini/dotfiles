@@ -1,6 +1,9 @@
 #
 # ~/.bashrc: executed by interactive shells
 #
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
 
 #---------.
 # OPTIONS |
