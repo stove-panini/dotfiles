@@ -73,7 +73,7 @@ filetype indent on
 
 " colorscheme
 let base16colorspace=256
-colorscheme base16-solar-flare
+colorscheme base16-materia
 
 
 "============.
@@ -139,7 +139,7 @@ set noshowmode
 
 " set colorscheme and git plugin
 let g:lightline = {
-    \ 'colorscheme':  'base16_high',
+    \ 'colorscheme':  'base16',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
