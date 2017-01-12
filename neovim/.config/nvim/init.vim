@@ -71,9 +71,11 @@ syntax enable
 filetype plugin on
 filetype indent on
 
-" colorscheme
-let base16colorspace=256
-colorscheme base16-solar-flare
+" colorscheme automatically set by base16-shell
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
 
 
 "============.
@@ -139,7 +141,7 @@ set noshowmode
 
 " set colorscheme and git plugin
 let g:lightline = {
-    \ 'colorscheme':  'base16_high',
+    \ 'colorscheme':  'base16',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
