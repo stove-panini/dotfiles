@@ -5,15 +5,14 @@
 
 # TODO: 1. Support multiple connected interfaces
 
-DEVICE=$(nmcli -t dev show | grep -B4 -A8 "(connected)" | grep "GENERAL.DEVICE" | cut -d ":" -f 2)
-TYPE=$(nmcli -t dev show | grep -B4 -A8 "(connected)" | grep "GENERAL.TYPE" | cut -d ":" -f 2)
-IP4=$(nmcli -t dev show | grep -B4 -A8 "(connected)" | grep "IP4.ADDRESS" | cut -d ":" -f 2 | sed s=/.*$==)
-EXT_IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
+DEVICE=$(nmcli dev status | grep " connected " | awk '{print $1}' | head -n 1)
+TYPE=$(nmcli dev status | grep " connected " | awk '{print $2}')
+IP4=$(nmcli -t dev show | grep "IP4.ADDRESS" | grep -v "127.0.0.1" | cut -d ":" -f 2 | sed s=/.*$==)
 W_SSID=$(nmcli -t --fields IN-USE,SSID dev wifi | grep "\*" | cut -d ":" -f 2)
 W_BARS=$(nmcli -t --fields IN-USE,BARS dev wifi | grep "\*" | cut -d ":" -f 2)
 
 
-if [[ $TYPE = ethernet ]]; then
+if [[ $TYPE = ethernet || bridge ]]; then
     # Ethernet output: ENO1 192.168.1.123
     echo "${DEVICE^^} $IP4"
 elif [[ $TYPE = wifi ]]; then
