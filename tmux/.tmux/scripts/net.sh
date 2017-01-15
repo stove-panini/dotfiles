@@ -9,10 +9,10 @@
 # name, so I try to account for that. A wired device with an arbitrary name that
 # starts with "w" will cause unexpected behavior.
 
-DEVICE=$(ip -4 address | grep "state UP" | awk '{ print substr($2, 1, length($2)-1) }')
-TYPE=$(ip -4 address | grep "state UP" | awk '{ print substr($2, 1, length($2)-length($2)+1) }')
-IP4=$(ip -4 address show ${DEVICE} | grep inet | awk '{ print substr($2, 1, length($2)-3) }')
-SSID=$(iw dev ${DEVICE} link | grep SSID | sed "s/SSID://" | sed "s/^[ \t]*//")
+DEVICE=$(ip -4 address | awk '/state UP/ { print substr($2, 1, length($2)-1) }')
+TYPE=$(ip -4 address | awk '/state UP/ { print substr($2, 1, length($2)-length($2)+1) }')
+IP4=$(ip -4 address show ${DEVICE} | awk '/inet/ { print substr($2, 1, length($2)-3) }')
+SSID=$(iw dev ${DEVICE} link | grep SSID | sed -e "s/SSID://" -e "s/^[ \t]*//")
 SIGNAL=$(awk 'NR==3 { print substr($3, 1, length($3)-1) }' /proc/net/wireless)
 
 bars () {
