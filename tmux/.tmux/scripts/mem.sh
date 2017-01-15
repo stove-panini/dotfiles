@@ -3,9 +3,7 @@
 # ~/.tmux/scripts/tmuxline-mem.sh: Displays free physical memory
 #
 
-# TODO: become an awk wizard
+FREE=$(free -h | awk 'NR==2 { print $4 }')
+PERCENT=$(free | awk 'NR==2 { printf "%.0f", ($3 / $2) * 100 }')
 
-free=$(free -h | grep "Mem" | awk '{print $4}')
-percent=$(free | grep "Mem" | awk '{printf "%.0f", $3 / $2 * 100}')
-
-echo "MEM $free / $percent%"
+echo "MEM ${FREE} / ${PERCENT}%"
