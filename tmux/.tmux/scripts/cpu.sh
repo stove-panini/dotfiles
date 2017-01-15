@@ -15,8 +15,6 @@ elif
     ! command -v sensors >/dev/null; then
         echo "Install lm_sensors"
 else
-    echo -n "CPU "
-    # pad output to 2 spaces to prevent statusbar wiggle
-    printf "%2s" "${IDLE}"
-    echo "% / ${TEMP}°C"
+    # pad idle% to prevent wiggle
+    printf "CPU %2s%% / ${TEMP}°C" "${IDLE}"
 fi
