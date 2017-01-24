@@ -27,6 +27,12 @@ bars () {
     fi
 }
 
+# Initial check for airplane mode
+if [[ ! $(ip link | grep "state UP") ]]; then
+    echo "AIRPLANE MODE"
+fi
+
+
 if [[ ${TYPE} != "w" ]]; then
     echo "${DEVICE^^} ${IP4}"
 elif [[ $TYPE = "w" ]]; then
