@@ -4,9 +4,9 @@
 #
 
 TEMP=$(sensors | grep "Physical id 0" | awk '{ printf "%d", $4 }')
-# mpstat must collect multiple samples of cpu usage to generate accurate usage %
-# awk subtracts idle% from 100 then rounds decimals
-USE=$(mpstat 1 4 | awk 'END { printf "%2.f", (100 - $12) }')
+# mpstat monitors cpu usage over 4 seconds to generate accurate usage%
+# awk subtracts idle% & iowait% from 100 then rounds decimals
+USE=$(mpstat 4 1 | awk 'END { printf "%2.f", (100 - $6 - $12) }')
 
 if
     ! command -v mpstat >/dev/null; then
