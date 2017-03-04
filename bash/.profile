@@ -34,3 +34,6 @@ export PAGER=less
 export XZ_OPT="--threads=0" # multithreaded xz
 export WINEDLLOVERRIDES="winemenubuilder.exe=d" # no wine file assoc.
 
+
+# Finally, source ~/.bashrc if it exists AND we have a bash shell.
+[[ -n "$BASH" ]] && [[ -f ~/.bashrc ]] && . ~/.bashrc
