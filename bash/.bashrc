@@ -11,8 +11,8 @@
 #----------.
 # THE LOOK |
 #----------'
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+#BASE16_SHELL=$HOME/.config/base16-shell/
+#[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 # Custom bash prompt via kirsle.net/wizards/ps1.html
 # root user
@@ -30,7 +30,7 @@ elif [[ $(tput colors) -eq 8 ]]; then
 
 # local session, high-color
 elif [[ $(tput colors) -gt 8 ]]; then
-    export PS1="\[$(tput setaf 6)\]\u \[$(tput setaf 15)\][\w]\n\$ \[$(tput sgr0)\]";
+    export PS1="\[$(tput setaf 4)\]\u \[$(tput setaf 15)\][\w]\n\$ \[$(tput sgr0)\]";
 fi
 
 # enable color in ls
