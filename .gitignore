@@ -6,7 +6,7 @@ ranger/.config/ranger/bookmarks
 **/__pycache__
 
 # vim plugins n colors
-#vim/.vim/
+vim/.vim/
 
 # weechat logs & crypt
 weechat/.weechat/sec.conf
