@@ -40,7 +40,7 @@ else
     COL1=12
     COL2=4
     COL3=15
-    LOCOL1=4
+    LOCOL1=6
     LOCOL2=7
 fi
 
