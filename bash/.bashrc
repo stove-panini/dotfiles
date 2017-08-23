@@ -12,32 +12,46 @@
 # THE LOOK |
 #----------'
 
-# A reminder:
-# 0 - Black
-# 1 - Red
-# 2 - Green
-# 3 - Yellow
-# 4 - Blue
-# 5 - Magenta
-# 6 - Cyan
-# 7 - White
+# The TTY can only display 0-7. The bold flag is needed to access 8-15.
+# 0/8  - Black
+# 1/9  - Red
+# 2/10 - Green
+# 3/11 - Yellow
+# 4/12 - Blue
+# 5/13 - Magenta
+# 6/14 - Cyan
+# 7/15 - White
+
+if [[ ${USER} = root ]]; then
+    COL1=9
+    COL2=1
+    COL3=1
+    LOCOL1=1
+    LOCOL2=1
+
+elif [[ ${SSH_TTY} ]]; then
+    COL1=10
+    COL2=2
+    COL3=15
+    LOCOL1=2
+    LOCOL2=7
+
+else
+    COL1=12
+    COL2=4
+    COL3=15
+    LOCOL1=4
+    LOCOL2=7
+fi
 
 # Custom bash prompt via kirsle.net/wizards/ps1.html
-# root user
-if [[ $USER = root ]]; then
-    export PS1="\[$(tput bold)\]\[$(tput setaf 1)\]\u@\h \[$(tput sgr0)\]\[$(tput setaf 1)\][\w]\n# \[$(tput sgr0)\]";
-
-# ssh session
-elif [[ $SSH_TTY ]]; then
-    export PS1="\[$(tput setaf 2)\]\u@\h \[$(tput setaf 15)\][\w]\n\$ \[$(tput sgr0)\]";
+# local session, high-color
+if [[ $(tput colors) -gt 8 ]]; then
+    export PS1="\[$(tput setaf ${COL1})\]\u\[$(tput setaf ${COL2})\]@\h \[$(tput setaf ${COL3})\][\w]\n\$ \[$(tput sgr0)\]";
 
 # local session, low-color
 elif [[ $(tput colors) -eq 8 ]]; then
-    export PS1="\[$(tput bold)\]\[$(tput setaf 3)\]\u \[$(tput setaf 7)\][\w]\n\$ \[$(tput sgr0)\]";
-
-# local session, high-color
-elif [[ $(tput colors) -gt 8 ]]; then
-    export PS1="\[$(tput setaf 4)\]\u \[$(tput setaf 15)\][\w]\n\$ \[$(tput sgr0)\]";
+    export PS1="\[$(tput bold)\]\[$(tput setaf ${LOCOL1})\]\u \[$(tput setaf ${LOCOL2})\][\w]\n\$ \[$(tput sgr0)\]";
 fi
 
 # enable color in ls
