@@ -51,7 +51,7 @@ if [[ $(tput colors) -gt 8 ]]; then
 
 # local session, low-color
 elif [[ $(tput colors) -eq 8 ]]; then
-    export PS1="\[$(tput bold)\]\[$(tput setaf ${LOCOL1})\]\u \[$(tput setaf ${LOCOL2})\][\w]\n\$ \[$(tput sgr0)\]";
+    export PS1="\[$(tput bold)\]\[$(tput setaf ${LOCOL1})\]\u@\h \[$(tput setaf ${LOCOL2})\][\w]\n\$ \[$(tput sgr0)\]";
 fi
 
 # enable color in ls
