@@ -44,14 +44,14 @@ else
     LOCOL2=7
 fi
 
-# Custom bash prompt via kirsle.net/wizards/ps1.html
+# Using single quotes because $ is a special character!
 # local session, high-color
 if [[ $(tput colors) -gt 8 ]]; then
-    export PS1="\[$(tput setaf ${COL1})\]\u\[$(tput setaf ${COL2})\]@\h \[$(tput setaf ${COL3})\][\w]\n\$ \[$(tput sgr0)\]";
+    export PS1='\[$(tput setaf ${COL1})\]\u\[$(tput setaf ${COL2})\]@\h \[$(tput setaf ${COL3})\][\w]\n\$ \[$(tput sgr0)\]';
 
 # local session, low-color
 elif [[ $(tput colors) -eq 8 ]]; then
-    export PS1="\[$(tput bold)\]\[$(tput setaf ${LOCOL1})\]\u@\h \[$(tput setaf ${LOCOL2})\][\w]\n\$ \[$(tput sgr0)\]";
+    export PS1='\[$(tput bold)\]\[$(tput setaf ${LOCOL1})\]\u@\h \[$(tput setaf ${LOCOL2})\][\w]\n\$ \[$(tput sgr0)\]';
 fi
 
 # enable color in ls
