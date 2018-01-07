@@ -14,6 +14,16 @@ alias md='mkdir -p'         # create parent directories if needed
 alias rd='rmdir'
 alias cp='cp -ir'           # copy dir contents / warn if overwriting
 alias mv='mv -i'            # warn if overwriting
+alias rsync='rsync -aP'     # archive mode with progress bar
 
 # make it easy
 alias q='exit'
+
+# distro-specific aliases
+if [[ $(uname -r | grep "ARCH") ]]; then
+    alias pac='trizen'
+fi
+
+if [[ $(uname -r | grep "el7") ]]; then
+    true #placeholder
+fi

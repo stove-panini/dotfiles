@@ -2,27 +2,6 @@
 # ~/.profile: executed by login shell
 #
 
-#---------.
-# OPTIONS |
-#---------'
-# see bash manpage under SHELL BUILTIN COMMANDS
-shopt -s autocd
-shopt -s checkwinsize
-shopt -s cmdhist
-shopt -s dotglob
-shopt -s globstar
-shopt -s nocaseglob
-
-# history
-HISTCONTROL=ignoreboth
-HISTSIZE=2000
-HISTFILESIZE=1000
-shopt -s histappend
-
-# bash completion w/ sudo
-complete -cf sudo
-
-
 #-----------------------.
 # ENVIRONMENT VARIABLES |
 #-----------------------'
