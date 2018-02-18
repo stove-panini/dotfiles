@@ -1,33 +1,14 @@
 #
-#
 # ~/.bashrc: executed by interactive shells
 #
-
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-
-#---------.
-# OPTIONS |
-#---------'
-# see bash manpage under SHELL BUILTIN COMMANDS
-shopt -s autocd
-shopt -s checkwinsize
-shopt -s cmdhist
-shopt -s dotglob
-shopt -s globstar
-shopt -s nocaseglob
-
-# history
-HISTCONTROL=ignoreboth
-HISTSIZE=2000
-HISTFILESIZE=1000
-shopt -s histappend
-
-# bash completion w/ sudo
-complete -cf sudo
-
+# Source global definitions
+if [[ -f /etc/bashrc ]]; then
+    . /etc/bashrc
+fi
 
 #----------.
 # THE LOOK |
@@ -76,7 +57,7 @@ elif [[ $(tput colors) -eq 8 ]]; then
 fi
 
 # enable color in ls
-if [ -x /usr/bin/dircolors ]; then
+if [[ -x /usr/bin/dircolors ]]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
@@ -84,6 +65,25 @@ fi
 #---------.
 # ALIASES |
 #---------'
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
+# cd'n around
+alias ..="cd .."            # go up one directory
+alias ...="cd ../.."        # go up two
+alias ....="cd ../../.."    # go up three
+alias cdd="cd -"            # go back to previous dir
+
+# file mgmt
+LS_OPTIONS="-F -h --group-directories-first --color=auto"
+alias ls="ls $LS_OPTIONS"
+alias ll="ls $LS_OPTIONS -l"
+alias la="ls $LS_OPTIONS -lA"
+alias grep="grep -i --color=auto"
+alias mkdir="mkdir -p"      # create parent directories if needed
+alias cp="cp -ir"           # copy dir contents / warn if overwriting
+alias mv="mv -i"            # warn if overwriting
+alias rsync="rsync -aP"     # archive mode with progress bar
+
+# make it easy
+alias q="exit"
+
+# source site-specific aliases file
+[[ -f ~/.bash_aliases ]] && . ~/.bash_aliases

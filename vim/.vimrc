@@ -2,99 +2,143 @@
 " ~/.vimrc
 "
 
-" VIM-PLUG
-" --------
+"""""""""""""""""""""""""""""
+" PLUGINS
+"""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 
 " sensible defaults
 Plug 'tpope/vim-sensible'
+" plugin-aware action repeater with '.'
+Plug 'tpope/vim-repeat'
 
-" one colorscheme pack to rule them all!
-"Plug 'flazz/vim-colorschemes'
-
-" lightline statusbar
-Plug 'itchyny/lightline.vim'
-
-" lightline native colorscheme
-Plug 'stove-panini/lightline-colorscheme-native'
-
+" Interface
+" ---------
 " Smyck colorscheme
 Plug 'stove-panini/smyck-color-scheme'
+" lightline statusbar
+Plug 'itchyny/lightline.vim'
+" git branch plugin for lightline
+Plug 'itchyny/vim-gitbranch'
+" lightline native colorscheme
+Plug 'stove-panini/lightline-colorscheme-native'
+" writing-mode
+Plug 'reedes/vim-pencil'
 
+" Text manipulation
+" -----------------
+" add/change/remove brackets etc
+Plug 'tpope/vim-surround'
+
+" Code-related
+" ------------
+" Filesystem tree sidebar
+Plug 'scrooloose/nerdtree'
+" Code autocompletion
+" TBD
 " Syntax checker
 Plug 'vim-syntastic/syntastic'
-
-" tmux.conf syntax highlight
-Plug 'tmux-plugins/vim-tmux'
-
-" easily generate a tmux statusline
-Plug 'edkolev/tmuxline.vim'
+" Git diff stats
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
 
-" INTERFACE
-" ---------
-" syntax colors
+"""""""""""""""""""""""""""""
+" PLUGIN CONFIG
+"""""""""""""""""""""""""""""
+" Lightline w/ plugin integration
+let g:lightline = {
+\   'colorscheme': 'native',
+\   'active': {
+\     'left': [ [ 'mode', 'paste' ],
+\             [ 'gitbranch', 'readonly', 'filename', 'modified' ],
+\             [ 'syntastic' ] ]
+\   },
+\   'component_function': {
+\     'gitbranch': 'gitbranch#name',
+\     'syntastic': 'SyntasticStatuslineFlag'
+\   },
+\}
+
+" Syntastic
+"let g:syntastic_mode_map = { 'mode': 'passive' }
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+
+" Pencil
+let g:pencil#wrapModeDefault = 'soft'
+augroup pencil
+  autocmd!
+  autocmd FileType markdown,mkd call pencil#init()
+  autocmd FileType text         call pencil#init()
+augroup END
+
+
+"""""""""""""""""""""""""""""
+" OPTIONS
+"""""""""""""""""""""""""""""
 colorscheme smyck
 
-" lightline colors
-let g:lightline = {
-      \ 'colorscheme': 'native',
-      \ }
-
+" Interface
+" ---------
 " hide default modeline
 set noshowmode
-
-" show line number sidebar
+" show line numbers
 set number
-
 " highlight current line
 set cursorline
-
 " no line wrap
 set nowrap
 
-
-" FORMATTING
-" ----------
+" Indentation
+" -----------
 " each indentation level is 4 spaces. tabs are not used
-set expandtab
-
-" tab key size
 set tabstop=4
-
+set expandtab
 " indent operation (<< and >>) size
 set shiftwidth=4
 
+" Search
+" ------
 " ignore case unless a capital is typed
 set ignorecase
 set smartcase
 
 
+"""""""""""""""""""""""""""""
 " CUSTOM KEYBINDS
-" ---------------
-" tab control works like a web browser
-nnoremap <C-n>     :tabnew<CR>
-nnoremap <C-S-tab> :tabprevious<CR>
-nnoremap <C-tab>   :tabnext<CR>
-inoremap <C-n>     <Esc>:tabnew<CR>
-inoremap <C-S-tab> <Esc>:tabprevious<CR>i
-inoremap <C-tab>   <Esc>:tabnext<CR>i
-nnoremap <A-1> 1gt
-nnoremap <A-2> 2gt
-nnoremap <A-3> 3gt
-nnoremap <A-4> 4gt
-nnoremap <A-5> 5gt
-nnoremap <A-6> 6gt
-nnoremap <A-7> 7gt
-nnoremap <A-8> 8gt
-nnoremap <A-9> 9gt
-nnoremap <A-0> 10gt
+"""""""""""""""""""""""""""""
+" unmap it first bc it has a default action (move right)
+nnoremap <SPACE> <Nop>
+" gotta escape that special character notation
+let mapleader = "\<Space>"
+
+" tab control
+nnoremap <leader>c :tabnew<CR>
+nnoremap <leader>n :tabnext<CR>
+nnoremap <leader>N :tabprev<CR>
+nnoremap <leader>1 1gt
+nnoremap <leader>2 2gt
+nnoremap <leader>3 3gt
+nnoremap <leader>4 4gt
+nnoremap <leader>5 5gt
+nnoremap <leader>6 6gt
+nnoremap <leader>7 7gt
+nnoremap <leader>8 8gt
+nnoremap <leader>9 9gt
+nnoremap <leader>0 10gt
+
+" toggles should use ctrl
+nnoremap <leader><C-t> :NERDTreeToggle<CR>
+nnoremap <leader><C-p> :PencilToggle<CR>
 
 
+"""""""""""""""""""""""""""""
 " MISCELLANEOUS
-" -------------
+"""""""""""""""""""""""""""""
 " use xclipboard if feature is available
 if has('clipboard')
     set clipboard=unnamedplus
@@ -102,8 +146,3 @@ endif
 
 " enable mouse because I'm a fraud
 set mouse=a
-
-
-" my tmuxline layout
-"source ~/.vim/tmuxline-custom.vim
-
