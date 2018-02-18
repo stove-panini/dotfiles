@@ -22,7 +22,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-gitbranch'
 " lightline native colorscheme
 Plug 'stove-panini/lightline-colorscheme-native'
-" writing-mode
+" writing-mode for text and markdown
 Plug 'reedes/vim-pencil'
 
 " Text manipulation
@@ -34,12 +34,12 @@ Plug 'tpope/vim-surround'
 " ------------
 " Filesystem tree sidebar
 Plug 'scrooloose/nerdtree'
-" Code autocompletion
-" TBD
 " Syntax checker
 Plug 'vim-syntastic/syntastic'
 " Git diff stats
 Plug 'airblade/vim-gitgutter'
+" Code autocompletion
+" TBD
 
 call plug#end()
 
@@ -48,6 +48,7 @@ call plug#end()
 " PLUGIN CONFIG
 """""""""""""""""""""""""""""
 " Lightline w/ plugin integration
+" -------------------------------
 let g:lightline = {
 \   'colorscheme': 'native',
 \   'active': {
@@ -62,6 +63,7 @@ let g:lightline = {
 \}
 
 " Syntastic
+" ---------
 "let g:syntastic_mode_map = { 'mode': 'passive' }
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -69,6 +71,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 
 " Pencil
+" ------
 let g:pencil#wrapModeDefault = 'soft'
 augroup pencil
   autocmd!
@@ -111,10 +114,14 @@ set smartcase
 """""""""""""""""""""""""""""
 " CUSTOM KEYBINDS
 """""""""""""""""""""""""""""
-" unmap it first bc it has a default action (move right)
+" map to nothing bc SPACE has a default action (move right)
 nnoremap <SPACE> <Nop>
 " gotta escape that special character notation
-let mapleader = "\<Space>"
+let mapleader = "\<SPACE>"
+
+" split control
+nnoremap <leader>- :split<CR>
+nnoremap <leader>\ :vsplit<CR>
 
 " tab control
 nnoremap <leader>c :tabnew<CR>
@@ -134,6 +141,9 @@ nnoremap <leader>0 10gt
 " toggles should use ctrl
 nnoremap <leader><C-t> :NERDTreeToggle<CR>
 nnoremap <leader><C-p> :PencilToggle<CR>
+
+" enter clears search results
+nnoremap<leader><CR> :nohlsearch<CR>
 
 
 """""""""""""""""""""""""""""
