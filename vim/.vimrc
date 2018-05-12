@@ -103,6 +103,11 @@ set tabstop=4
 set expandtab
 " indent operation (<< and >>) size
 set shiftwidth=4
+" 2 spaces for Ruby, please
+:autocmd Filetype ruby set softtabstop=2
+:autocmd Filetype ruby set shiftwidth=2
+:autocmd Filetype ruby set tabstop=2
+
 
 " Search
 " ------
