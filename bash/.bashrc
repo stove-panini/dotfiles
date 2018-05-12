@@ -6,9 +6,11 @@
 [[ $- != *i* ]] && return
 
 # Source global definitions
-if [[ -f /etc/bashrc ]]; then
-    . /etc/bashrc
-fi
+[[ -f /etc/bashrc ]] && source /etc/bashrc
+
+# Source chruby
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
 
 #----------.
 # THE LOOK |
@@ -58,7 +60,11 @@ fi
 
 # enable color in ls
 if [[ -x /usr/bin/dircolors ]]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    if [[ -r ~/.dircolors ]]; then
+        eval "$(dircolors -b ~/.dircolors)"
+    else
+        eval "$(dircolors -b)"
+    fi
 fi
 
 
