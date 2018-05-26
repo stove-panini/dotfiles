@@ -23,8 +23,7 @@ export PATH="${PATH}:~/.local/bin"
 
 # add gems to our path
 if [[ -x /usr/bin/ruby && -x /usr/bin/gem ]]; then
-    export GEM_HOME="${HOME}/.gem"
-    PATH="${PATH}:${GEM_HOME}/bin"
+    PATH="${PATH}:$(ruby -e 'print Gem.user_dir')/bin"
 fi
 
 
