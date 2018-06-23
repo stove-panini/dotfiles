@@ -38,9 +38,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'vim-syntastic/syntastic'
 " Git diff stats
 Plug 'airblade/vim-gitgutter'
-" Code autocompletion
-" TBD
-
+" Better Ruby highlighting
+Plug 'vim-ruby/vim-ruby'
 call plug#end()
 
 
