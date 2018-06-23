@@ -17,13 +17,18 @@ shopt -s globstar   # '**' matches all files, '**/' matches all directories
 export EDITOR="vim"
 export VISUAL="vim"
 export PAGER="less"
-export XZ_OPT="--threads=0" # multithreaded xz
-export WINEDLLOVERRIDES="winemenubuilder.exe=d" # no wine file assoc.
 export PATH="${PATH}:~/.local/bin"
+
+# disable wine file assoc.
+if [[ -x /usr/bin/wine ]]; then
+    export WINEDLLOVERRIDES="winemenubuilder.exe=d"
+fi
 
 # add gems to our path
 if [[ -x /usr/bin/ruby && -x /usr/bin/gem ]]; then
     PATH="${PATH}:$(ruby -e 'print Gem.user_dir')/bin"
+    # Bundler uses this!
+    export GEM_HOME=$(ruby -e 'print Gem.user_dir')
 fi
 
 
