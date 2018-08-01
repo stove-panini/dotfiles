@@ -98,14 +98,12 @@ set nowrap
 " Indentation
 " -----------
 " each indentation level is 4 spaces. tabs are not used
-set tabstop=4
 set expandtab
+set tabstop=4
 " indent operation (<< and >>) size
 set shiftwidth=4
-" 2 spaces for Ruby, please
-:autocmd Filetype ruby set softtabstop=2
-:autocmd Filetype ruby set shiftwidth=2
-:autocmd Filetype ruby set tabstop=2
+" 2 spaces for Ruby and YAML, please
+autocmd FileType ruby,yaml set ts=2 sw=2
 
 
 " Search
