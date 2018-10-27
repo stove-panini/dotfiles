@@ -14,8 +14,9 @@ Plug 'tpope/vim-repeat'
 
 " Interface
 " ---------
-" Smyck colorscheme
+" Colorschemes
 Plug 'stove-panini/smyck-color-scheme'
+Plug 'srcery-colors/srcery-vim'
 " lightline statusbar
 Plug 'itchyny/lightline.vim'
 " git branch plugin for lightline
@@ -24,11 +25,6 @@ Plug 'itchyny/vim-gitbranch'
 Plug 'stove-panini/lightline-colorscheme-native'
 " writing-mode for text and markdown
 Plug 'reedes/vim-pencil'
-
-" Text manipulation
-" -----------------
-" add/change/remove brackets etc
-Plug 'tpope/vim-surround'
 
 " Code-related
 " ------------
@@ -40,6 +36,14 @@ Plug 'vim-syntastic/syntastic'
 Plug 'airblade/vim-gitgutter'
 " Better Ruby highlighting
 Plug 'vim-ruby/vim-ruby'
+
+" Quality-of-Life
+" ---------------
+" add/change/remove brackets etc
+Plug 'tpope/vim-surround'
+" Fuzzy file search
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
 call plug#end()
 
 
@@ -63,11 +67,15 @@ let g:lightline = {
 
 " Syntastic
 " ---------
-"let g:syntastic_mode_map = { 'mode': 'passive' }
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
+"let g:syntastic_aggregate_errors = 1
+
+" Preferred checkers
+let g:syntastic_ruby_checkers = ['rubocop']
+let g:syntastic_python_checkers = ['flake8']
 
 " Pencil
 " ------
@@ -82,6 +90,8 @@ augroup END
 """""""""""""""""""""""""""""
 " OPTIONS
 """""""""""""""""""""""""""""
+"let g:srcery_italic = 1
+"colorscheme srcery
 colorscheme smyck
 
 " Interface
