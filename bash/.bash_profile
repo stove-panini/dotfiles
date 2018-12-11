@@ -6,9 +6,9 @@
 # OPTIONS |
 #---------'
 # Additional shell options
-shopt -s autocd     # dirs are executed as if cd was called
+#shopt -s autocd     # dirs are executed as if cd was called
 shopt -s cmdhist    # saves multi-line commands in one history entry
-shopt -s globstar   # '**' matches all files, '**/' matches all directories
+#shopt -s globstar   # '**' matches all files, '**/' matches all directories
 
 
 #-----------------------.
@@ -17,7 +17,7 @@ shopt -s globstar   # '**' matches all files, '**/' matches all directories
 export EDITOR="vim"
 export VISUAL="vim"
 export PAGER="less"
-export PATH="${PATH}:~/.local/bin"
+export PATH="${HOME}/.local/bin:${PATH}"
 
 # disable wine file assoc.
 if [[ -x /usr/bin/wine ]]; then
