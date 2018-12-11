@@ -90,9 +90,9 @@ augroup END
 """""""""""""""""""""""""""""
 " OPTIONS
 """""""""""""""""""""""""""""
-"let g:srcery_italic = 1
-"colorscheme srcery
-colorscheme smyck
+let g:srcery_italic = 1
+colorscheme srcery
+"colorscheme smyck
 
 " Interface
 " ---------
