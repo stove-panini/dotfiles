@@ -12,6 +12,9 @@
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 
+# For the love of god, no Ctrl+S, Ctrl+Q
+stty -ixon
+
 # Fuzzy finder keyboard shortcuts
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
