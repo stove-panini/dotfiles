@@ -2,35 +2,23 @@
 # ~/.bash_profile: executed by bash login shell
 #
 
-#---------.
-# OPTIONS |
-#---------'
-# Additional shell options
-#shopt -s autocd     # dirs are executed as if cd was called
-shopt -s cmdhist    # saves multi-line commands in one history entry
-#shopt -s globstar   # '**' matches all files, '**/' matches all directories
+# Save multi-line commands in one history entry
+shopt -s cmdhist
 
-
-#-----------------------.
-# ENVIRONMENT VARIABLES |
-#-----------------------'
 export EDITOR="vim"
 export VISUAL="vim"
 export PAGER="less"
-export PATH="${HOME}/.local/bin:${PATH}"
 
-# disable wine file assoc.
-if [[ -x /usr/bin/wine ]]; then
-    export WINEDLLOVERRIDES="winemenubuilder.exe=d"
-fi
+extra_paths=(
+    "${HOME}/.local/bin"
+)
 
-# add gems to our path
-if [[ -x /usr/bin/ruby && -x /usr/bin/gem ]]; then
-    PATH="${PATH}:$(ruby -e 'print Gem.user_dir')/bin"
-    # Bundler uses this!
-    export GEM_HOME=$(ruby -e 'print Gem.user_dir')
-fi
+for ex_path in "${extra_paths[@]}"; do
+    if ! [[ ${PATH} =~ ${ex_path} ]]; then
+        export PATH="${ex_path}:${PATH}"
+    fi
+done
 
 
-# Finally, source ~/.bashrc if it exists AND we have a bash shell.
-[[ ${BASH} && -f ~/.bashrc ]] && . ~/.bashrc
+# Source ~/.bashrc if it exists AND we have a bash shell.
+[[ "${BASH}" && -f ~/.bashrc ]] && source ~/.bashrc
