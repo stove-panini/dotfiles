@@ -13,7 +13,7 @@ alias ls="ls ${ls_options}"
 alias ll="ls ${ls_options} -l"
 alias la="ls ${ls_options} -lA"
 
-_prompt() {
+_bash_prompt() {
     num_colors="${1}"
 
     # 0/8  - Black     4/12 - Blue
@@ -40,4 +40,4 @@ _prompt() {
     fi
 }
 
-_prompt "$(tput colors)"
+_bash_prompt "$(tput colors)"
