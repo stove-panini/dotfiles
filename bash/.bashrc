@@ -8,18 +8,17 @@
 # Source global definitions
 [[ -f /etc/bashrc ]] && source /etc/bashrc
 
-# Source chruby
-if [ -d /usr/local/share/chruby ]; then
-    source /usr/local/share/chruby/chruby.sh
-    source /usr/local/share/chruby/auto.sh
-fi
-
 # Fuzzy finder keyboard shortcuts
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 
 # Aliases & functions
 [[ -f ~/.bash_aliases ]] && source ~/.bash_aliases
 
+# Source chruby
+if [ -d /usr/local/share/chruby ]; then
+    source /usr/local/share/chruby/chruby.sh
+    source /usr/local/share/chruby/auto.sh
+fi
 
 # For the love of god, no Ctrl+S, Ctrl+Q
 stty -ixon

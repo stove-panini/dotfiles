@@ -18,4 +18,4 @@ for ex_path in "${extra_paths[@]}"; do
 done
 
 # Source ~/.bashrc if it exists AND we have a bash shell.
-[[ "${BASH}" && -f ~/.bashrc ]] && source ~/.bashrc
+[[ "${BASH}" && -f "${HOME}/.bashrc" ]] && source "${HOME}/.bashrc"
