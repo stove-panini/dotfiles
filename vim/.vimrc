@@ -14,8 +14,9 @@ Plug 'tpope/vim-repeat'
 
 " Interface
 " ---------
-" Smyck colorscheme
+" colors
 Plug 'stove-panini/smyck-color-scheme'
+Plug 'srcery-colors/srcery-vim'
 " lightline statusbar
 Plug 'itchyny/lightline.vim'
 " git branch plugin for lightline
@@ -30,16 +31,36 @@ Plug 'reedes/vim-pencil'
 " add/change/remove brackets etc
 Plug 'tpope/vim-surround'
 
-" Code-related
+" Code
 " ------------
-" Filesystem tree sidebar
-Plug 'scrooloose/nerdtree'
-" Syntax checker
+" snippet engine & snips
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+" autocompletion
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'Shougo/neco-syntax'
+" syntax checker
 Plug 'vim-syntastic/syntastic'
-" Git diff stats
-Plug 'airblade/vim-gitgutter'
-" Better Ruby highlighting
+" better Ruby highlighting
 Plug 'vim-ruby/vim-ruby'
+" better Python highlighting
+Plug 'vim-python/python-syntax'
+" puppet syntax highlighting
+Plug 'rodjek/vim-puppet'
+" cloudformation syntax highlighting / linting
+Plug 'speshak/vim-cfn'
+
+" QoL
+" ------------
+" filepicker improvements
+Plug 'tpope/vim-vinegar'
+" fuzzy finder
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+" git diff stats
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 
@@ -49,7 +70,7 @@ call plug#end()
 " Lightline w/ plugin integration
 " -------------------------------
 let g:lightline = {
-\   'colorscheme': 'native',
+\   'colorscheme': 'srcery',
 \   'active': {
 \     'left': [ [ 'mode', 'paste' ],
 \             [ 'gitbranch', 'readonly', 'filename', 'modified' ],
@@ -68,6 +89,10 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
+"let g:syntastic_aggregate_errors = 1
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_ruby_checkers = ['rubocop']
+let g:syntastic_cloudformation_checkers = ['cfn_lint']
 
 " Pencil
 " ------
@@ -78,11 +103,33 @@ augroup pencil
   autocmd FileType text         call pencil#init()
 augroup END
 
+" Vim-Python
+" ----------
+let g:python_highlight_all = 1
+let g:python_highlight_file_headers_as_comments = 1
+
+" Deoplete
+" --------
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#var('around', {
+\   'mark_above': '[↑]',
+\   'mark_below': '[↓]',
+\   'mark_changes': '[*]',
+\})
+
+" Vinegar
+" -------
+let g:netrw_liststyle = 0
+" hide dotfiles
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+" vsplits open to the right
+let g:netrw_altv = 1
 
 """""""""""""""""""""""""""""
 " OPTIONS
 """""""""""""""""""""""""""""
-colorscheme smyck
+let g:srcery_italic = 1
+colorscheme srcery
 
 " Interface
 " ---------
@@ -105,6 +152,9 @@ set shiftwidth=4
 " 2 spaces for Ruby and YAML, please
 autocmd FileType ruby,yaml set ts=2 sw=2
 
+" Custom Filetypes
+" ----------------
+autocmd BufNewFile,BufRead *.cform setfiletype yaml.cloudformation
 
 " Search
 " ------
@@ -141,11 +191,12 @@ nnoremap <leader>9 9gt
 nnoremap <leader>0 10gt
 
 " toggles should use ctrl
-nnoremap <leader><C-t> :NERDTreeToggle<CR>
 nnoremap <leader><C-p> :PencilToggle<CR>
+nnoremap <leader><C-f> :FZF<CR>
+nnoremap <leader><C-g> :Rg<CR>
 
 " enter clears search results
-nnoremap<leader><CR> :nohlsearch<CR>
+nnoremap <leader><CR> :nohlsearch<CR>
 
 
 """""""""""""""""""""""""""""
@@ -153,7 +204,7 @@ nnoremap<leader><CR> :nohlsearch<CR>
 """""""""""""""""""""""""""""
 " use xclipboard if feature is available
 if has('clipboard')
-    set clipboard=unnamedplus
+    set clipboard=unnamed
 endif
 
 " enable mouse because I'm a fraud
