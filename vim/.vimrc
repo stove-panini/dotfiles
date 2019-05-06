@@ -155,7 +155,7 @@ nnoremap <leader><CR> :nohlsearch<CR>
 "---------------
 " use xclipboard if feature is available
 if has('clipboard')
-    set clipboard=unnamed
+    set clipboard^=unnamed,unnamedplus
 endif
 
 " enable mouse because I'm a fraud
