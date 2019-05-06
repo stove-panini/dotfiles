@@ -2,31 +2,20 @@
 # ~/.bash_profile: executed by bash login shell
 #
 
-#---------.
-# OPTIONS |
-#---------'
-# Additional shell options
-shopt -s cmdhist    # saves multi-line commands in one history entry
+# Save multi-line commands in one history entry
+shopt -s cmdhist
 
-#-----------------------.
-# ENVIRONMENT VARIABLES |
-#-----------------------'
-export EDITOR="vim"
-export VISUAL="vim"
-export PAGER="less"
-export PATH="${HOME}/.local/bin:${PATH}"
+# Add additions to our path here
+extra_paths=(
+    "${HOME}/.local/bin"
+    '/opt/local/bin'
+)
 
-# add MacPorts to our path, if we're on a Mac
-if [[ $(uname -s) = 'Darwin' ]]; then
-    export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-fi
+for ex_path in "${extra_paths[@]}"; do
+    if [[ ! "${PATH}" =~ "${ex_path}" && -d "${ex_path}" ]]; then
+        export PATH="${ex_path}:${PATH}"
+    fi
+done
 
-# add gems to our path
-if [[ $(which ruby) && $(which gem) ]]; then
-    PATH="${PATH}:$(ruby -e 'print Gem.user_dir')/bin"
-    # Bundler uses this!
-    export GEM_HOME=$(ruby -e 'print Gem.user_dir')
-fi
-
-# Finally, source ~/.bashrc if it exists AND we have a bash shell.
-[[ ${BASH} && -f ~/.bashrc ]] && . ~/.bashrc
+# Source ~/.bashrc if it exists AND we have a bash shell.
+[[ "${BASH}" && -f ~/.bashrc ]] && source ~/.bashrc

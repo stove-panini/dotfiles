@@ -2,71 +2,33 @@
 " ~/.vimrc
 "
 
-"""""""""""""""""""""""""""""
-" PLUGINS
-"""""""""""""""""""""""""""""
+"==========
+" PLUGINS |
+"---------'
 call plug#begin('~/.vim/plugged')
 
-" sensible defaults
-Plug 'tpope/vim-sensible'
-" plugin-aware action repeater with '.'
-Plug 'tpope/vim-repeat'
-
-" Interface
-" ---------
-" colors
-Plug 'stove-panini/smyck-color-scheme'
-Plug 'srcery-colors/srcery-vim'
-" lightline statusbar
-Plug 'itchyny/lightline.vim'
-" git branch plugin for lightline
-Plug 'itchyny/vim-gitbranch'
-" lightline native colorscheme
-Plug 'stove-panini/lightline-colorscheme-native'
-" writing-mode for text and markdown
-Plug 'reedes/vim-pencil'
-
-" Text manipulation
-" -----------------
-" add/change/remove brackets etc
-Plug 'tpope/vim-surround'
-
-" Code
-" ------------
-" snippet engine & snips
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-" autocompletion
-Plug 'Shougo/deoplete.nvim'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'Shougo/neco-syntax'
-" syntax checker
-Plug 'vim-syntastic/syntastic'
-" better Ruby highlighting
-Plug 'vim-ruby/vim-ruby'
-" better Python highlighting
-Plug 'vim-python/python-syntax'
-" puppet syntax highlighting
-Plug 'rodjek/vim-puppet'
-" cloudformation syntax highlighting / linting
-Plug 'speshak/vim-cfn'
-
-" QoL
-" ------------
-" filepicker improvements
-Plug 'tpope/vim-vinegar'
-" fuzzy finder
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-" git diff stats
 Plug 'airblade/vim-gitgutter'
+Plug 'itchyny/lightline.vim'
+Plug 'itchyny/vim-gitbranch'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'reedes/vim-pencil'
+Plug 'rodjek/vim-puppet'
+Plug 'speshak/vim-cfn'
+Plug 'srcery-colors/srcery-vim'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
+Plug 'vim-syntastic/syntastic'
+Plug 'vim-python/python-syntax'
+Plug 'vim-ruby/vim-ruby'
+
 call plug#end()
 
 
-"""""""""""""""""""""""""""""
-" PLUGIN CONFIG
-"""""""""""""""""""""""""""""
+"================
+" PLUGIN CONFIG |
+"---------------
 " Lightline w/ plugin integration
 " -------------------------------
 let g:lightline = {
@@ -82,18 +44,6 @@ let g:lightline = {
 \   },
 \}
 
-" Syntastic
-" ---------
-"let g:syntastic_mode_map = { 'mode': 'passive' }
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-"let g:syntastic_aggregate_errors = 1
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_ruby_checkers = ['rubocop']
-let g:syntastic_cloudformation_checkers = ['cfn_lint']
-
 " Pencil
 " ------
 let g:pencil#wrapModeDefault = 'soft'
@@ -103,31 +53,32 @@ augroup pencil
   autocmd FileType text         call pencil#init()
 augroup END
 
-" Vim-Python
-" ----------
+" Python
+" ------
 let g:python_highlight_all = 1
-let g:python_highlight_file_headers_as_comments = 1
 
-" Deoplete
-" --------
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#var('around', {
-\   'mark_above': '[↑]',
-\   'mark_below': '[↓]',
-\   'mark_changes': '[*]',
-\})
+" Syntastic
+" ---------
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+
+" Preferred checkers
+let g:syntastic_ruby_checkers = ['rubocop']
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_cloudformation_checkers = ['cfn_lint']
 
 " Vinegar
 " -------
 let g:netrw_liststyle = 0
-" hide dotfiles
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
-" vsplits open to the right
 let g:netrw_altv = 1
 
-"""""""""""""""""""""""""""""
-" OPTIONS
-"""""""""""""""""""""""""""""
+
+"==========
+" OPTIONS |
+"---------
 let g:srcery_italic = 1
 colorscheme srcery
 
@@ -144,8 +95,9 @@ set nowrap
 
 " Indentation
 " -----------
-" each indentation level is 4 spaces. tabs are not used
+" use spaces
 set expandtab
+" tab size
 set tabstop=4
 " indent operation (<< and >>) size
 set shiftwidth=4
@@ -158,22 +110,21 @@ autocmd BufNewFile,BufRead *.cform setfiletype yaml.cloudformation
 
 " Search
 " ------
-" ignore case unless a capital is typed
 set ignorecase
 set smartcase
 
 
-"""""""""""""""""""""""""""""
-" CUSTOM KEYBINDS
-"""""""""""""""""""""""""""""
+"==================
+" CUSTOM KEYBINDS |
+"-----------------
 " map to nothing bc SPACE has a default action (move right)
 nnoremap <SPACE> <Nop>
 " gotta escape that special character notation
 let mapleader = "\<SPACE>"
 
 " split control
-nnoremap <leader>- :split<CR>
-nnoremap <leader>\ :vsplit<CR>
+nnoremap <leader>- :Sexplore<CR>
+nnoremap <leader>\ :Vexplore<CR>
 
 " tab control
 nnoremap <leader>c :tabnew<CR>
@@ -199,9 +150,9 @@ nnoremap <leader><C-g> :Rg<CR>
 nnoremap <leader><CR> :nohlsearch<CR>
 
 
-"""""""""""""""""""""""""""""
-" MISCELLANEOUS
-"""""""""""""""""""""""""""""
+"================
+" MISCELLANEOUS |
+"---------------
 " use xclipboard if feature is available
 if has('clipboard')
     set clipboard=unnamed

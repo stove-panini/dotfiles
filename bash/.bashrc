@@ -14,58 +14,18 @@ if [ -d /usr/local/share/chruby ]; then
     source /usr/local/share/chruby/auto.sh
 fi
 
-# Source FZF
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# Fuzzy finder keyboard shortcuts
+[[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
+
+# Aliases & functions
+[[ -f ~/.bash_aliases ]] && source ~/.bash_aliases
 
 
-#----------.
-# THE LOOK |
-#----------'
+# For the love of god, no Ctrl+S, Ctrl+Q
+stty -ixon
 
-# The TTY can only display 0-7. The bold flag is needed to access 8-15.
-# 0/8  - Black
-# 1/9  - Red
-# 2/10 - Green
-# 3/11 - Yellow
-# 4/12 - Blue
-# 5/13 - Magenta
-# 6/14 - Cyan
-# 7/15 - White
-
-if [[ ${USER} = root ]]; then
-    color1=9
-    color2=1
-    color3=1
-    lowcolor1=1
-    lowcolor2=1
-
-elif [[ ${SSH_TTY} ]]; then
-    color1=10
-    color2=2
-    color3=15
-    lowcolor1=2
-    lowcolor2=7
-
-else
-    color1=12
-    color2=4
-    color3=15
-    lowcolor1=6
-    lowcolor2=7
-fi
-
-# Using single quotes because $ is a special character!
-# local session, high-color
-if [[ $(tput colors) -gt 8 ]]; then
-    export PS1='\[$(tput setaf ${color1})\]\u\[$(tput setaf ${color2})\]@\h \[$(tput setaf ${color3})\][\w]\n\$ \[$(tput sgr0)\]';
-
-# local session, low-color
-elif [[ $(tput colors) -eq 8 ]]; then
-    export PS1='\[$(tput bold)\]\[$(tput setaf ${lowcolor1})\]\u@\h \[$(tput setaf ${lowcolor2})\][\w]\n\$ \[$(tput sgr0)\]';
-fi
-
-# enable color in ls
-if [[ -x /usr/bin/dircolors ]]; then
+# Make dircolors match colorscheme
+if [[ -x "$(command -v dircolors)" ]]; then
     if [[ -r ~/.dircolors ]]; then
         eval "$(dircolors -b ~/.dircolors)"
     else
@@ -73,37 +33,26 @@ if [[ -x /usr/bin/dircolors ]]; then
     fi
 fi
 
+# Set prompt
+# 0/8  - Black     4/12 - Blue
+# 1/9  - Red       5/13 - Magenta
+# 2/10 - Green     6/14 - Cyan
+# 3/11 - Yellow    7/15 - White
 
-#---------.
-# ALIASES |
-#---------'
-# cd'n around
-alias ..="cd .."            # go up one directory
-alias ...="cd ../.."        # go up two
-alias ....="cd ../../.."    # go up three
-alias cdd="cd -"            # go back to previous dir
+color1=12
+color2=4
+color3=15
 
-# file mgmt
-LS_OPTIONS="-F -h"
-alias ls="ls $LS_OPTIONS"
-alias ll="ls $LS_OPTIONS -l"
-alias la="ls $LS_OPTIONS -lA"
-alias grep="grep -i --color=auto"
-alias mkdir="mkdir -p"      # create parent directories if needed
-alias cp="cp -ir"           # copy dir contents / warn if overwriting
-alias mv="mv -i"            # warn if overwriting
+if [[ "${USER}" = root ]]; then
+    color1=9
+    color2=1
+    color3=1
+elif [[ "${SSH_TTY}" ]]; then
+    color1=10
+    color2=2
+    color3=15
+fi
 
-# easy exit
-alias q="exit"
-
-# don't get lost in vim's :shell command
-whereami () {
-    if (( ${SHLVL} > 1 )); then
-        echo "This shell is a nested shell. (${SHLVL})"
-    else
-        echo "This is a top-level shell."
-    fi
-}
-
-# source site-specific aliases file
-[[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
+if (( $(tput colors) > 8 )); then
+    export PS1="\[$(tput setaf ${color1})\]\u\[$(tput setaf ${color2})\]@\h \[$(tput setaf ${color3})\][\w]\n\$ \[$(tput sgr0)\]"
+fi
