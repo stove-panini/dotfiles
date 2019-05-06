@@ -12,6 +12,8 @@ Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-gitbranch'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'reedes/vim-pencil'
+Plug 'rodjek/vim-puppet'
+Plug 'speshak/vim-cfn'
 Plug 'srcery-colors/srcery-vim'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
@@ -65,6 +67,13 @@ let g:syntastic_check_on_wq = 1
 " Preferred checkers
 let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_cloudformation_checkers = ['cfn_lint']
+
+" Vinegar
+" -------
+let g:netrw_liststyle = 0
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_altv = 1
 
 
 "==========
@@ -94,6 +103,10 @@ set tabstop=4
 set shiftwidth=4
 " 2 spaces for Ruby and YAML, please
 autocmd FileType ruby,yaml set ts=2 sw=2
+
+" Custom Filetypes
+" ----------------
+autocmd BufNewFile,BufRead *.cform setfiletype yaml.cloudformation
 
 " Search
 " ------
@@ -130,6 +143,8 @@ nnoremap <leader>0 10gt
 
 " toggles should use ctrl
 nnoremap <leader><C-p> :PencilToggle<CR>
+nnoremap <leader><C-f> :FZF<CR>
+nnoremap <leader><C-g> :Rg<CR>
 
 " enter clears search results
 nnoremap <leader><CR> :nohlsearch<CR>
@@ -140,7 +155,7 @@ nnoremap <leader><CR> :nohlsearch<CR>
 "---------------
 " use xclipboard if feature is available
 if has('clipboard')
-    set clipboard=unnamedplus
+    set clipboard^=unnamed,unnamedplus
 endif
 
 " enable mouse because I'm a fraud
