@@ -32,25 +32,27 @@ call plug#end()
 " Lightline w/ plugin integration
 " -------------------------------
 let g:lightline = {
-\   'colorscheme': 'srcery',
-\   'active': {
-\     'left': [ [ 'mode', 'paste' ],
-\             [ 'gitbranch', 'readonly', 'filename', 'modified' ],
-\             [ 'syntastic' ] ]
-\   },
-\   'component_function': {
-\     'gitbranch': 'gitbranch#name',
-\     'syntastic': 'SyntasticStatuslineFlag'
-\   },
+\    'colorscheme': 'srcery',
+\    'active': {
+\        'left': [
+\          [ 'mode', 'paste' ],
+\          [ 'gitbranch', 'readonly', 'filename', 'modified' ],
+\          [ 'syntastic' ]
+\        ]
+\    },
+\    'component_function': {
+\        'gitbranch': 'gitbranch#name',
+\        'syntastic': 'SyntasticStatuslineFlag'
+\    },
 \}
 
 " Pencil
 " ------
 let g:pencil#wrapModeDefault = 'soft'
 augroup pencil
-  autocmd!
-  autocmd FileType markdown,mkd call pencil#init()
-  autocmd FileType text         call pencil#init()
+    autocmd!
+    autocmd FileType markdown,mkd call pencil#init()
+    autocmd FileType text         call pencil#init()
 augroup END
 
 " Python
@@ -71,9 +73,8 @@ let g:syntastic_cloudformation_checkers = ['cfn_lint']
 
 " Vinegar
 " -------
-let g:netrw_liststyle = 0
+" hide dotfiles by default
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
-let g:netrw_altv = 1
 
 
 "==========
