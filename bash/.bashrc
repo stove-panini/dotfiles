@@ -49,7 +49,9 @@ if [[ "${USER}" = root ]]; then
 elif [[ "${SSH_TTY}" ]]; then
     color1=10
     color2=2
-    color3=15
+elif [[ "${container}" == 'podman' ]]; then
+    color1=14
+    color2=6
 fi
 
 if (( $(tput colors) > 8 )); then
