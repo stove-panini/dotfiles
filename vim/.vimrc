@@ -23,8 +23,11 @@ Plug 'vim-syntastic/syntastic'
 Plug 'vim-python/python-syntax'
 Plug 'vim-ruby/vim-ruby'
 
-call plug#end()
+if has('nvim')
+    Plug 'vimlab/split-term.vim'
+endif
 
+call plug#end()
 
 "================
 " PLUGIN CONFIG |
@@ -126,6 +129,11 @@ let mapleader = "\<SPACE>"
 " split control
 nnoremap <leader>- :Sexplore<CR>
 nnoremap <leader>\ :Vexplore<CR>
+if has('nvim')
+    nnoremap <leader>t :Term<CR>
+else
+    nnoremap <leader>t :terminal<CR>
+endif
 
 " tab control
 nnoremap <leader>c :tabnew<CR>
