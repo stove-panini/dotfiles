@@ -40,7 +40,7 @@ fi
 
 color1=12
 color2=4
-color3=15
+color3=7
 
 if [[ "${USER}" = root ]]; then
     color1=9
