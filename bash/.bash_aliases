@@ -18,7 +18,7 @@ if [[ ! -x $(command -v python) && -x $(command -v python3) ]]; then
     alias python='python3'
 fi
 
-# Alias 'vim' if we have Neovim
-if [[ -x $(command -v nvim) ]]; then
-    alias vim='nvim'
-fi
+vim_alternatives=('nvim' 'vimx')
+for vim in "${vim_alternatives[@]}"; do 
+    [[ -x $(command -v  "${vim}") ]] && alias vim="${vim}"
+done
