@@ -126,7 +126,6 @@ let mapleader = "\<SPACE>"
 " split control
 nnoremap <leader>- :Sexplore<CR>
 nnoremap <leader>\ :Vexplore<CR>
-nnoremap <leader>t :terminal<CR>
 
 " tab control
 nnoremap <leader>c :tabnew<CR>
