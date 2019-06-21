@@ -101,6 +101,9 @@ set expandtab
 set tabstop=4
 " indent operation (<< and >>) size
 set shiftwidth=4
+" show tabs if they exist
+set list
+set listchars=tab:▸·,trail:·
 " 2 spaces for Ruby and YAML, please
 autocmd FileType ruby,yaml set ts=2 sw=2
 
