@@ -11,6 +11,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-gitbranch'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'pearofducks/ansible-vim'
 Plug 'reedes/vim-pencil'
 Plug 'rodjek/vim-puppet'
 Plug 'speshak/vim-cfn'
@@ -28,6 +29,16 @@ call plug#end()
 "================
 " PLUGIN CONFIG |
 "---------------
+" Ansible
+" -------
+let g:ansible_unindent_after_newline = 1
+let g:ansible_template_syntaxes = { '.*/templates/.*\.xml\.j2': 'xml' }
+" files that are also yaml arent necessarily playbooks!
+augroup ansible_vim_fthosts
+  autocmd!
+  autocmd BufNewFile,BufRead */files/*.yml,*/files/*.yaml set filetype=yaml
+augroup END
+
 " Lightline w/ plugin integration
 " -------------------------------
 let g:lightline = {
