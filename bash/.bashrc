@@ -9,10 +9,10 @@
 [[ -f /etc/bashrc ]] && source /etc/bashrc
 
 # Fuzzy finder keyboard shortcuts
-[[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
+[[ -f "${HOME}/.fzf.bash" ]] && source "${HOME}/.fzf.bash"
 
 # Aliases & functions
-[[ -f ~/.bash_aliases ]] && source ~/.bash_aliases
+[[ -f "${HOME}/.bash_aliases" ]] && source "${HOME}/.bash_aliases"
 
 # Source chruby
 if [ -d /usr/local/share/chruby ]; then
@@ -25,8 +25,8 @@ stty -ixon
 
 # Make dircolors match colorscheme
 if [[ -x "$(command -v dircolors)" ]]; then
-    if [[ -r ~/.dircolors ]]; then
-        eval "$(dircolors -b ~/.dircolors)"
+    if [[ -r "${HOME}/.dircolors" ]]; then
+        eval "$(dircolors -b "${HOME}/.dircolors")"
     else
         eval "$(dircolors -b)"
     fi
@@ -49,11 +49,12 @@ if [[ "${USER}" = root ]]; then
 elif [[ "${SSH_TTY}" ]]; then
     color1=10
     color2=2
-elif [[ "${container}" == 'podman' ]]; then
+elif [[ "${NAME}" == 'fedora-toolbox' ]]; then
     color1=14
     color2=6
 fi
 
 if (( $(tput colors) > 8 )); then
-    export PS1="\[$(tput setaf ${color1})\]\u\[$(tput setaf ${color2})\]@\h \[$(tput setaf ${color3})\][\w]\n\$ \[$(tput sgr0)\]"
+    PS1="\[$(tput setaf ${color1})\]\u\[$(tput setaf ${color2})\]@\h \[$(tput setaf ${color3})\][\w]\n\$ \[$(tput sgr0)\]"
+    export PS1
 fi

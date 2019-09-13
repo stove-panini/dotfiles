@@ -3,10 +3,10 @@
 #
 
 alias cdd='cd -'
-alias mkdir="mkdir -p"
-alias cp="cp -ir"
-alias mv="mv -i"
-alias q="exit"
+alias mkdir='mkdir -p'
+alias cp='cp -ir'
+alias mv='mv -i'
+alias q='exit'
 
 ls_options='-F -h --group-directories-first --color=auto'
 alias ls="ls ${ls_options}"
