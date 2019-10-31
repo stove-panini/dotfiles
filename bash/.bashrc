@@ -43,7 +43,7 @@ if [[ "${USER}" = root ]]; then
 elif [[ "${SSH_TTY}" ]]; then
     color1=10
     color2=2
-elif [[ "${NAME}" == 'fedora-toolbox' ]]; then
+elif [[ -n "${TOOLBOX_PATH}" ]]; then
     color1=14
     color2=6
 fi
