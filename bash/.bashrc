@@ -14,12 +14,6 @@
 # Aliases & functions
 [[ -f "${HOME}/.bash_aliases" ]] && source "${HOME}/.bash_aliases"
 
-# Source chruby
-if [ -d /usr/local/share/chruby ]; then
-    source /usr/local/share/chruby/chruby.sh
-    source /usr/local/share/chruby/auto.sh
-fi
-
 # For the love of god, no Ctrl+S, Ctrl+Q
 stty -ixon
 
