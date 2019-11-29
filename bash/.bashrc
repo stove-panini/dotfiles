@@ -1,6 +1,8 @@
 #
 # ~/.bashrc: executed by interactive shells
 #
+# shellcheck disable=1090,1091
+true
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -52,3 +54,7 @@ if (( $(tput colors) > 8 )); then
     PS1="\[$(tput setaf ${color1})\]\u\[$(tput setaf ${color2})\]@\h \[$(tput setaf ${color3})\][\w]\n\$ \[$(tput sgr0)\]"
     export PS1
 fi
+
+# Fix garbage in nested terminal from preexec code in vte291
+# https://bugzilla.redhat.com/show_bug.cgi?id=1766813
+[[ -n "$VIM" ]] && unset PS0
