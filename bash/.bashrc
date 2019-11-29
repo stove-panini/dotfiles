@@ -1,8 +1,6 @@
 #
 # ~/.bashrc: executed by interactive shells
 #
-# shellcheck disable=1090,1091
-true
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return

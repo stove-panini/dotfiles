@@ -12,7 +12,7 @@ extra_paths=(
 )
 
 for ex_path in "${extra_paths[@]}"; do
-    if [[ ! "${PATH}" =~ "${ex_path}" && -d "${ex_path}" ]]; then
+    if [[ ! "${PATH}" =~ ${ex_path} && -d "${ex_path}" ]]; then
         export PATH="${ex_path}:${PATH}"
     fi
 done
