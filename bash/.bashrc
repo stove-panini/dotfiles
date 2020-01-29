@@ -8,8 +8,8 @@
 # Source global definitions
 [[ -f /etc/bashrc ]] && source /etc/bashrc
 
-# Fuzzy finder keyboard shortcuts
-[[ -f "${HOME}/.fzf.bash" ]] && source "${HOME}/.fzf.bash"
+# Fuzzy finder keyboard shortcuts (line added by install hook)
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Aliases & functions
 [[ -f "${HOME}/.bash_aliases" ]] && source "${HOME}/.bash_aliases"
