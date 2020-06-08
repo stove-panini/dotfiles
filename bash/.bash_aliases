@@ -19,13 +19,16 @@ _ls() {
 
 _vim() {
     local vim
-    local vim_alternatives=('nvim' 'vimx' 'vim' 'vi')
+    local vim_pref_order=('nvim' 'vimx' 'vim' 'vi')
 
-    for vim in "${vim_alternatives[@]}"; do
-        [[ -x $(command -v "$vim") ]] && break
+    for vim in "${vim_pref_order[@]}"; do
+        if [[ -x $(command -v "$vim") ]]; then
+            chosen_vim="$vim"
+            break
+        fi
     done
 
-    "$vim" "$@"
+    "$chosen_vim" "$@"
 }
 
 alias cdd='cd -'
@@ -43,3 +46,5 @@ alias vim='_vim'
 if [[ ! -x $(command -v python) && -x $(command -v python3) ]]; then
     alias python='python3'
 fi
+
+[[ -z "$TOOLBOX_PATH" ]] && alias te='toolbox enter'
