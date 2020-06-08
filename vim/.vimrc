@@ -7,21 +7,31 @@
 "---------'
 call plug#begin('~/.vim/plugged')
 
+" ui
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-gitbranch'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'pearofducks/ansible-vim'
-Plug 'reedes/vim-pencil'
-Plug 'rodjek/vim-puppet'
 Plug 'srcery-colors/srcery-vim'
+Plug 'tpope/vim-vinegar'
+
+" utils
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-vinegar'
+
+" syntax
 Plug 'vim-syntastic/syntastic'
+Plug 'pearofducks/ansible-vim'
+Plug 'reedes/vim-pencil'
+Plug 'rodjek/vim-puppet'
 Plug 'vim-python/python-syntax'
 Plug 'vim-ruby/vim-ruby'
+
+" snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'phenomenes/ansible-snippets'
 
 call plug#end()
 
@@ -114,10 +124,6 @@ set list
 set listchars=tab:▸·,trail:·
 " 2 spaces for Ruby and YAML, please
 autocmd FileType ruby,yaml set ts=2 sw=2
-
-" Custom Filetypes
-" ----------------
-autocmd BufNewFile,BufRead *.cform setfiletype yaml.cloudformation
 
 " Search
 " ------
