@@ -32,6 +32,7 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'phenomenes/ansible-snippets'
+Plug 'andrewstuart/vim-kubernetes'
 
 call plug#end()
 
@@ -93,6 +94,8 @@ let g:syntastic_cloudformation_checkers = ['cfn_lint']
 " hide dotfiles by default
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
+
+autocmd BufNewFile,BufRead */manifests/*.pp set filetype=puppet
 
 "==========
 " OPTIONS |
