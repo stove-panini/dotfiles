@@ -32,27 +32,19 @@ fi
 # 2/10 - Green     6/14 - Cyan
 # 3/11 - Yellow    7/15 - White
 
-color1=12
-color2=4
-color3=7
-
 if [[ "${USER}" = root ]]; then
     color1=9
     color2=1
     color3=1
-elif [[ "${SSH_TTY}" ]]; then
-    color1=10
-    color2=2
 elif [[ -n "${TOOLBOX_PATH}" ]]; then
     color1=14
     color2=6
+    color3=7
+else
+    color1=12
+    color2=4
+    color3=7
 fi
 
-if (( $(tput colors) > 8 )); then
-    PS1="\[$(tput setaf ${color1})\]\u\[$(tput setaf ${color2})\]@\h \[$(tput setaf ${color3})\][\w]\n\$ \[$(tput sgr0)\]"
-    export PS1
-fi
-
-# Fix garbage in nested terminal from preexec code in vte291
-# https://bugzilla.redhat.com/show_bug.cgi?id=1766813
-[[ -n "$VIM" ]] && unset PS0
+PS1="\[$(tput setaf ${color1})\]\u\[$(tput setaf ${color2})\]@\h \[$(tput setaf ${color3})\][\w]\n\$ \[$(tput sgr0)\]"
+export PS1
