@@ -1,0 +1,16 @@
+#
+# ~/.bashrc
+#
+
+# Source global config
+if [[ -f /etc/bashrc ]]; then
+    source /etc/bashrc
+fi
+
+# Source from the user config drop-in directory
+if [[ -d ~/.bashrc.d ]]; then
+    for rc in ~/.bashrc.d/*; do
+        [[ -f "$rc" ]] && source "$rc"
+    done
+    unset rc
+fi

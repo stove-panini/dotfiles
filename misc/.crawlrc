@@ -1,0 +1,99 @@
+#################
+### Interface ###
+#################
+
+default_manual_training = true
+equip_unequip = true
+sort_menus = true:equipped,identified,basename,art,ego,glowing,qualname,charged,slot
+
+autofight_stop  = 70
+autofight_caught = true
+autofight_wait = false
+
+########################
+### Autoinscriptions ###
+########################
+ai := autoinscribe
+
+# Convenient shortcuts
+ai += curing:@q1
+ai += potions? of heal wounds:@q2
+ai += potions? of haste:@q3
+ai += identify:@r1
+ai += scrolls? of teleportation:@r2
+
+##################
+### Autopickup ###
+##################
+ae := autopickup_exceptions
+
+# > ignore
+ae += >scrolls? of amnesia
+ae += >scrolls? of enchant
+ae += >scrolls? of noise
+ae += >potions? of brilliance
+ae += >potions? of magic
+ae += >potions? of mutation
+ae += >potions? of attraction
+# known rings & amulets
+ae += >(ring|amulet) of
+
+# < add
+
+################
+### Messages ###
+################
+channel.multiturn = mute
+
+msgc := message_colour
+more := force_more_message
+stop := runrest_stop_message
+ignore := runrest_ignore_message
+
+# Mute
+msgc += mute:returns to your side
+msgc += mute:a demon appears
+msgc += mute:puff of smoke
+msgc += mute:carefully avoids
+msgc += mute:is recalled
+msgc += mute:dissolves? into (sparkling lights|shadows)
+msgc += mute:(crumbles|melts) away\.
+msgc += mute:(merges|forms) itself .* the air
+msgc += mute:you swap places
+msgc += mute:your.*(looks stronger|shudders|resists)
+msgc += mute:your.*(stumbles backwards|holds.*ground)
+msgc += mute:your.*(blinks|safely over)
+msgc += mute:(phases out.*|misses) (your|something).*
+msgc += mute:your.*(picks up|drops)
+msgc += mute:your.*basks in the mutagenic energy
+msgc += mute:your.*(struggles|tears|pulls away).*(web|net)
+
+# Bad things
+more += Ouch! That really hurt!
+more += dispelling energy hits you
+more += You are blasted by holy energy!
+more += You are (blasted|electrocuted)!
+more += You are.*(confused|poisoned)
+more += watched by something
+more += flickers and vanishes!
+more += A sentinel's mark forms upon you
+more += You cannot teleport right now
+stop += wrath finds you
+
+# XP / Character
+more += You have reached level
+more += Training target.*reached!
+msgc += white:Training target.*reached!
+more += You rejoin the land of the living
+more += You have finished (your manual|forgetting about)
+more += You now have enough gold
+msgc += yellow:You now have enough gold
+more += Your scales start
+more += You feel monstrous
+more += Jiyva alters your body
+: if you.god() == "Xom" then
+more += god:
+stop += god:
+:else
+ignore += god:
+: end
