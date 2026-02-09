@@ -64,6 +64,7 @@ __ps1_sgr() {
 
         *,*)
             # Process comma-delimited style combinations
+            # Transforms "inverse,bold,underline" to "7;1;4;"
             local style_combo
 
             while IFS="," read -ra items; do
