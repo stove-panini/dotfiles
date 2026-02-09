@@ -1,8 +1,26 @@
-# Configurables should go in ~/.bashrc.d/10-options.sh
+# Configuration should go in ~/.bashrc.d/10-options.sh
 
-__ps1_color() {
-    local -A colormap
-    colormap=(
+# Default layout. Color defaults are defined in each module.
+if [[ -z ${PROMPT_CONFIG[*]} ]]; then
+    declare -A PROMPT_CONFIG
+    PROMPT_CONFIG=(
+        [0]=user
+        [1]=host
+        [2]=path
+        [3]=git
+        [4]=ec
+        [10]=icon
+    )
+fi
+
+__ps1_sgr() {
+    # Returns an escape code for formatting text
+
+    local color=$1
+    local style=${2:-normal}
+    local -A colors styles
+
+    colors=(
         [reset]=0
         [default]=39
 
@@ -25,59 +43,105 @@ __ps1_color() {
         [bright_white]=97
     )
 
+    styles=(
+        #* = support depends on the terminal emulator
+        [bold]=1
+        [dim]=2 #*
+        [italic]=3
+        [underline]=4
+        [blinking]=5 #*
+        [inverse]=7
+        [hidden]=8 #*
+        [strikethrough]=9 #*
+    )
+
     # Octal escapes must be used for brackets when dynamically evaluatng a
     # function call in PS1. (e.g. '\001' instead of '\[')
-    printf '\001\033[01;%sm\002' "${colormap[$1]}"
+    case $style in
+        normal)
+            printf '\001\033[%sm\002' "${colors[$color]}"
+            ;;
+
+        *,*)
+            # Process comma-delimited style combinations
+            local style_combo
+
+            while IFS="," read -ra items; do
+                for i in "${items[@]}"; do
+                    style_combo+="${styles[$i]};"
+                done
+            done <<<"$style"
+
+            printf '\001\033[%s%sm\002' "${style_combo}" "${colors[$color]}"
+            ;;
+
+        *)
+            printf '\001\033[%s;%sm\002' "${styles[$style]}" "${colors[$color]}"
+            ;;
+    esac
 }
 
+__print_module() {
+    local text=$1
+    local color=$2
+    local style=$3
+    local space=$4
+
+    __ps1_sgr "$color" "$style"
+    echo -n "$text"
+    __ps1_sgr reset
+    [[ $space == false ]] || echo -n " "
+}
+
+# Prompt modules
+# =============================================================================
 __ps1_ec() {
+    # Show exit code of last process if non-zero
+
+    local color=${PROMPT_CONFIG[ec_color]:-bright_red}
+    local style=${PROMPT_CONFIG[ec_style]:-bold}
+    local space=${PROMPT_CONFIG[ec_space]:-true}
+
     if (( _LAST_EC != 0 )); then
-        echo -n " [$_LAST_EC]"
+        __print_module "[$_LAST_EC]" "$color" "$style" "$space"
     fi
 }
 
-__ps1_git() {
-    # Ensure git is available
-    type git &>/dev/null || return
+__ps1_user() {
+    # Prints the current user
 
-    local result branch tag changes
-    branch="$(git branch --show-current 2>/dev/null || :)"
-    tag="$(git describe --tags --exact-match 2>/dev/null || :)"
+    local color=${PROMPT_CONFIG[user_color]:-bright_blue}
+    local style=${PROMPT_CONFIG[user_style]:-normal}
+    local space=${PROMPT_CONFIG[user_space]:-false}
 
-    # Return if not in a git repo
-    [[ $branch || $tag ]] || return
-
-    changes="$(git status --short 2>/dev/null || :)"
-
-    if [[ $tag ]]; then
-        result="◆ ${tag}"
-    else
-        result=" ${branch}"
-    fi
-
-    [[ $changes ]] && result+="*"
-
-    echo -n " [${result}]"
+    __print_module "$USER" "$color" "$style" "$space"
 }
 
-__ps1_hostname() {
-    # TOOLBOX_NAME is set in ~/.bashrc.d/10-toolbox.sh
-    if [[ $TOOLBOX_NAME ]]; then
-        echo -n "@${TOOLBOX_NAME}"
-    else
-        echo -n "@${HOSTNAME%%.*}"
-    fi
+__ps1_host() {
+    # Prints the hostname with a leading "@"
+    # TODO: VPN indicator?
+
+    local color=${PROMPT_CONFIG[host_color]:-blue}
+    local style=${PROMPT_CONFIG[host_style]:-normal}
+    local space=${PROMPT_CONFIG[host_space]:-true}
+
+    __print_module "@${HOSTNAME%%.*}" "$color" "$style" "$space"
 }
 
 __ps1_path() {
-    local limit result dirparts sub
+    # Prints the cwd, truncating the left-most directories to fit the window
 
-    limit=40
+    local color=${PROMPT_CONFIG[path_color]:-white}
+    local style=${PROMPT_CONFIG[path_style]:-normal}
+    local space=${PROMPT_CONFIG[path_space]:-true}
+    local limit=${PROMPT_CONFIG[path_limit]:-40}
+    local result dirparts sub
+
     result="${PWD/#$HOME/\~}" # substitute $HOME with ~
 
     # Return early if not over the character limit or checkwinsize is not on
     if (( ${#result} <= limit )) || [[ -z $COLUMNS ]]; then
-        echo -n " [${result}]"
+        __print_module "[${result}]" "$color" "$style" "$space"
         return
     fi
 
@@ -98,13 +162,79 @@ __ps1_path() {
         fi
     done
 
-    echo -n " [${result}]"
+    __print_module "[${result}]" "$color" "$style" "$space"
+}
+
+__ps1_icon() {
+    # Prints the icon just before text entry. A trailing space is included.
+
+    local color=${PROMPT_CONFIG[icon_color]:-white}
+    local style=${PROMPT_CONFIG[icon_style]:-normal}
+    local space=${PROMPT_CONFIG[icon_space]:-true}
+    local char=${PROMPT_CONFIG[icon_char]:-"$"}
+
+    __print_module "$char" "$color" "$style" "$space"
 }
 
 __ps1_time() {
-    echo -n " [$(date +%R)]"
+    # Prints the current time
+
+    local color=${PROMPT_CONFIG[time_color]:-white}
+    local style=${PROMPT_CONFIG[time_style]:-normal}
+    local space=${PROMPT_CONFIG[time_space]:-true}
+    local format=${PROMPT_CONFIG[time_format]:-"+%R"}
+
+    __print_module "[$(date "$format")]" "$color" "$style" "$space"
 }
 
+__ps1_git() {
+    # Show git branch/tag when in a git repo
+
+    local color=${PROMPT_CONFIG[git_color]:-yellow}
+    local style=${PROMPT_CONFIG[git_style]:-normal}
+    local space=${PROMPT_CONFIG[git_space]:-true}
+
+    # Ensure git is available
+    type git &>/dev/null || return
+
+    local result branch tag changes
+    branch="$(git branch --show-current 2>/dev/null || :)"
+    tag="$(git describe --tags --exact-match 2>/dev/null || :)"
+
+    # Return if not in a git repo
+    [[ $branch || $tag ]] || return
+
+    changes="$(git status --short 2>/dev/null || :)"
+
+    if [[ $tag ]]; then
+        result="◆ ${tag}"
+    else
+        result=" ${branch}"
+    fi
+
+    [[ -z $changes ]] || result+="*"
+
+    __print_module "[${result}]" "$color" "$style" "$space"
+}
+
+__ps1_msg() {
+    # Whatever you want it to say! Perhaps the output of a script...
+    # Colors and styles can be set in the message itself:
+    #     [msg_text]="$(tput setaf1 )red text!"
+    #
+    # Or a script can be sourced instead:
+    #     [msg_text]="$(~/.bin/my_script.sh)"
+
+    local color=${PROMPT_CONFIG[msg_color]:-default}
+    local style=${PROMPT_CONFIG[msg_style]:-normal}
+    local space=${PROMPT_CONFIG[msg_space]:-true}
+    local text=${PROMPT_CONFIG[msg_text]:-"your text here"}
+
+    __print_module "$text" "$color" "$style" "$space"
+}
+
+# Prompt module ordering
+# =============================================================================
 _set_ec() {
     # Store the value of $? so we can act on it in PS1
     # This must be the first thing called by PROMPT_COMMAND
@@ -112,28 +242,25 @@ _set_ec() {
 }
 
 _set_ps1() {
-    # Default colors
-    local user="${PROMPT_THEME[user]:-bright_blue}"
-    local host="${PROMPT_THEME[host]:-blue}"
-    local tbhn="${PROMPT_THEME[tbhn]:-cyan}"
-    local time="${PROMPT_THEME[time]:-white}"
-    local path="${PROMPT_THEME[path]:-white}"
-    local icon="${PROMPT_THEME[icon]:-white}"
-    local git="${PROMPT_THEME[git]:-yellow}"
-    local ec="${PROMPT_THEME[ec]:-bright_red}"
-
     unset PS1
 
-    # Single-quoted when we want the function *call*, not its result
-    #PS1+=$(__ps1_color "$time")'$(__ps1_time)'
-    PS1+=$(__ps1_color "$user")'\u'
-    PS1+=$(__ps1_color "$host")'$(__ps1_hostname)'
-    PS1+=$(__ps1_color "$path")'$(__ps1_path)'
-    PS1+=$(__ps1_color "$git")'$(__ps1_git)'
-    PS1+=$(__ps1_color "$ec")'$(__ps1_ec)'
-    PS1+='\n'
-    PS1+=$(__ps1_color "$icon")'$ '
-    PS1+=$(__ps1_color reset)
+    # I imagine 3 lines are all you'll ever need...
+    for i in {0..30}; do
+        # Ensure position has a module defined
+        [[ -n ${PROMPT_CONFIG[$i]} ]] || continue
+
+        # New line every 10 modules
+        if [[ $i != 0 && $(( i % 10 )) == 0 ]]; then
+            PS1+='\n'
+        fi
+
+        # Add function call to PS1 but don't interpolate it yet!
+        # shellcheck disable=SC2016
+        PS1+=$(printf '$(__ps1_%s)' "${PROMPT_CONFIG[$i]}")
+
+        # If we're at the icon module, stop
+        [[ ! ${PROMPT_CONFIG[$i]} == icon ]] || break
+    done
 }
 
 if [[ -z $PROMPT_COMMAND ]]; then
