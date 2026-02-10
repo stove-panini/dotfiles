@@ -49,10 +49,19 @@ brew_pkgs=(
     restic
     yt-dlp
 
-    # Misc
+    # Fonts
     font-hack
     font-iosevka
     font-jetbrains-mono
+
+    # GUI stuff
+    aws-vpn-client
+    bitwarden
+    firefox
+    microsoft-teams
+    podman-desktop
+    signal
+    slack
 )
 
 npm_pkgs=(
