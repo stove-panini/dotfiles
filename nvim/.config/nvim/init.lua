@@ -11,23 +11,21 @@ Plug('nvim-lualine/lualine.nvim')
 Plug('srcery-colors/srcery-vim')
 
 -- utils
-Plug('airblade/vim-rooter')
-Plug('junegunn/fzf')
-Plug('junegunn/fzf.vim')
-Plug('tpope/vim-repeat')
-Plug('tpope/vim-rsi')
-Plug('tpope/vim-sensible')
-Plug('tpope/vim-surround')
+Plug('airblade/vim-rooter') -- changes working directory to project root
+Plug('junegunn/fzf')        -- fuzzy finder
+Plug('junegunn/fzf.vim')    -- fzf wrapper for vim integration
+Plug('tpope/vim-repeat')    -- plugin-aware "."
+Plug('tpope/vim-rsi')       -- readline keybinds for insert and command mode
+Plug('tpope/vim-sensible')  -- nice defaults :)
+Plug('tpope/vim-surround')  -- add surroundings in pairs (), {}. "", etc.
 
--- language
-Plug('hrsh7th/vim-vsnip')     -- use VSCode snippets
-Plug('neovim/nvim-lspconfig') -- configurations for various LSPs
-
--- completion engine & sources
-Plug('hrsh7th/nvim-cmp')     -- the completion engine
-Plug('hrsh7th/cmp-nvim-lsp') -- neovim builtin LSP client
-Plug('hrsh7th/cmp-path')     -- filesystem path
-Plug('hrsh7th/cmp-vsnip')    -- snippets
+-- lsp configs & completion engine & sources
+Plug('neovim/nvim-lspconfig') -- default configs for various language servers
+Plug('hrsh7th/nvim-cmp')      -- the completion engine
+Plug('hrsh7th/cmp-nvim-lsp')  -- cmp source: nvim's language server client
+Plug('hrsh7th/cmp-path')      -- cmp source: filesystem path
+Plug('hrsh7th/cmp-vsnip')     -- cmp source: snippets
+Plug('hrsh7th/vim-vsnip')     -- the snippets themselves
 
 -- syntax
 Plug('HiPhish/jinja.vim')
