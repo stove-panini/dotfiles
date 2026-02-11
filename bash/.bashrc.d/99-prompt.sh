@@ -82,7 +82,7 @@ __ps1_sgr() {
     esac
 }
 
-__print_module() {
+__ps1_print() {
     local text=$1
     local color=$2
     local style=$3
@@ -104,7 +104,7 @@ __ps1_ec() {
     local space=${PROMPT_CONFIG[ec_space]:-true}
 
     if (( _LAST_EC != 0 )); then
-        __print_module "[$_LAST_EC]" "$color" "$style" "$space"
+        __ps1_print "[$_LAST_EC]" "$color" "$style" "$space"
     fi
 }
 
@@ -115,7 +115,7 @@ __ps1_user() {
     local style=${PROMPT_CONFIG[user_style]:-normal}
     local space=${PROMPT_CONFIG[user_space]:-false}
 
-    __print_module "$USER" "$color" "$style" "$space"
+    __ps1_print "$USER" "$color" "$style" "$space"
 }
 
 __ps1_host() {
@@ -126,7 +126,7 @@ __ps1_host() {
     local style=${PROMPT_CONFIG[host_style]:-normal}
     local space=${PROMPT_CONFIG[host_space]:-true}
 
-    __print_module "@${HOSTNAME%%.*}" "$color" "$style" "$space"
+    __ps1_print "@${HOSTNAME%%.*}" "$color" "$style" "$space"
 }
 
 __ps1_path() {
@@ -142,7 +142,7 @@ __ps1_path() {
 
     # Return early if not over the character limit or checkwinsize is not on
     if (( ${#result} <= limit )) || [[ -z $COLUMNS ]]; then
-        __print_module "[${result}]" "$color" "$style" "$space"
+        __ps1_print "[${result}]" "$color" "$style" "$space"
         return
     fi
 
@@ -163,7 +163,7 @@ __ps1_path() {
         fi
     done
 
-    __print_module "[${result}]" "$color" "$style" "$space"
+    __ps1_print "[${result}]" "$color" "$style" "$space"
 }
 
 __ps1_icon() {
@@ -174,7 +174,7 @@ __ps1_icon() {
     local space=${PROMPT_CONFIG[icon_space]:-true}
     local char=${PROMPT_CONFIG[icon_char]:-"$"}
 
-    __print_module "$char" "$color" "$style" "$space"
+    __ps1_print "$char" "$color" "$style" "$space"
 }
 
 __ps1_time() {
@@ -185,7 +185,7 @@ __ps1_time() {
     local space=${PROMPT_CONFIG[time_space]:-true}
     local format=${PROMPT_CONFIG[time_format]:-"+%R"}
 
-    __print_module "[$(date "$format")]" "$color" "$style" "$space"
+    __ps1_print "[$(date "$format")]" "$color" "$style" "$space"
 }
 
 __ps1_git() {
@@ -215,7 +215,7 @@ __ps1_git() {
 
     [[ -z $changes ]] || result+="*"
 
-    __print_module "[${result}]" "$color" "$style" "$space"
+    __ps1_print "[${result}]" "$color" "$style" "$space"
 }
 
 __ps1_msg() {
@@ -231,7 +231,7 @@ __ps1_msg() {
     local space=${PROMPT_CONFIG[msg_space]:-true}
     local text=${PROMPT_CONFIG[msg_text]:-"your text here"}
 
-    __print_module "$text" "$color" "$style" "$space"
+    __ps1_print "$text" "$color" "$style" "$space"
 }
 
 # Prompt module ordering
