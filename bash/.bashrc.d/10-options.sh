@@ -8,7 +8,8 @@ export PROMPT_CONFIG=(
     [user_color]=bright_green
 
     [1]=host
-    [host_color]=green
+    [host_vpnonly]=true # Only show hostname when connected to VPN
+    [host_vpncolor]=cyan
 
     [2]=path
     [path_color]=white

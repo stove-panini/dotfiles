@@ -120,13 +120,25 @@ __ps1_user() {
 
 __ps1_host() {
     # Prints the hostname with a leading "@"
-    # TODO: VPN indicator?
 
     local color=${PROMPT_CONFIG[host_color]:-blue}
     local style=${PROMPT_CONFIG[host_style]:-normal}
     local space=${PROMPT_CONFIG[host_space]:-true}
+    local vpncolor=${PROMPT_CONFIG[host_vpncolor]:-cyan}
+    local vpnstyle=${PROMPT_CONFIG[host_vpnstyle]:-normal}
+    local vpnonly=${PROMPT_CONFIG[host_vpnonly]:-false}
 
-    __ps1_print "@${HOSTNAME%%.*}" "$color" "$style" "$space"
+    # Check if connected to a VPN
+    if scutil --nc list | grep -q Connected; then
+        # Use VPN colors
+        __ps1_print "@${HOSTNAME%%.*}" "$vpncolor" "$vpnstyle" "$space"
+    elif [[ $vpnonly == true ]]; then
+        # Print a space if we're only showing the hostname when on a VPN
+        printf ' '
+    else
+        # Use normal colors
+        __ps1_print "@${HOSTNAME%%.*}" "$color" "$style" "$space"
+    fi
 }
 
 __ps1_path() {
