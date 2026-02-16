@@ -144,5 +144,5 @@ done
 adt_bindir="${HOME}/.local/pipx/venvs/ansible-dev-tools/bin"
 
 for i in "${adt_bindir}"/ansible*; do
-    ln -fs "${adt_bindir}/$i" "$bindir"
+    ln -fs "$i" "$bindir"
 done
