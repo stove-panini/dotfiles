@@ -141,18 +141,8 @@ done
 # 4. Misc tidying up
 # =============================================================================
 # Symlinking the individual binaries in ansible-dev-tools :)
-ansible_dev_tools=(
-    ansible
-    ansible-galaxy
-    ansible-inventory
-    ansible-lint
-    ansible-playbook
-    ansible-pull
-    ansible-vault
-)
+adt_bindir="${HOME}/.local/pipx/venvs/ansible-dev-tools/bin"
 
-for i in "${ansible_dev_tools[@]}"; do
-    if ! [[ -e "${bindir}/$i" ]]; then
-        ln -s "${HOME}/.local/pipx/venvs/ansible-dev-tools/bin/$i" "$bindir"
-    fi
+for i in "${adt_bindir}"/ansible*; do
+    ln -fs "${adt_bindir}/$i" "$bindir"
 done
