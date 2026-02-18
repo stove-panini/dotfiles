@@ -128,16 +128,20 @@ __ps1_host() {
     local vpnstyle=${PROMPT_CONFIG[host_vpnstyle]:-normal}
     local vpnonly=${PROMPT_CONFIG[host_vpnonly]:-false}
 
+    # Check the hostname rather than rely on $HOSTNAME
+    local hostname
+    hostname=$(hostname)
+
     # Check if connected to a VPN
     if scutil --nc list | grep -q Connected; then
         # Use VPN colors
-        __ps1_print "@${HOSTNAME%%.*}" "$vpncolor" "$vpnstyle" "$space"
+        __ps1_print "@${hostname%%.*}" "$vpncolor" "$vpnstyle" "$space"
     elif [[ $vpnonly == true ]]; then
         # Print a space if we're only showing the hostname when on a VPN
         printf ' '
     else
         # Use normal colors
-        __ps1_print "@${HOSTNAME%%.*}" "$color" "$style" "$space"
+        __ps1_print "@${hostname%%.*}" "$color" "$style" "$space"
     fi
 }
 
