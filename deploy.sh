@@ -13,6 +13,7 @@ brew_pkgs=(
     fd
     fzf
     gettext
+    git
     htop
     jq
     neovim
