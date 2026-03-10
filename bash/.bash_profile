@@ -32,6 +32,11 @@ if [[ -x /opt/homebrew/bin/brew ]]; then
     export HOMEBREW_NO_EMOJI=1 HOMEBREW_NO_ENV_HINTS=1
 fi
 
+# Podman autocompletion
+if type podman &>/dev/null; then
+    eval "$(podman completion bash)"
+fi
+
 # pipx
 if type pipx &>/dev/null; then
     eval "$(register-python-argcomplete pipx)"
