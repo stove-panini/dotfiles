@@ -29,7 +29,7 @@ Map('n', '<leader>f', vim.cmd.Rg)
 -- Keybinds for opening files from fzf window
 vim.g.fzf_action = {
   ['ctrl-t'] = 'tab split',
-  ['ctrl-n'] = 'split',
+  ['ctrl-x'] = 'split',
   ['ctrl-v'] = 'vsplit'
 }
 
