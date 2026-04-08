@@ -21,6 +21,7 @@ brew_pkgs=(
     stow
     tmux
     tree
+    watch
 
     # Programming
     cmake
@@ -59,6 +60,7 @@ brew_pkgs=(
     aws-vpn-client
     bitwarden
     firefox
+    gimp
     microsoft-teams
     podman-desktop
     signal
