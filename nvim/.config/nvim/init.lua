@@ -36,4 +36,5 @@ Plug('towolf/vim-helm')
 vim.call('plug#end')
 -------------------------------------------------------------------------------
 
+vim.g.srcery_italic = 1
 vim.cmd('silent! colorscheme srcery')
