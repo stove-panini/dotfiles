@@ -89,10 +89,7 @@ if [[ ${1:-} =~ up(grade|date) ]]; then
     brew update
     pipx upgrade-all
 
-    # Useful info for npm updates
-    npm_outdated=$(npm outdated --global)
-
-    if [[ -n $npm_outdated ]]; then
+    if ! npm outdated --global; then
         npm update --global
     fi
 
