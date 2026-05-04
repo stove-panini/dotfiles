@@ -1,5 +1,19 @@
 require('functions')
 
+-- Disable semantic tokens for terraformls: terraform-ls returns invalid
+-- token lengths causing an infinite loop and freezing neovim.
+-- https://github.com/neovim/neovim/issues/36257
+-- https://github.com/hashicorp/terraform-ls/issues/2094
+AutoCmd('LspAttach', {
+  callback = function(event)
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+    if client and client.name == 'terraformls' then
+      client.server_capabilities.semanticTokensProvider = nil
+    end
+  end
+})
+
 -- Format document before saving
 AutoCmd('BufWritePre', {
   pattern = '*',

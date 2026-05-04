@@ -72,10 +72,12 @@ npm_pkgs=(
     bash-language-server
     vim-language-server
     yaml-language-server
+    neovim
 )
 
 pip_pkgs=(
     ansible-dev-tools
+    pynvim
 )
 
 ruby_gems=(
@@ -91,6 +93,8 @@ if [[ ${1:-} =~ up(grade|date) ]]; then
 
     if ! npm outdated --global; then
         npm update --global
+    else
+        echo "All npm packages up to date"
     fi
 
     # Only update non-versioned gems
@@ -122,8 +126,6 @@ find -- * -type d -maxdepth 0 -print -exec stow -t "$HOME" {} \;
 
 # 3. User packages
 # =============================================================================
-bindir="${HOME}/.local/bin"
-
 pipx install "${pip_pkgs[@]}"
 
 # Trickery required for versioned gems...
@@ -141,8 +143,6 @@ done
 # 4. Misc tidying up
 # =============================================================================
 # Symlinking the individual binaries in ansible-dev-tools :)
-adt_bindir="${HOME}/.local/pipx/venvs/ansible-dev-tools/bin"
-
-for i in "${adt_bindir}"/ansible*; do
-    ln -fs "$i" "$bindir"
+for i in "${HOME}/.local/pipx/venvs/ansible-dev-tools/bin"/ansible*; do
+    ln -fs "$i" "${HOME}/.local/bin"
 done
