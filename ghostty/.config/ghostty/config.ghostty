@@ -1,0 +1,15 @@
+theme = Srcery
+
+font-family = JetBrains Mono
+font-size = 13
+
+window-width = 80
+window-height = 24
+
+# Use xterm-256color over SSH instead of xterm-ghostty
+shell-integration-features = ssh-env
+
+macos-icon = custom-style
+macos-icon-ghost-color = Aquamarine
+macos-icon-screen-color = Black
+macos-icon-frame = plastic
