@@ -88,7 +88,7 @@ ruby_gems=(
 # 0. Upgrade - bypass initial install stuff
 # =============================================================================
 if [[ ${1:-} =~ up(grade|date) ]]; then
-    brew update
+    brew upgrade
     pipx upgrade-all
 
     if ! npm outdated --global; then
