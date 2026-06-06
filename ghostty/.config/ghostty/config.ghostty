@@ -6,6 +6,10 @@ font-size = 13
 window-width = 80
 window-height = 24
 
+# New windows always start in ~/
+working-directory = home
+window-inherit-working-directory = false
+
 # Use xterm-256color over SSH instead of xterm-ghostty
 shell-integration-features = ssh-env
 
