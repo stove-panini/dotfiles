@@ -1,17 +1,3 @@
--- Disable semantic tokens for terraformls: terraform-ls returns invalid
--- token lengths causing an infinite loop and freezing neovim.
--- https://github.com/neovim/neovim/issues/36257
--- https://github.com/hashicorp/terraform-ls/issues/2094
-AutoCmd("LspAttach", {
-	callback = function(event)
-		local client = Lsp.get_client_by_id(event.data.client_id)
-
-		if client and client.name == "terraformls" then
-			client.server_capabilities.semanticTokensProvider = nil
-		end
-	end,
-})
-
 -- Format document before saving
 AutoCmd("BufWritePre", {
 	pattern = "*",
@@ -69,13 +55,6 @@ local augroup_ft_commands = {
 		end,
 	},
 	{
-		pattern = "sh",
-		callback = function()
-			OptLocal.sw = 4
-			OptLocal.ts = 4
-		end,
-	},
-	{
 		pattern = { "ruby", "yaml", "vim", "terraform" },
 		callback = function()
 			OptLocal.sw = 2
@@ -106,7 +85,7 @@ local augroup_ft_commands = {
 		end,
 	},
 	{
-		pattern = "pceas",
+		pattern = "wla_dx",
 		callback = function()
 			OptLocal.list = false
 			OptLocal.expandtab = false

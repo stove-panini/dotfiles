@@ -58,7 +58,6 @@ brew_pkgs=(
 
     # GUI stuff
     aws-vpn-client
-    bitwarden
     firefox
     gimp
     microsoft-teams
