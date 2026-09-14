@@ -5,23 +5,22 @@ stty -ixon -ixoff
 declare -A PROMPT_CONFIG
 export PROMPT_CONFIG=(
     [0]=user
-    [user_color]=bright_green
+    [user_style]=bright_green
 
     [1]=host
-    [host_color]=green
-    [host_vpncolor]=cyan
+    [host_style]=green
+    [host_vpnstyle]=cyan
 
     [2]=path
-    [path_color]=white
+    [path_style]=white
 
     [3]=git
-    [git_color]=yellow
+    [git_style]=yellow
 
     [4]=ec
-    [ec_color]=bright_red
+    [ec_style]=bright_red
 
     [10]=icon
-    [icon_color]=white
     [icon_char]=">"
-    [icon_style]=bold
+    [icon_style]="white bold"
 )

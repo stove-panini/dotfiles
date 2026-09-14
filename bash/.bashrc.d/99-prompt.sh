@@ -2,8 +2,7 @@
 
 # Default layout. Color defaults are defined in each module.
 if [[ -z ${PROMPT_CONFIG[*]} ]]; then
-    declare -A PROMPT_CONFIG
-    PROMPT_CONFIG=(
+    declare -A PROMPT_CONFIG=(
         [0]=user
         [1]=host
         [2]=path
@@ -13,85 +12,69 @@ if [[ -z ${PROMPT_CONFIG[*]} ]]; then
     )
 fi
 
+declare -A __SGR=(
+    [reset]=0
+    [default]=39
+
+    #* = support depends on the terminal emulator
+    [bold]=1
+    [dim]=2 #*
+    [italic]=3
+    [underline]=4
+    [blinking]=5 #*
+    [inverse]=7
+    [hidden]=8 #*
+    [strikethrough]=9 #*
+
+    [black]=30
+    [red]=31
+    [green]=32
+    [yellow]=33
+    [blue]=34
+    [magenta]=35
+    [cyan]=36
+    [white]=37
+
+    [bright_black]=90
+    [bright_red]=91
+    [bright_green]=92
+    [bright_yellow]=93
+    [bright_blue]=94
+    [bright_magenta]=95
+    [bright_cyan]=96
+    [bright_white]=97
+)
+
 __ps1_sgr() {
     # Returns an escape code for formatting text
+    local -a params=()
+    local arg
 
-    local color=$1
-    local style=${2:-normal}
-    local -A colors styles
+    for arg; do
+        if [[ ! -v __SGR[$arg] ]]; then
+            printf 'sgr: unknown attribute: %s\n' "$arg" >&2
+            return 1
+        fi
 
-    colors=(
-        [reset]=0
-        [default]=39
-
-        [black]=30
-        [red]=31
-        [green]=32
-        [yellow]=33
-        [blue]=34
-        [magenta]=35
-        [cyan]=36
-        [white]=37
-
-        [bright_black]=90
-        [bright_red]=91
-        [bright_green]=92
-        [bright_yellow]=93
-        [bright_blue]=94
-        [bright_magenta]=95
-        [bright_cyan]=96
-        [bright_white]=97
-    )
-
-    styles=(
-        #* = support depends on the terminal emulator
-        [bold]=1
-        [dim]=2 #*
-        [italic]=3
-        [underline]=4
-        [blinking]=5 #*
-        [inverse]=7
-        [hidden]=8 #*
-        [strikethrough]=9 #*
-    )
+        params+=("${__SGR[$arg]}")
+    done
 
     # Octal escapes must be used for brackets when dynamically evaluatng a
     # function call in PS1. (e.g. '\001' instead of '\[')
-    case $style in
-        normal)
-            printf '\001\033[%sm\002' "${colors[$color]}"
-            ;;
-
-        *,*)
-            # Process comma-delimited style combinations
-            # Transforms "inverse,bold,underline" to "7;1;4;"
-            local style_combo
-
-            while IFS="," read -ra items; do
-                for i in "${items[@]}"; do
-                    style_combo+="${styles[$i]};"
-                done
-            done <<<"$style"
-
-            printf '\001\033[%s%sm\002' "${style_combo}" "${colors[$color]}"
-            ;;
-
-        *)
-            printf '\001\033[%s;%sm\002' "${styles[$style]}" "${colors[$color]}"
-            ;;
-    esac
+    local IFS=';'
+    printf '\001\033[%sm\002' "${params[*]}"
 }
 
 __ps1_print() {
     local text=$1
-    local color=$2
-    local style=$3
-    local space=$4
+    local style=$2
+    local space=$3
 
-    __ps1_sgr "$color" "$style"
-    echo -n "$text"
+    # shellcheck disable=SC2086
+    __ps1_sgr $style
+    printf "%s" "$text"
     __ps1_sgr reset
-    [[ $space == false ]] || echo -n " "
+    [[ $space == false ]] || printf " "
 }
 
 # Prompt modules
@@ -99,33 +82,29 @@ __ps1_print() {
 __ps1_ec() {
     # Show exit code of last process if non-zero
 
-    local color=${PROMPT_CONFIG[ec_color]:-bright_red}
-    local style=${PROMPT_CONFIG[ec_style]:-bold}
+    local style=${PROMPT_CONFIG[ec_style]:-bright_red bold}
     local space=${PROMPT_CONFIG[ec_space]:-true}
 
     if (( _LAST_EC != 0 )); then
-        __ps1_print "[$_LAST_EC]" "$color" "$style" "$space"
+        __ps1_print "[$_LAST_EC]" "$style" "$space"
     fi
 }
 
 __ps1_user() {
     # Prints the current user
 
-    local color=${PROMPT_CONFIG[user_color]:-bright_blue}
-    local style=${PROMPT_CONFIG[user_style]:-normal}
+    local style=${PROMPT_CONFIG[user_style]:-bright_blue}
     local space=${PROMPT_CONFIG[user_space]:-false}
 
-    __ps1_print "$USER" "$color" "$style" "$space"
+    __ps1_print "$USER" "$style" "$space"
 }
 
 __ps1_host() {
     # Prints the hostname with a leading "@"
 
-    local color=${PROMPT_CONFIG[host_color]:-blue}
-    local style=${PROMPT_CONFIG[host_style]:-normal}
+    local style=${PROMPT_CONFIG[host_style]:-blue}
     local space=${PROMPT_CONFIG[host_space]:-true}
-    local vpncolor=${PROMPT_CONFIG[host_vpncolor]:-cyan}
-    local vpnstyle=${PROMPT_CONFIG[host_vpnstyle]:-normal}
+    local vpnstyle=${PROMPT_CONFIG[host_vpnstyle]:-cyan}
     local vpnonly=${PROMPT_CONFIG[host_vpnonly]:-false}
 
     # Check the hostname rather than rely on $HOSTNAME
@@ -135,21 +114,20 @@ __ps1_host() {
     # Check if connected to a VPN
     if scutil --nc list | grep -q Connected; then
         # Use VPN colors
-        __ps1_print "@${hostname%%.*}" "$vpncolor" "$vpnstyle" "$space"
+        __ps1_print "@${hostname%%.*}" "$vpnstyle" "$space"
     elif [[ $vpnonly == true ]]; then
         # Print a space if we're only showing the hostname when on a VPN
         printf ' '
     else
         # Use normal colors
-        __ps1_print "@${hostname%%.*}" "$color" "$style" "$space"
+        __ps1_print "@${hostname%%.*}" "$style" "$space"
     fi
 }
 
 __ps1_path() {
     # Prints the cwd, truncating the left-most directories to fit the window
 
-    local color=${PROMPT_CONFIG[path_color]:-white}
-    local style=${PROMPT_CONFIG[path_style]:-normal}
+    local style=${PROMPT_CONFIG[path_style]:-white}
     local space=${PROMPT_CONFIG[path_space]:-true}
     local limit=${PROMPT_CONFIG[path_limit]:-40}
     local result dirparts sub
@@ -158,7 +136,7 @@ __ps1_path() {
 
     # Return early if not over the character limit or checkwinsize is not on
     if (( ${#result} <= limit )) || [[ -z $COLUMNS ]]; then
-        __ps1_print "[${result}]" "$color" "$style" "$space"
+        __ps1_print "[${result}]" "$style" "$space"
         return
     fi
 
@@ -179,36 +157,33 @@ __ps1_path() {
         fi
     done
 
-    __ps1_print "[${result}]" "$color" "$style" "$space"
+    __ps1_print "[${result}]" "$style" "$space"
 }
 
 __ps1_icon() {
     # Prints the icon just before text entry. A trailing space is included.
 
-    local color=${PROMPT_CONFIG[icon_color]:-white}
-    local style=${PROMPT_CONFIG[icon_style]:-normal}
+    local style=${PROMPT_CONFIG[icon_style]:-white}
     local space=${PROMPT_CONFIG[icon_space]:-true}
     local char=${PROMPT_CONFIG[icon_char]:-"$"}
 
-    __ps1_print "$char" "$color" "$style" "$space"
+    __ps1_print "$char" "$style" "$space"
 }
 
 __ps1_time() {
     # Prints the current time
 
-    local color=${PROMPT_CONFIG[time_color]:-white}
-    local style=${PROMPT_CONFIG[time_style]:-normal}
+    local style=${PROMPT_CONFIG[time_style]:-white}
     local space=${PROMPT_CONFIG[time_space]:-true}
     local format=${PROMPT_CONFIG[time_format]:-"+%R"}
 
-    __ps1_print "[$(date "$format")]" "$color" "$style" "$space"
+    __ps1_print "[$(date "$format")]" "$style" "$space"
 }
 
 __ps1_git() {
     # Show git branch/tag when in a git repo
 
-    local color=${PROMPT_CONFIG[git_color]:-yellow}
-    local style=${PROMPT_CONFIG[git_style]:-normal}
+    local style=${PROMPT_CONFIG[git_style]:-yellow}
     local space=${PROMPT_CONFIG[git_space]:-true}
 
     # Ensure git is available
@@ -231,7 +206,7 @@ __ps1_git() {
 
     [[ -z $changes ]] || result+="*"
 
-    __ps1_print "[${result}]" "$color" "$style" "$space"
+    __ps1_print "[${result}]" "$style" "$space"
 }
 
 __ps1_msg() {
@@ -242,12 +217,11 @@ __ps1_msg() {
     # Or a script can be sourced instead:
     #     [msg_text]="$(~/.bin/my_script.sh)"
 
-    local color=${PROMPT_CONFIG[msg_color]:-default}
-    local style=${PROMPT_CONFIG[msg_style]:-normal}
+    local style=${PROMPT_CONFIG[msg_style]:-default}
     local space=${PROMPT_CONFIG[msg_space]:-true}
     local text=${PROMPT_CONFIG[msg_text]:-"your text here"}
 
-    __ps1_print "$text" "$color" "$style" "$space"
+    __ps1_print "$text" "$style" "$space"
 }
 
 # Prompt module ordering
