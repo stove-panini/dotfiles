@@ -35,8 +35,8 @@ Map("n", "<leader>T", function()
 	Cmd.new("term://%:p:h//bash")
 end)
 
--- Return to normal mode in termal with Esc
-Map("t", "<Esc>", "<C-\\><C-n>")
+-- Return to normal mode in terminal with Ctrl+Esc
+Map("t", "<C-Esc>", "<C-\\><C-n>")
 
 -- Linter messages
 Map("n", "<Tab>", vim.diagnostic.open_float)
