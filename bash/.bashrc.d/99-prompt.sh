@@ -46,16 +46,12 @@ declare -A __SGR=(
 )
 
 __ps1_sgr() {
-    # Returns an escape code for formatting text
+    # Returns an escape code for formatting text.
     local -a params=()
     local arg
 
     for arg; do
-        if [[ ! -v __SGR[$arg] ]]; then
-            printf 'sgr: unknown attribute: %s\n' "$arg" >&2
-            return 1
-        fi
-
+        [[ -v __SGR[$arg] ]] || continue
         params+=("${__SGR[$arg]}")
     done
 
@@ -132,7 +128,12 @@ __ps1_path() {
     local limit=${PROMPT_CONFIG[path_limit]:-40}
     local result dirparts sub
 
-    result="${PWD/#$HOME/\~}" # substitute $HOME with ~
+    # Substitute $HOME with ~, but only on a path boundary
+    if [[ $PWD == "$HOME" || $PWD == "$HOME"/* ]]; then
+        result="~${PWD#"$HOME"}"
+    else
+        result=$PWD
+    fi
 
     # Return early if not over the character limit or checkwinsize is not on
     if (( ${#result} <= limit )) || [[ -z $COLUMNS ]]; then
@@ -150,8 +151,8 @@ __ps1_path() {
     # result is less than the character limit
     for d in "${dirparts[@]}"; do
         if (( ${#result} > limit )); then
-            sub="${d:0:1}" # first character of directory
-            result="${result/$d/$sub}"
+            sub=${d:0:1} # first character of directory
+            result=${result/"$d"/"$sub"}
         else
             break
         fi
@@ -190,13 +191,13 @@ __ps1_git() {
     type git &>/dev/null || return
 
     local result branch tag changes
-    branch="$(git branch --show-current 2>/dev/null || :)"
-    tag="$(git describe --tags --exact-match 2>/dev/null || :)"
+    branch=$(git branch --show-current 2>/dev/null || :)
+    tag=$(git describe --tags --exact-match 2>/dev/null || :)
 
     # Return if not in a git repo
     [[ $branch || $tag ]] || return
 
-    changes="$(git status --short 2>/dev/null || :)"
+    changes=$(git status --short 2>/dev/null || :)
 
     if [[ $tag ]]; then
         result="◆ ${tag}"
