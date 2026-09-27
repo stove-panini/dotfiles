@@ -100,24 +100,8 @@ __ps1_host() {
 
     local style=${PROMPT_CONFIG[host_style]:-blue}
     local space=${PROMPT_CONFIG[host_space]:-true}
-    local vpnstyle=${PROMPT_CONFIG[host_vpnstyle]:-cyan}
-    local vpnonly=${PROMPT_CONFIG[host_vpnonly]:-false}
 
-    # Check the hostname rather than rely on $HOSTNAME
-    local hostname
-    hostname=$(hostname)
-
-    # Check if connected to a VPN
-    if scutil --nc list | grep -q Connected; then
-        # Use VPN colors
-        __ps1_print "@${hostname%%.*}" "$vpnstyle" "$space"
-    elif [[ $vpnonly == true ]]; then
-        # Print a space if we're only showing the hostname when on a VPN
-        printf ' '
-    else
-        # Use normal colors
-        __ps1_print "@${hostname%%.*}" "$style" "$space"
-    fi
+    __ps1_print "@${HOSTNAME%%.*}" "$style" "$space"
 }
 
 __ps1_path() {
@@ -126,7 +110,10 @@ __ps1_path() {
     local style=${PROMPT_CONFIG[path_style]:-white}
     local space=${PROMPT_CONFIG[path_space]:-true}
     local limit=${PROMPT_CONFIG[path_limit]:-40}
-    local result dirparts sub
+    local result dirparts d i last
+
+    # Room to leave for the other modules sharing the line
+    local reserve=40
 
     # Substitute $HOME with ~, but only on a path boundary
     if [[ $PWD == "$HOME" || $PWD == "$HOME"/* ]]; then
@@ -135,27 +122,28 @@ __ps1_path() {
         result=$PWD
     fi
 
-    # Return early if not over the character limit or checkwinsize is not on
-    if (( ${#result} <= limit )) || [[ -z $COLUMNS ]]; then
+    # Use the smaller of the configured limit and what fits in the window
+    # ($COLUMNS is unset when there's no tty, leaving the limit as-is)
+    if [[ $COLUMNS ]] && (( COLUMNS - reserve < limit )); then
+        limit=$(( COLUMNS - reserve ))
+    fi
+
+    # Return early if not over the character limit
+    if (( ${#result} <= limit )); then
         __ps1_print "[${result}]" "$style" "$space"
         return
     fi
-
-    # Redefine limit based on terminal window width
-    limit=$(( COLUMNS - 40 ))
 
     # Split path into array of directory names
     IFS=/ read -ra dirparts <<<"${result}"
 
     # Substitute directory names with their first letter until the length of
-    # result is less than the character limit
-    for d in "${dirparts[@]}"; do
-        if (( ${#result} > limit )); then
-            sub=${d:0:1} # first character of directory
-            result=${result/"$d"/"$sub"}
-        else
-            break
-        fi
+    # result is less than the character limit. Always show the last directory.
+    last=$(( ${#dirparts[@]} - 1 ))
+    for (( i = 0; i < last; i++ )); do
+        (( ${#result} > limit )) || break
+        d=${dirparts[i]}
+        result=${result/"$d"/"${d:0:1}"}
     done
 
     __ps1_print "[${result}]" "$style" "$space"
@@ -190,22 +178,36 @@ __ps1_git() {
     # Ensure git is available
     type git &>/dev/null || return
 
-    local result branch tag changes
-    branch=$(git branch --show-current 2>/dev/null || :)
+    # Prints the branch (or "(detached)"), the commit, and whether the worktree
+    # is dirty. It also fails outside a repo, which is our repo check.
+    local out
+    out=$(git status --porcelain=v2 --branch 2>/dev/null) || return
+
+    # Parse porcelain output. Any lines not starting with '#' indicate changed
+    # files that have not yet been committed.
+    local line head oid dirty=false
+    while IFS= read -r line; do
+        case $line in
+            '# branch.oid '*) oid=${line#'# branch.oid '} ;;
+            '# branch.head '*) head=${line#'# branch.head '} ;;
+            '#'*) ;;
+            *) dirty=true; break ;;
+        esac
+    done <<<"$out"
+
+    # Prefer displaying the tag over the branch
+    local result tag
     tag=$(git describe --tags --exact-match 2>/dev/null || :)
-
-    # Return if not in a git repo
-    [[ $branch || $tag ]] || return
-
-    changes=$(git status --short 2>/dev/null || :)
 
     if [[ $tag ]]; then
         result="◆ ${tag}"
+    elif [[ $head == '(detached)' ]]; then
+        result="@ ${oid:0:7}"
     else
-        result=" ${branch}"
+        result="${head}"
     fi
 
-    [[ -z $changes ]] || result+="*"
+    [[ $dirty == false ]] || result+="*"
 
     __ps1_print "[${result}]" "$style" "$space"
 }
@@ -234,6 +236,8 @@ _set_ec() {
 }
 
 _set_ps1() {
+    local i
+
     unset PS1
 
     # I imagine 3 lines are all you'll ever need...
