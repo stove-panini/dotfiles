@@ -3,13 +3,13 @@ stty -ixon -ixoff
 
 # Setup colors for prompt
 declare -A PROMPT_CONFIG
-export PROMPT_CONFIG=(
+# shellcheck disable=SC2034
+PROMPT_CONFIG=(
     [0]=user
     [user_style]=bright_green
 
     [1]=host
     [host_style]=green
-    [host_vpnstyle]=cyan
 
     [2]=path
     [path_style]=white
