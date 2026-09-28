@@ -110,11 +110,10 @@ __ps1_path() {
     local style=${PROMPT_CONFIG[path_style]:-white}
     local space=${PROMPT_CONFIG[path_space]:-true}
     local limit=${PROMPT_CONFIG[path_limit]:-40}
-    local result dirparts d i last
+    local result dirparts d i last reserve=40
 
     # Fit to the window, or fall back to a fixed limit when there's no tty
     if [[ $COLUMNS ]]; then
-        local reserve=40
         limit=$(( COLUMNS - reserve ))
     else
         limit=40
