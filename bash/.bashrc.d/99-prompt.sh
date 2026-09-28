@@ -112,8 +112,13 @@ __ps1_path() {
     local limit=${PROMPT_CONFIG[path_limit]:-40}
     local result dirparts d i last
 
-    # Room to leave for the other modules sharing the line
-    local reserve=40
+    # Fit to the window, or fall back to a fixed limit when there's no tty
+    if [[ $COLUMNS ]]; then
+        local reserve=40
+        limit=$(( COLUMNS - reserve ))
+    else
+        limit=40
+    fi
 
     # Substitute $HOME with ~, but only on a path boundary
     if [[ $PWD == "$HOME" || $PWD == "$HOME"/* ]]; then
