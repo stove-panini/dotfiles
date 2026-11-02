@@ -13,6 +13,22 @@ window-inherit-working-directory = false
 # Use xterm-256color over SSH instead of xterm-ghostty
 shell-integration-features = ssh-env
 
+# No splits
+keybind = super+shift+enter=unbind
+keybind = super+d=unbind
+keybind = super+shift+d=unbind
+keybind = super+[=unbind
+keybind = super+]=unbind
+keybind = super+alt+arrow_up=unbind
+keybind = super+alt+arrow_down=unbind
+keybind = super+alt+arrow_left=unbind
+keybind = super+alt+arrow_right=unbind
+keybind = super+ctrl+arrow_up=unbind
+keybind = super+ctrl+arrow_down=unbind
+keybind = super+ctrl+arrow_left=unbind
+keybind = super+ctrl+arrow_right=unbind
+keybind = super+ctrl+==unbind
+
 macos-icon = custom-style
 macos-icon-ghost-color = Aquamarine
 macos-icon-screen-color = Black

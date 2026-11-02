@@ -75,6 +75,7 @@ local augroup_ft_commands = {
 		callback = function()
 			OptLocal.wrap = true
 			OptLocal.linebreak = true
+			OptLocal.spell = true
 		end,
 	},
 	{

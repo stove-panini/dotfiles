@@ -1,7 +1,7 @@
 -- Language servers
 local servers = {
 	ansiblels = {},
-	awkls = {},
+	--awk_ls = {},
 	bashls = {},
 	gopls = {},
 	lua_ls = {},

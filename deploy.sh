@@ -68,6 +68,7 @@ brew_pkgs=(
 
 npm_pkgs=(
     @ansible/ansible-language-server
+    awk-language-server
     bash-language-server
     vim-language-server
     yaml-language-server

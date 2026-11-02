@@ -32,9 +32,9 @@ Plug("hrsh7th/cmp-vsnip") -- cmp source: snippets
 Plug("hrsh7th/vim-vsnip") -- the snippets themselves
 
 -- syntax
-Plug("stevearc/conform.nvim")
 --Plug('HiPhish/jinja.vim')
 Plug("rodjek/vim-puppet")
+Plug("stevearc/conform.nvim") -- formatter configuration
 --Plug('stove-panini/vim-pceas')
 --Plug('towolf/vim-helm')
 
