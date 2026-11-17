@@ -21,6 +21,7 @@ brew_pkgs=(
     stow
     tmux
     tree
+    uv
     watch
 
     # Programming
@@ -30,8 +31,6 @@ brew_pkgs=(
     lua-language-server
     python
     python-lsp-server
-    pipx
-    python-argcomplete # required for pipx
     shellcheck
 
     # DevOps stuff
@@ -75,9 +74,9 @@ npm_pkgs=(
     neovim
 )
 
-pip_pkgs=(
-    ansible-dev-tools
-    pynvim
+declare -A uv_tools
+uv_tools=(
+    [ansible-core]='--with-executables-from ansible-lint --with boto3'
 )
 
 ruby_gems=(
@@ -89,7 +88,7 @@ ruby_gems=(
 # =============================================================================
 if [[ ${1:-} =~ up(grade|date) ]]; then
     brew upgrade
-    pipx upgrade-all
+    uv tool upgrade --all
 
     if ! npm outdated --global; then
         npm update --global
@@ -126,7 +125,10 @@ find -- * -type d -maxdepth 0 -print -exec stow -t "$HOME" {} \;
 
 # 3. User packages
 # =============================================================================
-pipx install "${pip_pkgs[@]}"
+for tool in "${!uv_tools[@]}"; do
+    # shellcheck disable=SC2086
+    uv tool install "$tool" ${uv_tools[$tool]}
+done
 
 # Trickery required for versioned gems...
 for gem in "${ruby_gems[@]}"; do
